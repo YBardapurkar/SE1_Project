@@ -1,0 +1,16 @@
+package com.se1.team3.campuscarrental;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+
+public class AdminHomeActivity extends AppCompatActivity {
+
+//    TODO - Mohana
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_admin_home);
+    }
+}
