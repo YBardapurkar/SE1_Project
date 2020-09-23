@@ -1,3 +1,32 @@
 <resources>
     <string name="app_name">CampusCarRental</string>
+
+    <string name="role_user" >User</string>
+    <string name="role_rental_manager">Rental Manager</string>
+    <string name="role_admin">Admin</string>
+
+    <string-array name="roles">
+        <item>@string/role_user</item>
+        <item>@string/role_rental_manager</item>
+        <item>@string/role_admin</item>
+    </string-array>
+
+    <!--Login-->
+    <string name="title_login">Login</string>
+
+    <string name="label_login_username">Username</string>
+    <string name="label_login_password">Password</string>
+
+    <string name="button_no_account">Don\'t have an account?</string>
+    <string name="button_login_submit">Login</string>
+
+<!--    Signup-->
+
+<!--    User Home-->
+
+<!--    Rental Manager Home-->
+
+<!--    Admin Home-->
+
+
 </resources>
