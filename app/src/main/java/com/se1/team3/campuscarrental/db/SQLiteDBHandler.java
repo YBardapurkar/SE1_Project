@@ -1,5 +1,6 @@
 package com.se1.team3.campuscarrental.db;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -29,7 +30,7 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
 
     public SQLiteDBHandler(@Nullable Context context) {
         super(context, DATABASE_NAME, null, 1);
-        SQLiteDatabase db = this.getWritableDatabase();
+//        SQLiteDatabase db = this.getWritableDatabase();
     }
 
     @Override
@@ -45,7 +46,15 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
     }
 
     public void saveUser(){
-
+//        TODO - this is just for testing, fix this
+        SQLiteDatabase db = this.getWritableDatabase();
+        //Create a new map of values, where column names are the keys
+        ContentValues cValues = new ContentValues();
+        cValues.put("USERNAME", "usernmae");
+        cValues.put("PASSWORD", "password");
+        // Insert the new row, returning the primary key value of the new row
+        long newRowId = db.insert(TABLE_NAME,null, cValues);
+        db.close();
     }
 
     public void getUser(String username, String password){
