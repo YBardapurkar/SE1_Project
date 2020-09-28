@@ -80,23 +80,24 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
     @Override
     public SystemUser getUser(String username, String password) {
         SystemUser user = null;
-        SQLiteDatabase db = this.getWritableDatabase();
-        String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE USERNAME = " + username;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE USERNAME = '" + username + "';";
         Cursor cursor = db.rawQuery(selectQuery, null);
-        cursor.moveToNext();
-        String utaId = cursor.getString(cursor.getColumnIndexOrThrow(COL_UTA_ID));
-        String firstName = cursor.getString(cursor.getColumnIndexOrThrow(COL_FIRSTNAME));
-        String lastName = cursor.getString(cursor.getColumnIndexOrThrow(COL_LASTNAME));
-        String role = cursor.getString(cursor.getColumnIndexOrThrow(COL_ROLE));
-        String membership = cursor.getString(cursor.getColumnIndexOrThrow(COL_MEMBERSHIP));
-        String phone = cursor.getString(cursor.getColumnIndexOrThrow(COL_PHONE));
-        String email = cursor.getString(cursor.getColumnIndexOrThrow(COL_EMAIL));
-        String street = cursor.getString(cursor.getColumnIndexOrThrow(COL_STREET_ADDRESS));
-        String city = cursor.getString(cursor.getColumnIndexOrThrow(COL_CITY));
-        String state = cursor.getString(cursor.getColumnIndexOrThrow(COL_STATE));
-        String pin = cursor.getString(cursor.getColumnIndexOrThrow(COL_PIN));
+        while (cursor.moveToNext()) {
+            String utaId = cursor.getString(cursor.getColumnIndexOrThrow(COL_UTA_ID));
+            String firstName = cursor.getString(cursor.getColumnIndexOrThrow(COL_FIRSTNAME));
+            String lastName = cursor.getString(cursor.getColumnIndexOrThrow(COL_LASTNAME));
+            String role = cursor.getString(cursor.getColumnIndexOrThrow(COL_ROLE));
+            String membership = cursor.getString(cursor.getColumnIndexOrThrow(COL_MEMBERSHIP));
+            String phone = cursor.getString(cursor.getColumnIndexOrThrow(COL_PHONE));
+            String email = cursor.getString(cursor.getColumnIndexOrThrow(COL_EMAIL));
+            String street = cursor.getString(cursor.getColumnIndexOrThrow(COL_STREET_ADDRESS));
+            String city = cursor.getString(cursor.getColumnIndexOrThrow(COL_CITY));
+            String state = cursor.getString(cursor.getColumnIndexOrThrow(COL_STATE));
+            String pin = cursor.getString(cursor.getColumnIndexOrThrow(COL_PIN));
 
-        user = new SystemUser(username,password,firstName,lastName,utaId,role,membership,phone,email,street,city,state,pin);
+            user = new SystemUser(username, password, firstName, lastName, utaId, role, membership, phone, email, street, city, state, pin);
+        }
         cursor.close();
 
         db.close();
