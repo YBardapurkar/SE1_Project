@@ -8,6 +8,7 @@ public class SystemUser {
     private String lastName;
     private String utaId;
     private String role;
+    private String membership;
     private String phone;
     private String email;
     private String street;
@@ -15,15 +16,17 @@ public class SystemUser {
     private String state;
     private String pin;
 
-    public SystemUser(String username, String password, String firstName, String lastName,
-                      String utaId, String role, String phone, String email, String street,
-                      String city, String state, String pin) {
+    public SystemUser() {
+    }
+
+    public SystemUser(String username, String password, String firstName, String lastName, String utaId, String role, String membership, String phone, String email, String street, String city, String state, String pin) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.utaId = utaId;
         this.role = role;
+        this.membership = membership;
         this.phone = phone;
         this.email = email;
         this.street = street;
@@ -79,7 +82,15 @@ public class SystemUser {
     public void setRole(String role) {
         this.role = role;
     }
+    
+    public String getMembership() {
+        return membership;
+    }
 
+    public void setMembership(String membership) {
+        this.membership = membership;
+    }
+    
     public String getPhone() {
         return phone;
     }
@@ -127,4 +138,6 @@ public class SystemUser {
     public void setPin(String pin) {
         this.pin = pin;
     }
+    
+    
 }
