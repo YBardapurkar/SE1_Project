@@ -1,9 +1,218 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignUpActivity">
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/signup_parent_linear"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="clip_horizontal|center_horizontal"
+        android:orientation="vertical"
+        android:layout_margin="5dp"
+        android:paddingTop="20dp"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/sigunup_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="10dp"
+            android:layout_marginBottom="12dp"
+            android:text="@string/title_signup"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            tools:text="SignUp" />
+        <!--edit text view for username input-->
+        <EditText
+            android:id="@+id/signup_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_margin="10dp"
+            android:hint="@string/txt_enteruername"
+            android:inputType="textPersonName" />
+        <!--edit text view for password input-->
+        <EditText
+            android:id="@+id/signup_Password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_margin="10dp"
+            android:hint="@string/txt_enterpassword"
+            android:inputType="textPassword" />
+        <!--edit text view for UTA id input-->
+
+        <EditText
+            android:id="@+id/signu_utaid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="@string/txt_hint_utaid"
+            android:digits="0123456789."
+            android:ems="10"
+            android:layout_margin="10dp"
+            android:hint="@string/txt_utaid"
+            android:inputType="number" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <!--edit text view for first name input-->
+            <EditText
+                android:id="@+id/signup_firstname"
+                android:layout_width="155dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:ems="10"
+                android:gravity="center_horizontal"
+                android:hint="@string/txt_firstname"
+                android:inputType="textPersonName" />
+            <!--edit text view for last name input-->
+            <EditText
+                android:layout_margin="10dp"
+                android:id="@+id/signup_lastname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="center_horizontal"
+                android:hint="@string/txt_lastname"
+                android:inputType="textPersonName" />
+        </LinearLayout>
+
+        <!--edit text view for phone no input-->
+        <EditText
+            android:id="@+id/sigunup_phoneno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_margin="10dp"
+            android:hint="@string/txt_phone"
+            android:inputType="phone" />
+        <!--edit text view for Email input-->
+        <EditText
+            android:id="@+id/signup_emailid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_margin="10dp"
+            android:hint="@string/txt_email"
+            android:inputType="textEmailAddress" />
+        <!--edit text view for street address input-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/signup_address"
+                android:layout_width="257dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:ems="10"
+                android:layout_weight="1.5"
+                android:gravity="left"
+                android:hint="@string/txt_streetadd"
+                android:inputType="textPostalAddress" />
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/signup_pincode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="@string/txt_hint_utaid"
+            android:digits="0123456789."
+            android:ems="10"
+            android:layout_weight="0.5"
+            android:layout_margin="10dp"
+            android:hint="@string/txt_zip_code"
+            android:inputType="number" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/signup_city"
+
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:layout_margin="10dp"
+                android:hint="@string/txt_city"
+                android:inputType="textPersonName"
+                android:layout_width="0dp" />
+
+            <EditText
+                android:id="@+id/signup_state"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:layout_margin="10dp"
+                android:inputType="textPersonName"
+                android:hint="@string/txt_state" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_enrollmemb"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <ToggleButton
+                android:id="@+id/membership_button"
+                android:layout_width="wrap_content"
+                android:textOn="YES"
+                android:textOff="NO"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="ToggleButton" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_role" />
+
+            <Spinner
+                android:id="@+id/role_spinner"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Register" />
+
+
+    </LinearLayout>
+</ScrollView>

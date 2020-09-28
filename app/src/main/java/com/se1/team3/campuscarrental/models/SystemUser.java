@@ -35,6 +35,26 @@ public class SystemUser {
         this.pin = pin;
     }
 
+
+    @Override
+    public String toString() {
+        return "SystemUser{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", utaId='" + utaId + '\'' +
+                ", role='" + role + '\'' +
+                ", membership='" + membership + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", street='" + street + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", pin='" + pin + '\'' +
+                '}';
+    }
+
     public String getUsername() {
         return username;
     }

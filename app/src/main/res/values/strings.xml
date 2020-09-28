@@ -22,7 +22,26 @@
 
 
     <!--    Signup-->
-
+    <string name="title_signup">SignUp</string>
+    <string name="txt_enteruername">Enter Username</string>
+    <string name="txt_enterpassword">Enter Password</string>
+    <string name="txt_utaid">Enter UTA ID</string>
+    <string name="txt_firstname">First Name</string>
+    <string name="txt_lastname">Last Name</string>
+    <string name="txt_role">Select Role</string>
+    <string-array name="txt_option_role">
+        <item>User</item>
+        <item>Admin</item>
+        <item>Rental Manager</item>
+    </string-array>
+    <string name="txt_Membership">Membership</string>
+    <string name="txt_phone">Phone Number</string>
+    <string name="txt_email">Email</string>
+    <string name="txt_streetadd">Street Address</string>
+    <string name="txt_city">City</string>
+    <string name="txt_state">State</string>
+    <string name="txt_hint_utaid">Enter your 8 digit UTA ID</string>
+    <string name="txt_enrollmemb">Do you want to enroll for Membership ?</string>
     <!--    Home-->
     <string name="logout_confirmation_message">Are you sure you want to log out?</string>
     <string name="logout_confirmation_yes">Yes</string>
@@ -33,6 +52,8 @@
     <string name="exit_confirmation_no">No</string>
 
     <string name="welcome_message">Welcome, %1$s</string>
+    <string name="txt_zip_code">Zip Code</string>
+
     <!--    User Home-->
 
     <!--    Rental Manager Home-->

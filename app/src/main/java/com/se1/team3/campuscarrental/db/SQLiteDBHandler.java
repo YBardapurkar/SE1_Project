@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import com.se1.team3.campuscarrental.models.SystemUser;
+
 public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
 
     public static final String DATABASE_NAME = "campusCarRental.db";
@@ -45,15 +47,16 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
         onCreate(db);
     }
 
-    public void saveUser(){
+    public void saveUser(SystemUser new_user) {
 //        TODO - this is just for testing, fix this
+//        write code for new user insert
         SQLiteDatabase db = this.getWritableDatabase();
         //Create a new map of values, where column names are the keys
         ContentValues cValues = new ContentValues();
         cValues.put("USERNAME", "usernmae");
         cValues.put("PASSWORD", "password");
         // Insert the new row, returning the primary key value of the new row
-        long newRowId = db.insert(TABLE_NAME,null, cValues);
+        long newRowId = db.insert(TABLE_NAME, null, cValues);
         db.close();
     }
 

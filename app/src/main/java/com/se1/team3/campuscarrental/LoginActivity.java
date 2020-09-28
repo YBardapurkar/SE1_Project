@@ -1,7 +1,6 @@
 package com.se1.team3.campuscarrental;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.se1.team3.campuscarrental.db.DBHandler;
 import com.se1.team3.campuscarrental.db.SQLiteDBHandler;
+import com.se1.team3.campuscarrental.models.SystemUser;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -46,8 +46,11 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String username = usernameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
-
-                dbHandler.saveUser();
+                //datamodel model object
+                SystemUser user = new SystemUser();
+                user.setUsername(username);
+                user.setPassword(password);
+                dbHandler.saveUser(user);
 //                TODO - Yash - add login functions
             }
         });

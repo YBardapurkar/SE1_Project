@@ -13,7 +13,7 @@ public interface DBHandler {
 
    public void getUser(String username, String password);
 
-   public void saveUser();
+   public void saveUser(SystemUser new_user);
 
 //TO BE MODIFIED
 }
