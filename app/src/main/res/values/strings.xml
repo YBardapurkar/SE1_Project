@@ -36,6 +36,10 @@
     <!--    User Home-->
 
     <!--    Rental Manager Home-->
+    <string name="btn_list_of_available_cars">List of Available Cars</string>
+    <string name="btn_list_of_reservations">List of Reservations</string>
+    <string name="btn_rental_manager_profile">Rental Manager Profile</string>
+    <string name="btn_logout">Logout</string>
 
     <!--    Admin Home-->
 
