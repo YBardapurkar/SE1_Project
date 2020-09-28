@@ -30,5 +30,12 @@
             </intent-filter>
         </activity>
     </application>
+    <meta-data
+        android:name="AA_DB_NAME"
+        android:value="campusCarRental.db"/>
+
+    <meta-data
+        android:name="AA_DB_VERSION"
+        android:value="1"/>
 
 </manifest>

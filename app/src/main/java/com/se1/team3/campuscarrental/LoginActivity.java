@@ -17,13 +17,13 @@ public class LoginActivity extends AppCompatActivity {
     EditText usernameEditText, passwordEditText;
     Button buttonNoAccount, buttonLogin;
 
-    DBHandler dbHandler = new SQLiteDBHandler(this);
+    SQLiteDBHandler dbHandler = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        dbHandler = new SQLiteDBHandler(this);
 //        TODO - Yash - check if user logged in using sharedpreferences
 
         usernameEditText = (EditText)findViewById(R.id.edittext_login_username);
