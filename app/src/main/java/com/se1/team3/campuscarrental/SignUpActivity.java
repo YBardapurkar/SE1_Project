@@ -26,8 +26,7 @@ import butterknife.OnClick;
 
 
 public class SignUpActivity extends AppCompatActivity {
-    @BindView(R.id.sigunup_title)
-    TextView sigunupTitle;
+
     @BindView(R.id.signup_username)
     EditText signupUsername;
     @BindView(R.id.signup_Password)
@@ -68,6 +67,9 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
+        setTitle(R.string.title_signup);
+
         ButterKnife.bind(this);
 
         dbHandler = new SQLiteDBHandler(this);
@@ -105,5 +107,12 @@ public class SignUpActivity extends AppCompatActivity {
         Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+        startActivity(intent);
+        super.onBackPressed();
     }
 }

@@ -6,23 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
-    <TextView
-        android:id="@+id/title_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="12dp"
-        android:text="@string/title_login"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        tools:text="Login" />
-
     <LinearLayout
         android:id="@+id/form_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/title_login"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="24dp"
         android:layout_marginBottom="12dp"
         android:orientation="vertical">
 

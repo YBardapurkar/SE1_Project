@@ -10,10 +10,9 @@
     android:paddingBottom="10dp"
     tools:context=".RentalManagerHomeActivity">
     <TextView
+        android:id="@+id/text_rm_welcome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textColor="#86AD33"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:text="@string/welcome_message"/>
     <LinearLayout
