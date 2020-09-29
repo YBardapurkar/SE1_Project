@@ -5,13 +5,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
+
 
 import androidx.annotation.Nullable;
 
 import com.se1.team3.campuscarrental.models.SystemUser;
 
-import java.util.List;
+
 
 public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
 
@@ -70,10 +70,16 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
         values.put(COL_STATE, systemUser.getState());
         values.put(COL_PIN, systemUser.getPin());
 
-        // Inserting Row
-        db.insert(TABLE_NAME, null, values);
+
+        // Insert a new row for user in the database, returning the ID of that new row.
+        long rowId = db.insert(TABLE_NAME, null, values);
         db.close();
-        return true;
+
+        if (rowId == -1) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     //lookup for user data with username and password
@@ -81,7 +87,7 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
     public SystemUser getUser(String username, String password) {
         SystemUser user = null;
         SQLiteDatabase db = this.getReadableDatabase();
-        String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE USERNAME = '" + username + "';";
+        String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE USERNAME = '" + username + "' + AND + PASSWORD = '" + password + "'";
         Cursor cursor = db.rawQuery(selectQuery, null);
         while (cursor.moveToNext()) {
             String utaId = cursor.getString(cursor.getColumnIndexOrThrow(COL_UTA_ID));
@@ -104,27 +110,4 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
         return user;
     }
 
-    public boolean checkIfUserExists(String TABLE_NAME, String username)
-    {
-        try
-        {
-            SQLiteDatabase db=this.getReadableDatabase();
-            Cursor cursor=db.rawQuery("SELECT "+COL_USERNAME+" FROM "+TABLE_NAME+" WHERE "+COL_USERNAME+"='"+COL_USERNAME+"'",null);
-            if (cursor.moveToFirst())
-            {
-                db.close();
-                Log.d("Record  Already Exists", "Table is:"+TABLE_NAME+" ColumnName:"+COL_USERNAME);
-                return true;//record Exists
-
-            }
-            Log.d("New Record  ", "Table is:"+TABLE_NAME+" ColumnName:"+COL_USERNAME+" Column Value:"+COL_USERNAME);
-            db.close();
-        }
-        catch(Exception errorException)
-        {
-            Log.d("Exception occured", "Exception occured "+errorException);
-            // db.close();
-        }
-        return false;
-    }
 }
