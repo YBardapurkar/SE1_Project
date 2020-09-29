@@ -3,6 +3,8 @@ package com.se1.team3.campuscarrental;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -102,11 +104,30 @@ public class SignUpActivity extends AppCompatActivity {
         new_user.setPin(signupPincode.getText().toString());
 
         //calling the inert query function
-        dbHandler.saveUser(new_user);
-        Toast.makeText(SignUpActivity.this, "Succesfully Registered.", Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
-        startActivity(intent);
-        finish();
+        if (dbHandler.saveUser(new_user)) {
+            /*REgistration is Sucessfull*/
+            Toast.makeText(SignUpActivity.this, "Succesfully Registered.", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            /*Registration has failed*/
+            Toast.makeText(SignUpActivity.this, "Failed Registration!!!.", Toast.LENGTH_LONG).show();
+            clearForm((ViewGroup) findViewById(R.id.signup_parent_linear));
+        }
+
+    }
+
+    private void clearForm(ViewGroup group) {
+        for (int i = 0, count = group.getChildCount(); i < count; ++i) {
+            View view = group.getChildAt(i);
+            if (view instanceof EditText) {
+                ((EditText) view).setText("");
+            }
+
+            if (view instanceof ViewGroup && (((ViewGroup) view).getChildCount() > 0))
+                clearForm((ViewGroup) view);
+        }
     }
 
     @Override
