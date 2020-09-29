@@ -49,6 +49,15 @@
     <string name="txt_zip_code">Zip Code</string>
 
     <!--    User Home-->
+    <string name="title_user_home">User Home</string>
+    <string name="btn_view_profile">Profile</string>
+    <string name="btn_update_profile">Update Profile</string>
+    <string name="btn_search_car">Search Car</string>
+    <string name="btn_view_car_details">Car Details</string>
+    <string name="btn_request_rental">Request Rental</string>
+    <string name="btn_my_reserv">My Reservations</string>
+    <string name="btn_selec_reserv">Current</string>
+    <string name="btn_cancel_reserv">Cancel</string>
 
     <!--    Rental Manager Home-->
     <string name="title_rental_manager_home">Rental Manager Home</string>

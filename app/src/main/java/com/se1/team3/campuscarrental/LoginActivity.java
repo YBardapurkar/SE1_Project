@@ -24,8 +24,8 @@ public class LoginActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
 
     static final String PREFERENCES = "SharedPreferences";
-    static final String USERNAME = "username";
-    static final String ROLE = "role";
+    static final String USERNAME = "username"; //shubham123
+    static final String ROLE = "role"; //shubham123
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
