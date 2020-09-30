@@ -67,6 +67,8 @@
     <string name="btn_logout">Logout</string>
 
     <!--    Admin Home-->
+    <string name="btn_search_user">Search Users</string>
+    <string name="title_admin_home">Admin Home</string>
 
 
 </resources>

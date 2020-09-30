@@ -87,7 +87,7 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
     public SystemUser getUser(String username, String password) {
         SystemUser user = null;
         SQLiteDatabase db = this.getReadableDatabase();
-        String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE USERNAME = '" + username + "' + AND + PASSWORD = '" + password + "'";
+        String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE USERNAME = '" + username + "' AND PASSWORD = '" + password + "'";
         Cursor cursor = db.rawQuery(selectQuery, null);
         while (cursor.moveToNext()) {
             String utaId = cursor.getString(cursor.getColumnIndexOrThrow(COL_UTA_ID));
