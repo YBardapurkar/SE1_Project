@@ -31,7 +31,7 @@ public class UserHomeActivity extends AppCompatActivity {
         setTitle(R.string.title_user_home);
 
         sharedPreferences =  getApplicationContext().getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
-        String welcomeMessage = String.format(getResources().getString(R.string.welcome_message)+ " %1$s", sharedPreferences.getString(USERNAME, ""));
+        String welcomeMessage = String.format(getResources().getString(R.string.welcome_message), sharedPreferences.getString(USERNAME, ""));
 //        String welcomeMessage = "Shubham Shah";
         textWelcome = findViewById(R.id.text_user_welcome);
         textWelcome.setText(welcomeMessage);
