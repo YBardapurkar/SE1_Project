@@ -45,6 +45,53 @@
             android:hint="@string/txt_utaid"
             android:inputType="number" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_role" />
+
+            <Spinner
+                android:id="@+id/role_spinner"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/membership_LL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_enrollmemb"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <ToggleButton
+                android:id="@+id/membership_button"
+                android:layout_width="wrap_content"
+                android:textOn="YES"
+                android:textOff="NO"
+
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="ToggleButton" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -147,53 +194,6 @@
                 android:hint="@string/txt_state" />
 
 
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/txt_enrollmemb"
-                android:layout_margin="4dp"
-                android:layout_weight="1"
-                android:gravity="center" />
-
-            <ToggleButton
-                android:id="@+id/membership_button"
-                android:layout_width="wrap_content"
-                android:textOn="YES"
-                android:textOff="NO"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="ToggleButton" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_weight="1"
-                android:layout_margin="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/txt_role" />
-
-            <Spinner
-                android:id="@+id/role_spinner"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
         </LinearLayout>
 
         <Button

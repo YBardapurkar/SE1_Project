@@ -2,15 +2,14 @@ package com.se1.team3.campuscarrental;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -19,8 +18,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.se1.team3.campuscarrental.db.DBHandler;
 import com.se1.team3.campuscarrental.db.SQLiteDBHandler;
 import com.se1.team3.campuscarrental.models.SystemUser;
-
-import java.io.Console;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -62,6 +59,8 @@ public class SignUpActivity extends AppCompatActivity {
     /*variables for value*/
     DBHandler dbHandler;
     SystemUser new_user;
+    @BindView(R.id.membership_LL)
+    LinearLayout membershipLL;
 
 //    todo - Shubham Phape
 
@@ -81,6 +80,26 @@ public class SignUpActivity extends AppCompatActivity {
                 R.array.txt_option_role, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         roleSpinner.setAdapter(adapter);
+
+        roleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String choice = (String) parent.getItemAtPosition(position);
+                if (choice.equalsIgnoreCase("user")) {
+                    membershipLL.setVisibility(View.VISIBLE);
+                } else {
+                    membershipLL.setVisibility(View.GONE);
+                    membershipButton.setChecked(false);
+                }
+                //Toast.makeText(SignUpActivity.this, choice, Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
     }
 
