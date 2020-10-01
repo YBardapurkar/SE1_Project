@@ -45,7 +45,7 @@
     <string name="exit_confirmation_yes">Yes</string>
     <string name="exit_confirmation_no">No</string>
 
-    <string name="welcome_message">Welcome, </string>
+    <string name="welcome_message">Welcome, %1$s</string>
     <string name="txt_zip_code">Zip Code</string>
 
     <!--    User Home-->
