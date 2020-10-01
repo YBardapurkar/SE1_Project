@@ -110,9 +110,9 @@ public class SignUpActivity extends AppCompatActivity {
         new_user = new SystemUser();
         new_user.setUsername(signupUsername.getText().toString());
         new_user.setPassword(signupPassword.getText().toString());
-        new_user.setFirstName(signuUtaid.getText().toString());
+        new_user.setFirstName(signupLastname.getText().toString());
         new_user.setLastName(signupFirstname.getText().toString());
-        new_user.setUtaId(signupLastname.getText().toString());
+        new_user.setUtaId(signuUtaid.getText().toString());
         new_user.setRole(roleSpinner.getSelectedItem().toString());
         new_user.setPhone(sigunupPhoneno.getText().toString());
         new_user.setEmail(signupEmailid.getText().toString());
