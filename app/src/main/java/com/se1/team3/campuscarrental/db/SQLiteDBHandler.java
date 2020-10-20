@@ -9,8 +9,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import com.se1.team3.campuscarrental.R;
+import com.se1.team3.campuscarrental.models.Car;
 import com.se1.team3.campuscarrental.models.SystemUser;
 
+import java.sql.SQLDataException;
 
 
 public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
@@ -31,24 +34,40 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
     public static final String COL_STATE = "STATE";
     public static final String COL_PIN = "ZIPCODE";
 
-
+    public static final String TABLE_CARS = "carTable";
+    public static final String COL_CAR_ID = "CAR_ID";
+    public static final String COL_CAR_NAME = "CAR_NAME";
+    public static final String COL_CAPACITY = "CAPACITY";
+    public static final String COL_CAR_IMAGE = "CAR_IMAGE";
+    public static final String COL_WEEKDAY = "WEEKDAY";
+    public static final String COL_WEEKEND = "WEEKEND";
+    public static final String COL_WEEK = "WEEK";
+    public static final String COL_GPS = "GPS";
+    public static final String COL_ONSTAR = "ONSTAR";
+    public static final String COL_SIRIUSXM = "SISRIUSXM";
 
     public SQLiteDBHandler(@Nullable Context context) {
-        super(context, DATABASE_NAME, null, 1);
-       SQLiteDatabase db = this.getWritableDatabase();
+        super(context, DATABASE_NAME, null, 2);
+        SQLiteDatabase db = this.getWritableDatabase();
         System.out.println("campusCarRental.db path" +db.getPath());
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table " + TABLE_NAME + " (USERNAME TEXT PRIMARY KEY, PASSWORD TEXT, UTA_ID INTEGER, FIRSTNAME TEXT, LASTNAME TEXT, ROLE TEXT, MEMBERSHIP TEXT, PHONE INTEGER, EMAIL TEXT,STREET_ADDRESS TEXT,CITY TEXT, STATE TEXT, ZIPCODE INTEGER)");
-
+        upgrade1(db);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        onCreate(db);
+        if (oldVersion < 2) {
+            upgrade1(db);
+        }
+    }
+
+    private void upgrade1(SQLiteDatabase db) {
+        db.execSQL("create table " + TABLE_CARS + " (" + COL_CAR_ID +" integer primary key autoincrement, " + COL_CAR_NAME + " TEXT, " + COL_CAPACITY + " INTEGER, " + COL_CAR_IMAGE + " INTEGER, " + COL_WEEKDAY + " DECIMAL(6,2), " + COL_WEEKEND + " DECIMAL(10,2), " + COL_WEEK + " DECIMAL(10,2), " + COL_GPS + " DECIMAL(10,2), " + COL_ONSTAR + " DECIMAL(10,2), " + COL_SIRIUSXM + " DECIMAL(10,2)" + ");");
+        saveCars(db);
     }
 
     //To save user data after sign up
@@ -75,11 +94,7 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
         long rowId = db.insert(TABLE_NAME, null, values);
         db.close();
 
-        if (rowId == -1) {
-            return false;
-        } else {
-            return true;
-        }
+        return rowId >= 0;
     }
 
     //lookup for user data with username and password
@@ -110,4 +125,55 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
         return user;
     }
 
+    @Override
+    public Car getCarById(int carId) {
+        Car car = null;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "SELECT * FROM " + TABLE_CARS + " WHERE " + COL_CAR_ID + " = '" + carId + "';";
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToNext()) {
+            int id = cursor.getInt(cursor.getColumnIndexOrThrow(COL_CAR_ID));
+            String carName = cursor.getString(cursor.getColumnIndexOrThrow(COL_CAR_NAME));
+            int capacity = cursor.getInt(cursor.getColumnIndexOrThrow(COL_CAPACITY));
+            int imageId = cursor.getInt(cursor.getColumnIndexOrThrow(COL_CAR_IMAGE));
+            double weekday = cursor.getDouble(cursor.getColumnIndexOrThrow(COL_WEEKDAY));
+            double weekend = cursor.getDouble(cursor.getColumnIndexOrThrow(COL_WEEKEND));
+            double week = cursor.getDouble(cursor.getColumnIndexOrThrow(COL_WEEK));
+            double gps = cursor.getDouble(cursor.getColumnIndexOrThrow(COL_GPS));
+            double onStar = cursor.getDouble(cursor.getColumnIndexOrThrow(COL_ONSTAR));
+            double siriusXm = cursor.getDouble(cursor.getColumnIndexOrThrow(COL_SIRIUSXM));
+
+            car = new Car(id, carName, capacity, imageId, weekday, weekend, week, gps, onStar, siriusXm);
+        }
+        cursor.close();
+        db.close();
+        return car;
+    }
+
+    private void saveCar(SQLiteDatabase db, Car car) {
+        ContentValues values = new ContentValues();
+        values.put(COL_CAR_NAME, car.getCarName());
+        values.put(COL_CAPACITY, car.getCapacity());
+        values.put(COL_CAR_IMAGE, car.getImage());
+        values.put(COL_WEEKDAY, car.getWeekday());
+        values.put(COL_WEEKEND, car.getWeekend());
+        values.put(COL_WEEK, car.getWeek());
+        values.put(COL_GPS, car.getGps());
+        values.put(COL_ONSTAR, car.getOnStar());
+        values.put(COL_SIRIUSXM, car.getSiriusXM());
+
+        db.insert(TABLE_CARS, null, values);
+    }
+
+    private void saveCars(SQLiteDatabase db) {
+        saveCar(db, new Car(0, "Smart", 1,R.drawable.smart, 32.99, 37.99, 230.93, 3.00, 5.00, 7.00));
+        saveCar(db, new Car(0,"Economy", 3, R.drawable.economy, 39.99, 44.99, 279.93, 3.00, 5.00, 7.00));
+        saveCar(db, new Car(0, "Compact",4, R.drawable.compact, 44.99, 49.99, 314.93, 3.00, 5.00, 7.00));
+        saveCar(db, new Car(0, "Intermediate", 4, R.drawable.intermediate,45.99, 50.99, 321.93, 3.00, 5.00, 7.00));
+        saveCar(db, new Car(0, "Standard", 5, R.drawable.standard, 48.99, 53.99, 342.93, 3.00, 5.00, 7.00));
+        saveCar(db, new Car(0, "Full Size", 6, R.drawable.full_size,52.99, 57.99, 370.93, 3.00, 5.00, 7.00));
+        saveCar(db, new Car(0, "SUV", 8,R.drawable.suv ,59.99, 64.99, 419.93, 3.00, 5.00, 7.00));
+        saveCar(db, new Car(0, "MiniVan", 9, R.drawable.minivan, 59.99, 64.99, 419.93, 3.00, 5.00, 7.00));
+        saveCar(db, new Car(0, "Ultra Sports", 2,R.drawable.ultra_sports, 199.99, 204.99, 1399.93, 5.00, 7.00, 9.00));
+    }
 }
