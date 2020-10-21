@@ -46,19 +46,20 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button_no_account"
+        android:id="@+id/button_login_submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/form_login"
         android:layout_centerHorizontal="true"
-        android:text="@string/button_no_account" />
+        android:text="@string/button_login_submit" />
 
     <Button
-        android:id="@+id/button_login_submit"
+        android:id="@+id/button_no_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/button_no_account"
         android:layout_centerHorizontal="true"
-        android:text="@string/button_login_submit" />
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="24dp"
+        android:text="@string/button_no_account" />
 
 </RelativeLayout>

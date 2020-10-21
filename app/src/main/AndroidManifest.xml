@@ -37,5 +37,4 @@
     <meta-data
         android:name="AA_DB_VERSION"
         android:value="1"/>
-    <uses-sdk android:minSdkVersion="23"/>
 </manifest>

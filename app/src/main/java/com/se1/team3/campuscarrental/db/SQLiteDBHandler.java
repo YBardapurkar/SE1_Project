@@ -6,14 +6,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-
 import androidx.annotation.Nullable;
 
 import com.se1.team3.campuscarrental.R;
 import com.se1.team3.campuscarrental.models.Car;
 import com.se1.team3.campuscarrental.models.SystemUser;
 
-import java.sql.SQLDataException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
@@ -148,6 +148,87 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
         cursor.close();
         db.close();
         return car;
+    }
+
+    @Override
+    public List<Car> getAllCars() {
+        List<Car> cars = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "SELECT * FROM " + TABLE_CARS + ";";
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(cursor.getColumnIndexOrThrow(COL_CAR_ID));
+            String carName = cursor.getString(cursor.getColumnIndexOrThrow(COL_CAR_NAME));
+            int capacity = cursor.getInt(cursor.getColumnIndexOrThrow(COL_CAPACITY));
+            int imageId = cursor.getInt(cursor.getColumnIndexOrThrow(COL_CAR_IMAGE));
+            double weekday = cursor.getDouble(cursor.getColumnIndexOrThrow(COL_WEEKDAY));
+            double weekend = cursor.getDouble(cursor.getColumnIndexOrThrow(COL_WEEKEND));
+            double week = cursor.getDouble(cursor.getColumnIndexOrThrow(COL_WEEK));
+            double gps = cursor.getDouble(cursor.getColumnIndexOrThrow(COL_GPS));
+            double onStar = cursor.getDouble(cursor.getColumnIndexOrThrow(COL_ONSTAR));
+            double siriusXm = cursor.getDouble(cursor.getColumnIndexOrThrow(COL_SIRIUSXM));
+
+            cars.add(new Car(id, carName, capacity, imageId, weekday, weekend, week, gps, onStar, siriusXm));
+        }
+        cursor.close();
+        db.close();
+        return cars;
+    }
+
+    @Override
+    public SystemUser getUserByUsername(String username) {
+        SystemUser user = null;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE USERNAME = '" + username + "';";
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToNext()) {
+            String password = cursor.getString(cursor.getColumnIndexOrThrow(COL_PASSWORD));
+            String utaId = cursor.getString(cursor.getColumnIndexOrThrow(COL_UTA_ID));
+            String firstName = cursor.getString(cursor.getColumnIndexOrThrow(COL_FIRSTNAME));
+            String lastName = cursor.getString(cursor.getColumnIndexOrThrow(COL_LASTNAME));
+            String role = cursor.getString(cursor.getColumnIndexOrThrow(COL_ROLE));
+            String membership = cursor.getString(cursor.getColumnIndexOrThrow(COL_MEMBERSHIP));
+            String phone = cursor.getString(cursor.getColumnIndexOrThrow(COL_PHONE));
+            String email = cursor.getString(cursor.getColumnIndexOrThrow(COL_EMAIL));
+            String street = cursor.getString(cursor.getColumnIndexOrThrow(COL_STREET_ADDRESS));
+            String city = cursor.getString(cursor.getColumnIndexOrThrow(COL_CITY));
+            String state = cursor.getString(cursor.getColumnIndexOrThrow(COL_STATE));
+            String pin = cursor.getString(cursor.getColumnIndexOrThrow(COL_PIN));
+
+            user = new SystemUser(username, password, firstName, lastName, utaId, role, membership, phone, email, street, city, state, pin);
+        }
+        cursor.close();
+
+        db.close();
+        return user;
+    }
+
+    @Override
+    public List<SystemUser> getAllUsers() {
+        List<SystemUser> users = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "SELECT * FROM " + TABLE_NAME + ";";
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        while (cursor.moveToNext()) {
+            String username = cursor.getString(cursor.getColumnIndexOrThrow(COL_USERNAME));
+            String utaId = cursor.getString(cursor.getColumnIndexOrThrow(COL_UTA_ID));
+            String firstName = cursor.getString(cursor.getColumnIndexOrThrow(COL_FIRSTNAME));
+            String lastName = cursor.getString(cursor.getColumnIndexOrThrow(COL_LASTNAME));
+            String role = cursor.getString(cursor.getColumnIndexOrThrow(COL_ROLE));
+            String membership = cursor.getString(cursor.getColumnIndexOrThrow(COL_MEMBERSHIP));
+            String phone = cursor.getString(cursor.getColumnIndexOrThrow(COL_PHONE));
+            String email = cursor.getString(cursor.getColumnIndexOrThrow(COL_EMAIL));
+            String street = cursor.getString(cursor.getColumnIndexOrThrow(COL_STREET_ADDRESS));
+            String city = cursor.getString(cursor.getColumnIndexOrThrow(COL_CITY));
+            String state = cursor.getString(cursor.getColumnIndexOrThrow(COL_STATE));
+            String pin = cursor.getString(cursor.getColumnIndexOrThrow(COL_PIN));
+
+            users.add(new SystemUser(username, "", firstName, lastName, utaId, role, membership, phone, email, street, city, state, pin));
+        }
+        cursor.close();
+
+        db.close();
+        return users;
     }
 
     private void saveCar(SQLiteDatabase db, Car car) {
