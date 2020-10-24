@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:id="@+id/user_details_parent_linear"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="clip_horizontal|center_horizontal"
+        android:orientation="vertical"
+        android:layout_margin="5dp"
+        android:paddingTop="20dp"
+        android:padding="20dp">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dip"
+            android:background="#FF909090" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/user_photo" />
+
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow
+                android:layout_margin="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                !-- text view for username -->
+
+                <TextView
+                    android:id="@+id/txtusername"
+                    android:layout_weight="1"
+                    android:layout_column="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp"
+                    android:text="@string/user_name" />
+
+                <TextView
+                    android:id="@+id/display_username_txt"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_margin="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                !-- text view for Role -->
+
+                <TextView
+                    android:id="@+id/txtuserrole"
+                    android:layout_weight="1"
+                    android:layout_column="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp"
+                    android:text="@string/role" />
+
+                <TextView
+                    android:id="@+id/display_role_txt"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_margin="4dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_margin="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                !-- text view for First Name -->
+
+                <TextView
+                    android:id="@+id/txtfirstname"
+                    android:layout_weight="1"
+                    android:layout_column="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp"
+                    android:text="@string/first_name" />
+
+                <TextView
+                    android:id="@+id/display_first_name_txt"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_margin="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                !-- text view for last Name -->
+
+                <TextView
+                    android:id="@+id/txtlastname"
+                    android:layout_weight="1"
+                    android:layout_column="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp"
+                    android:text="@string/last_name" />
+
+                <TextView
+                    android:id="@+id/display_last_name_txt"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_margin="3dp"
+                android:id="@+id/membership_row"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                !-- text view for membership -->
+
+                <TextView
+                    android:id="@+id/txtmembership"
+                    android:layout_weight="1"
+                    android:layout_column="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp"
+                    android:text="Membership" />
+
+                <TextView
+                    android:id="@+id/display_membership_txt"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_margin="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                !-- text view for UTA ID -->
+
+                <TextView
+                    android:id="@+id/txtutaid"
+                    android:layout_weight="1"
+                    android:layout_column="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp"
+                    android:text="@string/uta_id" />
+
+                <TextView
+                    android:id="@+id/display_UTAID_txt"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp" />
+            </TableRow>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dip"
+                android:background="#FF909090" />
+
+            <TextView
+                android:gravity="center"
+                android:textSize="18dp"
+                android:layout_gravity="center"
+                android:layout_margin="4dp"
+                android:text="Contact Information" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dip"
+                android:background="#FF909090" />
+
+            <TableRow
+                android:layout_margin="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                !-- text view for Phone no -->
+
+                <TextView
+                    android:id="@+id/txtphoneno"
+                    android:layout_weight="1"
+                    android:layout_column="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp"
+                    android:text="@string/phone_number" />
+
+                <TextView
+                    android:id="@+id/display_phone_txt"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_margin="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                !-- text view for Email -->
+
+                <TextView
+                    android:id="@+id/txtEmail"
+                    android:layout_weight="1"
+                    android:layout_column="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp"
+                    android:text="@string/email" />
+
+                <TextView
+                    android:id="@+id/display_Email_txt"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_margin="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                !-- text view for Street Addresss -->
+
+                <TextView
+                    android:id="@+id/txtstreetaddress"
+                    android:layout_weight="1"
+                    android:layout_column="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp"
+                    android:text="Street Address" />
+
+                <TextView
+                    android:id="@+id/display_street_address_txt"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_margin="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                !-- text view for city -->
+
+                <TextView
+                    android:id="@+id/txtcity"
+                    android:layout_weight="1"
+                    android:layout_column="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp"
+                    android:text="@string/city" />
+
+                <TextView
+                    android:id="@+id/display_city_txt"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_margin="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                !-- text view for State -->
+
+                <TextView
+                    android:id="@+id/txtState"
+                    android:layout_weight="1"
+                    android:layout_column="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp"
+                    android:text="@string/state" />
+
+                <TextView
+                    android:id="@+id/display_State_txt"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_margin="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                !-- text view for Zip coe -->
+
+                <TextView
+                    android:id="@+id/txtzipcode"
+                    android:layout_weight="1"
+                    android:layout_column="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp"
+                    android:text="@string/txt_zip_code" />
+
+                <TextView
+                    android:id="@+id/display_zip_code_txt"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp" />
+            </TableRow>
+
+
+        </TableLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dip"
+            android:background="#FF909090" />
+
+        <Button
+            android:id="@+id/change_role_btn"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/change_role" />
+
+        <Button
+            android:id="@+id/edit_profile_btn"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/edit_profile" />
+
+        <Button
+            android:id="@+id/Revoke_renter_btn"
+            android:layout_margin="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/revoke_renter" />
+
+
+    </LinearLayout>
+
+</ScrollView>
