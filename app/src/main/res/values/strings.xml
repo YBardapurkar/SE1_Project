@@ -69,6 +69,22 @@
     <!--    Admin Home-->
     <string name="btn_search_user">Search Users</string>
     <string name="title_admin_home">Admin Home</string>
+    <string name="user_details_txt">User Details</string>
+    <string name="name_txt">Name</string>
+    <string name="uta_id">UTA ID</string>
+    <string name="user_name">User Name</string>
+    <string name="role">Role</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="email">Email</string>
+    <string name="city">City</string>
+    <string name="state">State</string>
+    <string name="zip_code">Zip Code</string>
+    <string name="revoke_renter">Revoke Renter</string>
+    <string name="change_role">Change user Role</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="save_changes">Save Changes</string>
 
 
 </resources>

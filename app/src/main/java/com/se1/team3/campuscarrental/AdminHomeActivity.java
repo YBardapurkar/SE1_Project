@@ -2,6 +2,7 @@ package com.se1.team3.campuscarrental;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -43,7 +44,9 @@ public class AdminHomeActivity extends HomeActivity {
         btn_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"Search Users", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Search Users", Toast.LENGTH_SHORT).show();
+                //Intent intent = new Intent(AdminHomeActivity.this, AdminViewsUserDetailsActivity.class);
+                //startActivity(intent);
             }
         });
 
