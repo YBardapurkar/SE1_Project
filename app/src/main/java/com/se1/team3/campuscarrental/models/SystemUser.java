@@ -8,18 +8,19 @@ public class SystemUser {
     private String lastName;
     private String utaId;
     private String role;
-    private String membership;
+    private boolean membership;
     private String phone;
     private String email;
     private String street;
     private String city;
     private String state;
     private String pin;
+    private boolean status;
 
     public SystemUser() {
     }
 
-    public SystemUser(String username, String password, String firstName, String lastName, String utaId, String role, String membership, String phone, String email, String street, String city, String state, String pin) {
+    public SystemUser(String username, String password, String firstName, String lastName, String utaId, String role, boolean membership, String phone, String email, String street, String city, String state, String pin, boolean status) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -33,6 +34,7 @@ public class SystemUser {
         this.city = city;
         this.state = state;
         this.pin = pin;
+        this.status = status;
     }
 
 
@@ -52,6 +54,7 @@ public class SystemUser {
                 ", city='" + city + '\'' +
                 ", state='" + state + '\'' +
                 ", pin='" + pin + '\'' +
+                ", status='" + status + '\'' +
                 '}';
     }
 
@@ -102,15 +105,15 @@ public class SystemUser {
     public void setRole(String role) {
         this.role = role;
     }
-    
-    public String getMembership() {
+
+    public boolean isMembership() {
         return membership;
     }
 
-    public void setMembership(String membership) {
+    public void setMembership(boolean membership) {
         this.membership = membership;
     }
-    
+
     public String getPhone() {
         return phone;
     }
@@ -158,6 +161,12 @@ public class SystemUser {
     public void setPin(String pin) {
         this.pin = pin;
     }
-    
-    
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
 }

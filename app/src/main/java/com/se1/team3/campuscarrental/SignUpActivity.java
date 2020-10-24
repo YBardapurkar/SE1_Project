@@ -118,9 +118,10 @@ public class SignUpActivity extends AppCompatActivity {
         new_user.setEmail(signupEmailid.getText().toString());
         new_user.setStreet(signupAddress.getText().toString());
         new_user.setCity(signupCity.getText().toString());
-        new_user.setMembership(membershipButton.getText().toString());
+        new_user.setMembership(membershipButton.isChecked());
         new_user.setState(signupState.getText().toString());
         new_user.setPin(signupPincode.getText().toString());
+        new_user.setStatus(true);
 
         //calling the inert query function
         if (dbHandler.saveUser(new_user)) {

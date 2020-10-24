@@ -33,6 +33,7 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
     public static final String COL_CITY= "CITY";
     public static final String COL_STATE = "STATE";
     public static final String COL_PIN = "ZIPCODE";
+    public static final String COL_STATUS = "STATUS";
 
     public static final String TABLE_CARS = "carTable";
     public static final String COL_CAR_ID = "CAR_ID";
@@ -54,7 +55,7 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_NAME + " (USERNAME TEXT PRIMARY KEY, PASSWORD TEXT, UTA_ID INTEGER, FIRSTNAME TEXT, LASTNAME TEXT, ROLE TEXT, MEMBERSHIP TEXT, PHONE INTEGER, EMAIL TEXT,STREET_ADDRESS TEXT,CITY TEXT, STATE TEXT, ZIPCODE INTEGER)");
+        db.execSQL("create table " + TABLE_NAME + " (USERNAME TEXT PRIMARY KEY, PASSWORD TEXT, UTA_ID INTEGER, FIRSTNAME TEXT, LASTNAME TEXT, ROLE TEXT, MEMBERSHIP INTEGER, PHONE INTEGER, EMAIL TEXT,STREET_ADDRESS TEXT,CITY TEXT, STATE TEXT, ZIPCODE INTEGER, STATUS INTEGER)");
         upgrade1(db);
     }
 
@@ -81,13 +82,14 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
         values.put(COL_FIRSTNAME, systemUser.getFirstName());
         values.put(COL_LASTNAME, systemUser.getLastName());
         values.put(COL_ROLE, systemUser.getRole());
-        values.put(COL_MEMBERSHIP, systemUser.getMembership());
+        values.put(COL_MEMBERSHIP, systemUser.isMembership());
         values.put(COL_PHONE, systemUser.getPhone());
         values.put(COL_EMAIL, systemUser.getEmail());
         values.put(COL_STREET_ADDRESS, systemUser.getStreet());
         values.put(COL_CITY, systemUser.getCity());
         values.put(COL_STATE, systemUser.getState());
         values.put(COL_PIN, systemUser.getPin());
+        values.put(COL_STATUS, systemUser.isStatus());
 
 
         // Insert a new row for user in the database, returning the ID of that new row.
@@ -109,15 +111,16 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
             String firstName = cursor.getString(cursor.getColumnIndexOrThrow(COL_FIRSTNAME));
             String lastName = cursor.getString(cursor.getColumnIndexOrThrow(COL_LASTNAME));
             String role = cursor.getString(cursor.getColumnIndexOrThrow(COL_ROLE));
-            String membership = cursor.getString(cursor.getColumnIndexOrThrow(COL_MEMBERSHIP));
+            boolean membership = cursor.getInt(cursor.getColumnIndexOrThrow(COL_MEMBERSHIP)) == 1;
             String phone = cursor.getString(cursor.getColumnIndexOrThrow(COL_PHONE));
             String email = cursor.getString(cursor.getColumnIndexOrThrow(COL_EMAIL));
             String street = cursor.getString(cursor.getColumnIndexOrThrow(COL_STREET_ADDRESS));
             String city = cursor.getString(cursor.getColumnIndexOrThrow(COL_CITY));
             String state = cursor.getString(cursor.getColumnIndexOrThrow(COL_STATE));
             String pin = cursor.getString(cursor.getColumnIndexOrThrow(COL_PIN));
+            boolean status = cursor.getInt(cursor.getColumnIndexOrThrow(COL_STATUS)) == 1;
 
-            user = new SystemUser(username, password, firstName, lastName, utaId, role, membership, phone, email, street, city, state, pin);
+            user = new SystemUser(username, password, firstName, lastName, utaId, role, membership, phone, email, street, city, state, pin, status);
         }
         cursor.close();
 
@@ -187,15 +190,16 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
             String firstName = cursor.getString(cursor.getColumnIndexOrThrow(COL_FIRSTNAME));
             String lastName = cursor.getString(cursor.getColumnIndexOrThrow(COL_LASTNAME));
             String role = cursor.getString(cursor.getColumnIndexOrThrow(COL_ROLE));
-            String membership = cursor.getString(cursor.getColumnIndexOrThrow(COL_MEMBERSHIP));
+            boolean membership = cursor.getInt(cursor.getColumnIndexOrThrow(COL_MEMBERSHIP)) == 1;
             String phone = cursor.getString(cursor.getColumnIndexOrThrow(COL_PHONE));
             String email = cursor.getString(cursor.getColumnIndexOrThrow(COL_EMAIL));
             String street = cursor.getString(cursor.getColumnIndexOrThrow(COL_STREET_ADDRESS));
             String city = cursor.getString(cursor.getColumnIndexOrThrow(COL_CITY));
             String state = cursor.getString(cursor.getColumnIndexOrThrow(COL_STATE));
             String pin = cursor.getString(cursor.getColumnIndexOrThrow(COL_PIN));
+            boolean status = cursor.getInt(cursor.getColumnIndexOrThrow(COL_STATUS)) == 1;
 
-            user = new SystemUser(username, password, firstName, lastName, utaId, role, membership, phone, email, street, city, state, pin);
+            user = new SystemUser(username, password, firstName, lastName, utaId, role, membership, phone, email, street, city, state, pin, status);
         }
         cursor.close();
 
@@ -215,15 +219,16 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
             String firstName = cursor.getString(cursor.getColumnIndexOrThrow(COL_FIRSTNAME));
             String lastName = cursor.getString(cursor.getColumnIndexOrThrow(COL_LASTNAME));
             String role = cursor.getString(cursor.getColumnIndexOrThrow(COL_ROLE));
-            String membership = cursor.getString(cursor.getColumnIndexOrThrow(COL_MEMBERSHIP));
+            boolean membership = cursor.getInt(cursor.getColumnIndexOrThrow(COL_MEMBERSHIP)) == 1;
             String phone = cursor.getString(cursor.getColumnIndexOrThrow(COL_PHONE));
             String email = cursor.getString(cursor.getColumnIndexOrThrow(COL_EMAIL));
             String street = cursor.getString(cursor.getColumnIndexOrThrow(COL_STREET_ADDRESS));
             String city = cursor.getString(cursor.getColumnIndexOrThrow(COL_CITY));
             String state = cursor.getString(cursor.getColumnIndexOrThrow(COL_STATE));
             String pin = cursor.getString(cursor.getColumnIndexOrThrow(COL_PIN));
+            boolean status = cursor.getInt(cursor.getColumnIndexOrThrow(COL_STATUS)) == 1;
 
-            users.add(new SystemUser(username, "", firstName, lastName, utaId, role, membership, phone, email, street, city, state, pin));
+            users.add(new SystemUser(username, "", firstName, lastName, utaId, role, membership, phone, email, street, city, state, pin, status));
         }
         cursor.close();
 
