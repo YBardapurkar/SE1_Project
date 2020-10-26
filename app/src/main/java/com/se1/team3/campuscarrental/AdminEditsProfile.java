@@ -1,6 +1,7 @@
 package com.se1.team3.campuscarrental;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.se1.team3.campuscarrental.db.DBHandler;
@@ -29,6 +31,7 @@ public class AdminEditsProfile extends AppCompatActivity {
     static final String PREFERENCES = "SharedPreferences";
     static final String USERNAME = "username";
     static final String ROLE = "role";
+    static final String TARGET_USERNAME = "targetUsername"; // the username of the sselected user in previous activity
 
     SystemUser selected_user;
     DBHandler dbHandler = null;
@@ -76,6 +79,7 @@ public class AdminEditsProfile extends AppCompatActivity {
         sharedPreferences = getApplicationContext().getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
 
         //object to save the data from the database
+        //selected_user =dbHandler.getUserByUsername(sharedPreferences.getString(TARGET_USERNAME, null));
         selected_user = dbHandler.getUserByUsername("shubham");
 
         //setting the values
@@ -118,18 +122,39 @@ public class AdminEditsProfile extends AppCompatActivity {
         selected_user.setState(updateStateTxt.getText().toString());
         selected_user.setPin(updateZipCodeTxt.getText().toString());
         /*fire query to update these attributes*/
-        /*or for now just show the toast and redirect*/
-        if (dbHandler.saveUser(selected_user)) {
-            /*UPdate is Sucessfull*/
-            Toast.makeText(AdminEditsProfile.this, "Succesfully Updated.", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(AdminEditsProfile.this, AdminViewsUserDetailsActivity.class);
-            startActivity(intent);
-            finish();
-        } else {
-            /*Registration has failed*/
-            Toast.makeText(AdminEditsProfile.this, "Failed UPdation!!!.", Toast.LENGTH_LONG).show();
-        }
+        /*Firstly diplaying the query and depending on the response updating or not*/
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you want to Save Changes?")
+                .setPositiveButton(R.string.logout_confirmation_yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        /*Please do the edit database  database stuff here*/
 
+                        if (dbHandler.edit_profile(selected_user)) {
+                            /*UPdate is Sucessfull*/
+                            Toast.makeText(AdminEditsProfile.this, "Succesfully Updated.", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(AdminEditsProfile.this, AdminViewsUserDetailsActivity.class);
+                            dialog.dismiss();
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            /*Registration has failed*/
+                            Toast.makeText(AdminEditsProfile.this, "Failed Updation!!!.", Toast.LENGTH_LONG).show();
+                            dialog.dismiss();
+                        }
+
+                    }
+                })
+                .setNegativeButton(R.string.logout_confirmation_no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(AdminEditsProfile.this, "Changes NOT SAVED!!", Toast.LENGTH_LONG).show();
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
 
     }
 }

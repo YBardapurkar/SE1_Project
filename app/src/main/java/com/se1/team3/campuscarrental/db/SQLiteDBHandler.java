@@ -252,14 +252,49 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
     }
 
     private void saveCars(SQLiteDatabase db) {
-        saveCar(db, new Car(0, "Smart", 1,R.drawable.smart, 32.99, 37.99, 230.93, 3.00, 5.00, 7.00));
-        saveCar(db, new Car(0,"Economy", 3, R.drawable.economy, 39.99, 44.99, 279.93, 3.00, 5.00, 7.00));
-        saveCar(db, new Car(0, "Compact",4, R.drawable.compact, 44.99, 49.99, 314.93, 3.00, 5.00, 7.00));
-        saveCar(db, new Car(0, "Intermediate", 4, R.drawable.intermediate,45.99, 50.99, 321.93, 3.00, 5.00, 7.00));
+        saveCar(db, new Car(0, "Smart", 1, R.drawable.smart, 32.99, 37.99, 230.93, 3.00, 5.00, 7.00));
+        saveCar(db, new Car(0, "Economy", 3, R.drawable.economy, 39.99, 44.99, 279.93, 3.00, 5.00, 7.00));
+        saveCar(db, new Car(0, "Compact", 4, R.drawable.compact, 44.99, 49.99, 314.93, 3.00, 5.00, 7.00));
+        saveCar(db, new Car(0, "Intermediate", 4, R.drawable.intermediate, 45.99, 50.99, 321.93, 3.00, 5.00, 7.00));
         saveCar(db, new Car(0, "Standard", 5, R.drawable.standard, 48.99, 53.99, 342.93, 3.00, 5.00, 7.00));
-        saveCar(db, new Car(0, "Full Size", 6, R.drawable.full_size,52.99, 57.99, 370.93, 3.00, 5.00, 7.00));
-        saveCar(db, new Car(0, "SUV", 8,R.drawable.suv ,59.99, 64.99, 419.93, 3.00, 5.00, 7.00));
+        saveCar(db, new Car(0, "Full Size", 6, R.drawable.full_size, 52.99, 57.99, 370.93, 3.00, 5.00, 7.00));
+        saveCar(db, new Car(0, "SUV", 8, R.drawable.suv, 59.99, 64.99, 419.93, 3.00, 5.00, 7.00));
         saveCar(db, new Car(0, "MiniVan", 9, R.drawable.minivan, 59.99, 64.99, 419.93, 3.00, 5.00, 7.00));
-        saveCar(db, new Car(0, "Ultra Sports", 2,R.drawable.ultra_sports, 199.99, 204.99, 1399.93, 5.00, 7.00, 9.00));
+        saveCar(db, new Car(0, "Ultra Sports", 2, R.drawable.ultra_sports, 199.99, 204.99, 1399.93, 5.00, 7.00, 9.00));
     }
+
+    /*function to update the columns edited by Admin
+     * This function has been called from page "AdminEditsProfile.java"*/
+    public boolean edit_profile(SystemUser user_tobe_edited) {
+        ContentValues cv = new ContentValues();
+        SQLiteDatabase db = this.getWritableDatabase();
+        cv.put(COL_FIRSTNAME, user_tobe_edited.getFirstName());
+        cv.put(COL_LASTNAME, user_tobe_edited.getLastName());
+        cv.put(COL_UTA_ID, user_tobe_edited.getUtaId());
+        cv.put(COL_PHONE, user_tobe_edited.getPhone());
+        cv.put(COL_EMAIL, user_tobe_edited.getEmail());
+        cv.put(COL_STREET_ADDRESS, user_tobe_edited.getStreet());
+        cv.put(COL_CITY, user_tobe_edited.getCity());
+        cv.put(COL_STATE, user_tobe_edited.getState());
+        cv.put(COL_PIN, user_tobe_edited.getPin());
+
+        db.update(TABLE_NAME, cv, COL_USERNAME + "=?", new String[]{user_tobe_edited.getUsername()});
+        db.close();
+        return true;
+    }
+
+    /*function to revoke renter
+     * This function is called from ViewUSerdetailsActivity.java by the admin*/
+    @Override
+    public boolean revoke_renter(SystemUser target_user) {
+        ContentValues cv = new ContentValues();
+        SQLiteDatabase db = this.getWritableDatabase();
+        cv.put(COL_STATUS, target_user.isStatus());
+
+        db.update(TABLE_NAME, cv, COL_USERNAME + "=?", new String[]{target_user.getUsername()});
+        db.close();
+
+        return true;
+    }
+
 }

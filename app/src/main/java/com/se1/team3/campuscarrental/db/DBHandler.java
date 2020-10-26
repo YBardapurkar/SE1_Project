@@ -10,11 +10,19 @@ import java.util.List;
 public interface DBHandler {
 
    SystemUser getUser(String username, String password);
+
    boolean saveUser(SystemUser sysUser);
+
    Car getCarById(int carId);
+
    List<Car> getAllCars();
+
    SystemUser getUserByUsername(String username);
+
    List<SystemUser> getAllUsers();
 
+   boolean edit_profile(SystemUser sysUser);
+
+   boolean revoke_renter(SystemUser target_user);
 //TO BE MODIFIED
 }
