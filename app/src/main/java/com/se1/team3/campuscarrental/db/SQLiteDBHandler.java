@@ -236,6 +236,37 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
         return users;
     }
 
+    @Override
+    public List<SystemUser> searchUsers(String query, String rle) {
+
+        List<SystemUser> users = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE USERNAME like '" + query + "' AND ROLE like '" + rle + "%';";
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        while (cursor.moveToNext()) {
+            String username = cursor.getString(cursor.getColumnIndexOrThrow(COL_USERNAME));
+            String utaId = cursor.getString(cursor.getColumnIndexOrThrow(COL_UTA_ID));
+            String firstName = cursor.getString(cursor.getColumnIndexOrThrow(COL_FIRSTNAME));
+            String lastName = cursor.getString(cursor.getColumnIndexOrThrow(COL_LASTNAME));
+            String role = cursor.getString(cursor.getColumnIndexOrThrow(COL_ROLE));
+            boolean membership = cursor.getInt(cursor.getColumnIndexOrThrow(COL_MEMBERSHIP)) == 1;
+            String phone = cursor.getString(cursor.getColumnIndexOrThrow(COL_PHONE));
+            String email = cursor.getString(cursor.getColumnIndexOrThrow(COL_EMAIL));
+            String street = cursor.getString(cursor.getColumnIndexOrThrow(COL_STREET_ADDRESS));
+            String city = cursor.getString(cursor.getColumnIndexOrThrow(COL_CITY));
+            String state = cursor.getString(cursor.getColumnIndexOrThrow(COL_STATE));
+            String pin = cursor.getString(cursor.getColumnIndexOrThrow(COL_PIN));
+            boolean status = cursor.getInt(cursor.getColumnIndexOrThrow(COL_STATUS)) == 1;
+
+            users.add(new SystemUser(username, "", firstName, lastName, utaId, role, membership, phone, email, street, city, state, pin, status));
+        }
+        cursor.close();
+
+        db.close();
+        return users;
+
+    }
+
     private void saveCar(SQLiteDatabase db, Car car) {
         ContentValues values = new ContentValues();
         values.put(COL_CAR_NAME, car.getCarName());

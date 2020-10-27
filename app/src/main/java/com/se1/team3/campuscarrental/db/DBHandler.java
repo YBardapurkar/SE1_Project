@@ -20,6 +20,7 @@ public interface DBHandler {
    SystemUser getUserByUsername(String username);
 
    List<SystemUser> getAllUsers();
+   List<SystemUser> searchUsers(String query,String rle);
 
    boolean edit_profile(SystemUser sysUser);
 
