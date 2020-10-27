@@ -4,11 +4,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,7 +29,6 @@ public class AdminViewsUserDetailsActivity extends AppCompatActivity {
     static final String PREFERENCES = "SharedPreferences";
     static final String USERNAME = "username";
     static final String ROLE = "role";
-    static final String TARGET_USERNAME = "targetUsername"; // the username of the sselected user in previous activity
 
     SystemUser selected_user;
     DBHandler dbHandler = null;
@@ -70,10 +67,6 @@ public class AdminViewsUserDetailsActivity extends AppCompatActivity {
     Button RevokeRenterBtn;
     @BindView(R.id.membership_row)
     TableRow membershipRow;
-    @BindView(R.id.tabllayoutuserdetails)
-    TableLayout tabllayoutuserdetails;
-    @BindView(R.id.display_status_txt)
-    TextView displayStatusTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,10 +79,18 @@ public class AdminViewsUserDetailsActivity extends AppCompatActivity {
         dbHandler = new SQLiteDBHandler(this);
         sharedPreferences = getApplicationContext().getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
 
-
         //object to save the data from the database
-        //selected_user =dbHandler.getUserByUsername(sharedPreferences.getString(TARGET_USERNAME, null));
-        selected_user = dbHandler.getUserByUsername("shubham");
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
+        String username = null;
+        if(b!=null)
+        {
+            username =(String) b.get("USERNAME");
+        }
+        else{
+            finish();
+        }
+        selected_user = dbHandler.getUserByUsername(username);
 
         //setting the values
         displayUsernameTxt.setText(selected_user.getUsername());
@@ -108,11 +109,6 @@ public class AdminViewsUserDetailsActivity extends AppCompatActivity {
             membershipRow.setVisibility(View.GONE);
         }
 
-        if (selected_user.isStatus()) {
-            displayStatusTxt.setText("Active");
-        } else {
-            displayStatusTxt.setText("Deactive");
-        }
         displayUTAIDTxt.setText(selected_user.getUtaId());
         displayPhoneTxt.setText(selected_user.getPhone());
         displayEmailTxt.setText(selected_user.getEmail());
@@ -144,18 +140,7 @@ public class AdminViewsUserDetailsActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         /*Please do the revoke status database stuff here*/
-
-                        selected_user.setStatus(false);
-                        if (dbHandler.revoke_renter(selected_user)) {
-                            /*suceefully revoked*/
-                            Toast.makeText(AdminViewsUserDetailsActivity.this, "User Status Revoked Successfully!", Toast.LENGTH_LONG).show();
-                            tabllayoutuserdetails.setBackgroundColor(Color.LTGRAY);
-                            changeRoleBtn.setActivated(false);
-                            editProfileBtn.setActivated(false);
-                        } else {
-                            /*it ifthe quey fails to revoke*/
-                        }
-
+                        Toast.makeText(AdminViewsUserDetailsActivity.this, "User Status Revoked Successfully!", Toast.LENGTH_LONG).show();
                         dialog.dismiss();
 
                     }
@@ -170,13 +155,6 @@ public class AdminViewsUserDetailsActivity extends AppCompatActivity {
 
         AlertDialog dialog = builder.create();
         dialog.show();
-    }
-    /*This function is back button pressed to remove the target user from the shared prefrences*/
-    /*@Override
-    public void onBackPressed() {
-        sharedPreferences.edit()
-                .remove(TARGET_USERNAME)
-                .commit();
 
-    }*/
+    }
 }

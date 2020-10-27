@@ -45,8 +45,8 @@ public class AdminHomeActivity extends HomeActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "Search Users", Toast.LENGTH_SHORT).show();
-                //Intent intent = new Intent(AdminHomeActivity.this, AdminViewsUserDetailsActivity.class);
-                //startActivity(intent);
+                Intent intent = new Intent(AdminHomeActivity.this, SearchUserActivity.class);
+                startActivity(intent);
             }
         });
 

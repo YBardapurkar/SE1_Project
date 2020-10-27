@@ -99,5 +99,14 @@
     <string name="edit_profile">Edit profile</string>
     <string name="save_changes">Save Changes</string>
 
+    <!--    Search Users-->
+    <string name="search_label">Users</string>
+    <string name="title_search_user">Search Users</string>
+    <string-array name="array_name">
+        <item>@string/role_user</item>
+        <item>@string/role_rental_manager</item>
+        <item>@string/role_admin</item>
+    </string-array>
+
 
 </resources>
