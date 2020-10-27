@@ -43,7 +43,13 @@ public class UserHomeActivity extends AppCompatActivity {
 
         btn_profile.setOnClickListener(v -> Toast.makeText(UserHomeActivity.this, "### View Profile", Toast.LENGTH_SHORT).show());
 
-        btn_searchCar.setOnClickListener(v -> Toast.makeText(UserHomeActivity.this, "!!! Search Car", Toast.LENGTH_SHORT).show());
+        btn_searchCar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UserHomeActivity.this, SearchCarActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         btn_viewAllReserves.setOnClickListener(v -> Toast.makeText(UserHomeActivity.this, " $$$ View All Reservations", Toast.LENGTH_SHORT).show());

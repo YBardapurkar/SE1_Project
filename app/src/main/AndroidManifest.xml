@@ -17,7 +17,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AdminEditsProfile"></activity>
+        <activity android:name=".SearchCarActivity"></activity>
+        <activity android:name=".AdminEditsProfile" />
         <activity android:name=".AdminViewsUserDetailsActivity" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".AdminHomeActivity" />

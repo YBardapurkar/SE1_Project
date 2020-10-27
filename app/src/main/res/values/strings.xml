@@ -59,6 +59,19 @@
     <string name="btn_selec_reserv">Current</string>
     <string name="btn_cancel_reserv">Cancel</string>
 
+    <!--    Search Car-->
+    <string name="label_start">From</string>
+    <string name="hint_start_date">From Date</string>
+    <string name="hint_start_time">From Time</string>
+    <string name="label_to">To:</string>
+    <string name="hint_end_date">To Date</string>
+    <string name="hint_end_time">To Time</string>
+    <string name="btn_search_car_submit">Search Car</string>
+
+    <!--    Search Car List Item-->
+    <string name="car_item_capacity">Capacity: %1$d</string>
+    <string name="car_item_starting_price">Starting from: $%1$.2f / day</string>
+
     <!--    Rental Manager Home-->
     <string name="title_rental_manager_home">Rental Manager Home</string>
     <string name="btn_list_of_available_cars">List of Available Cars</string>

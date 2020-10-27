@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="12dp">
+
+    <ImageView
+        android:id="@+id/imageView_car"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginEnd="12dp"
+        android:contentDescription="Car Image" />
+
+    <TextView
+        android:id="@+id/text_car_item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:layout_toEndOf="@+id/imageView_car" />
+
+    <TextView
+        android:id="@+id/text_car_item_capacity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/imageView_car"
+        android:layout_below="@+id/text_car_item_name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+    <TextView
+        android:id="@+id/text_car_item_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/imageView_car"
+        android:layout_below="@+id/text_car_item_capacity"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+</RelativeLayout>
