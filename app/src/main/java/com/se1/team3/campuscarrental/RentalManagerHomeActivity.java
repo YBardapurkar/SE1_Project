@@ -38,7 +38,11 @@ public class RentalManagerHomeActivity extends HomeActivity {
 //                Toast.makeText(getApplicationContext(),"Rental Manager", Toast.LENGTH_SHORT).show();
             viewProfile();
         });
-        btn_lcar.setOnClickListener(v -> Toast.makeText(getApplicationContext(),"List of Available Cars", Toast.LENGTH_SHORT).show());
+        btn_lcar.setOnClickListener(v -> {
+                Intent intent = new Intent(RentalManagerHomeActivity.this, AvailableCarsActivity.class);
+                startActivity(intent);
+        }
+                );
         btn_reserve.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {

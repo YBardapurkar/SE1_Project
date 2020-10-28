@@ -16,6 +16,7 @@ public interface DBHandler {
    Car getCarById(int carId);
 
    List<Car> getAllCars();
+   List<Car> getAvailableCars(long millis);
 
    SystemUser getUserByUsername(String username);
 
@@ -25,5 +26,7 @@ public interface DBHandler {
    boolean edit_profile(SystemUser sysUser);
 
    boolean revoke_renter(SystemUser target_user);
+
+   boolean change_role(SystemUser target_user);
 //TO BE MODIFIED
 }

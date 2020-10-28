@@ -15,15 +15,14 @@
         android:paddingTop="20dp"
         android:padding="20dp">
 
-
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
+        <TextView
+            android:gravity="center"
+            android:textSize="18dp"
+            android:layout_gravity="center"
+            android:layout_margin="4dp"
+            android:text="User Details"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/user_photo" />
-
+            android:layout_width="match_parent" />
 
         <TableLayout
             android:id="@+id/tabllayoutuserdetails"
@@ -51,27 +50,7 @@
                     android:layout_margin="4dp" />
             </TableRow>
 
-            <TableRow
-                android:layout_margin="3dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                !-- text view for Role -->
 
-                <TextView
-                    android:id="@+id/txtuserrole"
-                    android:layout_weight="1"
-                    android:layout_column="1"
-                    android:gravity="left"
-                    android:layout_margin="4dp"
-                    android:text="@string/role" />
-
-                <TextView
-                    android:id="@+id/display_role_txt"
-                    android:layout_weight="1"
-                    android:gravity="left"
-                    android:textColor="@color/colorPrimary"
-                    android:layout_margin="4dp" />
-            </TableRow>
 
             <TableRow
                 android:layout_margin="3dp"
@@ -87,7 +66,7 @@
                     android:layout_margin="4dp"
                     android:text="@string/first_name" />
 
-                <TextView
+                <EditText
                     android:id="@+id/display_first_name_txt"
                     android:layout_weight="1"
                     android:gravity="left"
@@ -108,7 +87,7 @@
                     android:layout_margin="4dp"
                     android:text="@string/last_name" />
 
-                <TextView
+                <EditText
                     android:id="@+id/display_last_name_txt"
                     android:layout_weight="1"
                     android:gravity="left"
@@ -129,9 +108,10 @@
                     android:layout_margin="4dp"
                     android:text="@string/uta_id" />
 
-                <TextView
+                <EditText
                     android:id="@+id/display_UTAID_txt"
                     android:layout_weight="1"
+                    android:inputType="number"
                     android:gravity="left"
                     android:layout_margin="4dp" />
             </TableRow>
@@ -158,45 +138,6 @@
                     android:layout_margin="4dp" />
             </TableRow>
 
-            <TableRow
-                android:layout_margin="3dp"
-                android:id="@+id/status_row"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                !-- text view for membership -->
-
-                <TextView
-                    android:id="@+id/txtstatus"
-                    android:layout_weight="1"
-                    android:layout_column="1"
-                    android:gravity="left"
-                    android:layout_margin="4dp"
-                    android:text="Status" />
-
-                <TextView
-                    android:id="@+id/display_status_txt"
-                    android:layout_weight="1"
-                    android:gravity="left"
-                    android:layout_margin="4dp" />
-            </TableRow>
-
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dip"
-                android:background="#FF909090" />
-
-            <TextView
-                android:gravity="center"
-                android:textSize="18dp"
-                android:layout_gravity="center"
-                android:layout_margin="4dp"
-                android:text="Contact Information" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dip"
-                android:background="#FF909090" />
 
             <TableRow
                 android:layout_margin="3dp"
@@ -212,7 +153,8 @@
                     android:layout_margin="4dp"
                     android:text="@string/phone_number" />
 
-                <TextView
+                <EditText
+                    android:inputType="phone"
                     android:id="@+id/display_phone_txt"
                     android:layout_weight="1"
                     android:gravity="left"
@@ -233,7 +175,8 @@
                     android:layout_margin="4dp"
                     android:text="@string/email" />
 
-                <TextView
+                <EditText
+                    android:inputType="textEmailAddress"
                     android:id="@+id/display_Email_txt"
                     android:layout_weight="1"
                     android:gravity="left"
@@ -254,7 +197,8 @@
                     android:layout_margin="4dp"
                     android:text="Street Address" />
 
-                <TextView
+                <EditText
+                    android:inputType="textPostalAddress"
                     android:id="@+id/display_street_address_txt"
                     android:layout_weight="1"
                     android:gravity="left"
@@ -276,7 +220,7 @@
                     android:layout_margin="4dp"
                     android:text="@string/city" />
 
-                <TextView
+                <EditText
                     android:id="@+id/display_city_txt"
                     android:layout_weight="1"
                     android:gravity="left"
@@ -297,7 +241,7 @@
                     android:layout_margin="4dp"
                     android:text="@string/state" />
 
-                <TextView
+                <EditText
                     android:id="@+id/display_State_txt"
                     android:layout_weight="1"
                     android:gravity="left"
@@ -318,7 +262,8 @@
                     android:layout_margin="4dp"
                     android:text="@string/txt_zip_code" />
 
-                <TextView
+                <EditText
+                    android:inputType="number"
                     android:id="@+id/display_zip_code_txt"
                     android:layout_weight="1"
                     android:gravity="left"
@@ -328,24 +273,55 @@
 
         </TableLayout>
 
+        <Button
+            android:id="@+id/edit_profile_btn"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/save_changes" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="2dip"
             android:background="#FF909090" />
 
+
+        <TextView
+            android:id="@+id/txtuserrole"
+            android:layout_weight="1"
+            android:layout_column="1"
+            android:gravity="center"
+            android:textSize="18dp"
+            android:layout_gravity="center"
+            android:layout_margin="4dp"
+            android:text="@string/role"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent" />
+
+        <Spinner
+            android:id="@+id/display_role_spinner"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:drawSelectorOnTop="true"
+            android:entries="@array/array_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
         <Button
+
             android:id="@+id/change_role_btn"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/change_role" />
 
-        <Button
-            android:id="@+id/edit_profile_btn"
-            android:layout_margin="10dp"
+        <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/edit_profile" />
+            android:layout_height="2dip"
+            android:background="#FF909090" />
+
 
         <Button
             android:id="@+id/Revoke_renter_btn"

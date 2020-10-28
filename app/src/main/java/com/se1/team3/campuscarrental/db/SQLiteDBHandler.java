@@ -179,6 +179,12 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
     }
 
     @Override
+    public List<Car> getAvailableCars(long millis) {
+//        TODO implement this
+        return getAllCars();
+    }
+
+    @Override
     public SystemUser getUserByUsername(String username) {
         SystemUser user = null;
         SQLiteDatabase db = this.getReadableDatabase();
@@ -328,35 +334,17 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
         return true;
     }
 
-    public void InsertReservationDetails(String reservation_number, String car_name, String start_date, String end_date, int occupant_capacity, double total_cost, boolean gps_selected, boolean onstar_selected, boolean siriusxm_selected, Boolean is_cancelled) {
-        String query = "INSERT INTO car_reservation (\n" +
-                "                                reservation_number,\n" +
-                "                                car_name,\n" +
-                "                                start_date,\n" +
-                "                                end_date,\n" +
-                "                                occupant_capacity,\n" +
-                "                                total_cost,\n" +
-                "                                gps_selected,\n" +
-                "                                siriusxm_selected,\n" +
-                "                                onstar_selected,\n" +
-                "                                is_cancelled\n" +
-                "                            )\n" +
-                "                            VALUES (\n" +
-                "                                '"+reservation_number+"',\n" +
-                "                                '"+car_name+"',\n" +
-                "                                '"+start_date+"',\n" +
-                "                                '"+end_date+"',\n" +
-                "                                '"+occupant_capacity+"',\n" +
-                "                                '"+total_cost+"',\n" +
-                "                                '"+gps_selected+"',\n" +
-                "                                '"+siriusxm_selected+"',\n" +
-                "                                '"+onstar_selected+"',\n" +
-                "                                "+is_cancelled+"\n" +
-                "                            );";
+    /*function to change the role renter
+     * This function is called from ViewUSerdetailsActivity.java by the admin*/
+    @Override
+    public boolean change_role(SystemUser target_user) {
+        ContentValues cv = new ContentValues();
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = null;
-        cursor = db.rawQuery(query, null);
-        int temp = cursor.getCount();
-        cursor.close();
+        cv.put(COL_ROLE, target_user.getRole());
+
+        db.update(TABLE_NAME, cv, COL_USERNAME + "=?", new String[]{target_user.getUsername()});
+        db.close();
+
+        return true;
     }
 }
