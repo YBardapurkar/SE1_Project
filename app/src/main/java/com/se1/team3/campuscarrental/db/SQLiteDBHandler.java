@@ -328,4 +328,17 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
         return true;
     }
 
+    /*function to change the role renter
+     * This function is called from ViewUSerdetailsActivity.java by the admin*/
+    @Override
+    public boolean change_role(SystemUser target_user) {
+        ContentValues cv = new ContentValues();
+        SQLiteDatabase db = this.getWritableDatabase();
+        cv.put(COL_ROLE, target_user.getRole());
+
+        db.update(TABLE_NAME, cv, COL_USERNAME + "=?", new String[]{target_user.getUsername()});
+        db.close();
+
+        return true;
+    }
 }
