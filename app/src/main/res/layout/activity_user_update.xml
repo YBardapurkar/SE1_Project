@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:ignore="ExtraText"
+    android:id="@+id/linearLayout1">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="116dp"
+        android:src="@drawable/user_photo"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="40dp"
+        android:id="@+id/userimage"/>
+    <!-- Labels -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/userimage"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="30dp"
+        android:text="First Name: "
+        android:id="@+id/label_first_name"
+        android:textSize="18sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/label_first_name"
+        android:layout_marginTop="15dp"
+        android:layout_alignStart="@+id/label_first_name"
+        android:text="Last Name: "
+        android:id="@+id/label_last_name"
+        android:textSize="18sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/label_last_name"
+        android:layout_marginTop="15dp"
+        android:layout_alignStart="@+id/label_first_name"
+        android:text="Uta Id: "
+        android:id="@+id/label_uta_id"
+        android:textSize="18sp"
+        android:inputType="number"
+        android:digits="0123456789"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/label_uta_id"
+        android:layout_marginTop="15dp"
+        android:layout_alignStart="@+id/label_first_name"
+        android:text="Email: "
+        android:id="@+id/label_email"
+        android:textSize="18sp"
+        android:inputType="textEmailAddress"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/label_email"
+        android:layout_marginTop="15dp"
+        android:layout_alignStart="@+id/label_first_name"
+        android:text="Phone: "
+        android:id="@+id/label_phone"
+        android:textSize="18sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/label_phone"
+        android:layout_marginTop="15dp"
+        android:layout_alignStart="@+id/label_first_name"
+        android:text="Street Address: "
+        android:id="@+id/label_street"
+        android:textSize="18sp"
+        android:inputType="phone"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/label_street"
+        android:layout_marginTop="15dp"
+        android:layout_alignStart="@+id/label_first_name"
+        android:text="City: "
+        android:id="@+id/label_city"
+        android:textSize="18sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/label_city"
+        android:layout_marginTop="15dp"
+        android:layout_alignStart="@+id/label_first_name"
+        android:text="State: "
+        android:id="@+id/label_state"
+        android:textSize="18sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/label_state"
+        android:layout_marginTop="15dp"
+        android:layout_alignStart="@+id/label_first_name"
+        android:text="PIN: "
+        android:id="@+id/label_pin"
+        android:textSize="18sp"
+        android:inputType="number"
+        android:digits="0123456789"/>
+    <LinearLayout
+        android:id="@+id/membership_LL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/label_pin"
+        android:layout_alignStart="@+id/label_pin">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Membership ?"
+            android:gravity="center"
+            android:textSize="18sp"/>
+
+        <ToggleButton
+            android:id="@+id/membership_button"
+            android:layout_width="wrap_content"
+            android:textOn="YES"
+            android:textOff="NO"
+            android:layout_height="wrap_content"
+            android:text="ToggleButton" />
+
+    </LinearLayout>
+
+    <!-- Data -->
+    <EditText
+        android:id="@+id/text_first_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/label_first_name"
+        android:layout_alignBaseline="@+id/label_first_name"
+        android:textSize="18sp"
+        />
+    <EditText
+        android:id="@+id/text_last_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/label_last_name"
+        android:layout_alignBaseline="@+id/label_last_name"
+        android:textSize="18sp"
+        />
+    <EditText
+        android:id="@+id/text_uta_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/label_uta_id"
+        android:layout_alignBaseline="@+id/label_uta_id"
+        android:textSize="18sp"
+        android:inputType="number"
+        android:maxLength="10"
+        />
+    <EditText
+        android:id="@+id/text_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/label_email"
+        android:layout_alignBaseline="@+id/label_email"
+        android:textSize="18sp"
+        />
+    <EditText
+        android:id="@+id/text_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/label_phone"
+        android:layout_alignBaseline="@+id/label_phone"
+        android:textSize="18sp"
+        android:maxLength="10"
+        android:inputType="phone"
+        />
+    <EditText
+        android:id="@+id/text_street"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/label_street"
+        android:layout_alignBaseline="@+id/label_street"
+        android:textSize="18sp"
+        />
+    <EditText
+        android:id="@+id/text_city"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/label_city"
+        android:layout_alignBaseline="@+id/label_city"
+        android:textSize="18sp"
+        />
+    <EditText
+        android:id="@+id/text_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/label_state"
+        android:layout_alignBaseline="@+id/label_state"
+        android:textSize="18sp"
+        />
+    <EditText
+        android:id="@+id/text_pin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/label_pin"
+        android:layout_alignBaseline="@+id/label_pin"
+        android:textSize="18sp"
+        android:maxLength="5"
+        android:inputType="number"
+        />
+
+    <Button
+        android:id="@+id/update_prof_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:text="SAVE"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"/>
+
+
+</RelativeLayout>

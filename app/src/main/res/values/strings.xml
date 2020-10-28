@@ -48,6 +48,18 @@
     <string name="welcome_message">Welcome, %1$s</string>
     <string name="txt_zip_code">Zip Code</string>
 
+    <!--    Profile-->
+    <string name="title_user_profile">Profile</string>
+    <string name="txt_name">FULL NAME</string>
+    <string name="txt_id">UTA ID</string>
+    <string name="txt_usr_role">ROLE</string>
+    <string name="txt_usr_member">MEMBER</string>
+    <string name="txt_usr_email">EMAIL</string>
+    <string name="txt_usr_phone">PHONE</string>
+    <string name="txt_usr_address">ADDRESS</string>
+    <string name="txt_usr_name">USERNAME</string>
+    <string name="txt_usr_status">STATUS</string>
+
     <!--    User Home-->
     <string name="title_user_home">User Home</string>
     <string name="btn_view_profile">Profile</string>

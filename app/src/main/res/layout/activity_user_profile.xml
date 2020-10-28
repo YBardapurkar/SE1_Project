@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:ignore="ExtraText"
+    android:id="@+id/linearLayout1">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="116dp"
+        android:src="@drawable/user_photo"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="40dp"
+        android:id="@+id/userimage"/>
+<!-- Labels -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/userimage"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="30dp"
+        android:text="@string/txt_name"
+        android:id="@+id/fullName_label"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/userimage"
+        android:layout_toRightOf="@+id/fullName_label"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="180dp"
+        android:text="@string/txt_usr_name"
+        android:id="@+id/username_label"
+        android:textSize="15sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/username_label"
+        android:layout_alignStart="@+id/username_label"
+        android:layout_marginTop="50dp"
+        android:text="@string/txt_id"
+        android:id="@+id/id_label"
+        android:textSize="15sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fullName_label"
+        android:layout_marginTop="50dp"
+        android:layout_alignLeft="@+id/fullName_label"
+        android:text="@string/txt_usr_role"
+        android:id="@+id/id_role"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/id_role"
+        android:layout_marginTop="50dp"
+        android:layout_alignStart="@+id/fullName_label"
+        android:text="@string/txt_usr_email"
+        android:id="@+id/id_email"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/phone_member"
+        android:layout_marginTop="50dp"
+        android:layout_alignStart="@+id/fullName_label"
+        android:text="@string/txt_usr_address"
+        android:id="@+id/id_address"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/id_email"
+        android:layout_marginTop="50dp"
+        android:layout_alignStart="@+id/id_label"
+        android:text="@string/txt_usr_member"
+        android:id="@+id/member_label"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/id_email"
+        android:layout_marginTop="50dp"
+        android:layout_alignStart="@+id/id_email"
+        android:text="@string/txt_usr_phone"
+        android:id="@+id/phone_member"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/member_label"
+        android:layout_marginTop="50dp"
+        android:layout_alignStart="@+id/id_label"
+        android:text="@string/txt_usr_status"
+        android:id="@+id/status"
+        android:textSize="15sp" />
+<!-- Data -->
+    <TextView
+        android:id="@+id/fullName_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fullName_label"
+        android:layout_alignStart="@+id/fullName_label"
+        android:textSize="22sp"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/role_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/id_role"
+        android:layout_alignStart="@+id/fullName_label"
+        android:textSize="22sp"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/email_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/id_email"
+        android:layout_alignStart="@+id/fullName_label"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/add_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/id_address"
+        android:layout_alignStart="@+id/fullName_label"
+        android:textSize="22sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/username_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/username_label"
+        android:layout_below="@+id/username_label"
+        android:textSize="22sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/id_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/id_label"
+        android:layout_alignStart="@+id/id_label"
+        android:textSize="22sp"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/id_member"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/member_label"
+        android:layout_alignStart="@+id/id_label"
+        android:textSize="22sp"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/id_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/phone_member"
+        android:layout_alignStart="@+id/phone_member"
+        android:textSize="22sp"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/id_status_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/status"
+        android:layout_alignStart="@+id/status"
+        android:textSize="22sp"
+        android:textStyle="bold"/>
+    <Button
+        android:id="@+id/update_prof_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:text="Update Profile"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"/>
+
+
+</RelativeLayout>

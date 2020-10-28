@@ -19,7 +19,7 @@ public class UserHomeActivity extends AppCompatActivity {
     Button btn_profile,  btn_searchCar, btn_viewAllReserves, btn_logout;
     SharedPreferences sharedPreferences;
     TextView textWelcome;
-
+    Bundle bundle;
     static final String PREFERENCES = "SharedPreferences";
     static final String USERNAME = "username";
     static final String ROLE = "role";
@@ -32,7 +32,6 @@ public class UserHomeActivity extends AppCompatActivity {
 
         sharedPreferences =  getApplicationContext().getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
         String welcomeMessage = String.format(getResources().getString(R.string.welcome_message), sharedPreferences.getString(USERNAME, ""));
-//        String welcomeMessage = "Shubham Shah";
         textWelcome = findViewById(R.id.text_user_welcome);
         textWelcome.setText(welcomeMessage);
 
@@ -41,7 +40,10 @@ public class UserHomeActivity extends AppCompatActivity {
         btn_viewAllReserves = findViewById(R.id.btn_reserves);
         btn_logout = findViewById(R.id.btn_logout);
 
-        btn_profile.setOnClickListener(v -> Toast.makeText(UserHomeActivity.this, "### View Profile", Toast.LENGTH_SHORT).show());
+        btn_profile.setOnClickListener(v -> {
+            Toast.makeText(UserHomeActivity.this, "User Profile", Toast.LENGTH_SHORT).show();
+            viewProfile();
+        });
 
         btn_searchCar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,28 +62,29 @@ public class UserHomeActivity extends AppCompatActivity {
         });
     }
 
+    public void viewProfile(){
+        Intent intent = new Intent(this, UserProfileActivity.class);
+        bundle = new Bundle();
+        bundle.putString("username", sharedPreferences.getString(USERNAME, ""));
+        bundle.putString("flag", "0");
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
     public void logout() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.logout_confirmation_message)
-                .setPositiveButton(R.string.logout_confirmation_yes, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        sharedPreferences.edit()
-                                .remove(USERNAME)
-                                .remove(ROLE)
-                                .apply();
+                .setPositiveButton(R.string.logout_confirmation_yes, (dialog, which) -> {
+                    sharedPreferences.edit()
+                            .remove(USERNAME)
+                            .remove(ROLE)
+                            .apply();
 
-                        Intent intent = new Intent(UserHomeActivity.this, LoginActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
+                    Intent intent = new Intent(UserHomeActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
                 })
-                .setNegativeButton(R.string.logout_confirmation_no, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
+                .setNegativeButton(R.string.logout_confirmation_no, (dialog, which) -> dialog.dismiss());
 
         AlertDialog dialog = builder.create();
         dialog.show();
@@ -91,18 +94,8 @@ public class UserHomeActivity extends AppCompatActivity {
     public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.exit_confirmation_message)
-                .setPositiveButton(R.string.exit_confirmation_yes, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        UserHomeActivity.super.onBackPressed();
-                    }
-                })
-                .setNegativeButton(R.string.exit_confirmation_no, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
+                .setPositiveButton(R.string.exit_confirmation_yes, (dialog, which) -> UserHomeActivity.super.onBackPressed())
+                .setNegativeButton(R.string.exit_confirmation_no, (dialog, which) -> dialog.dismiss());
 
         AlertDialog dialog = builder.create();
         dialog.show();
