@@ -5,9 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.os.PersistableBundle;
+import android.content.Intent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.se1.team3.campuscarrental.db.DBHandler;
 import com.se1.team3.campuscarrental.db.SQLiteDBHandler;
 import com.se1.team3.campuscarrental.models.SystemUser;
@@ -17,9 +20,10 @@ public class UserProfileActivity extends  AppCompatActivity{
 
     TextView name, uta_id, usrname, role, email, member, address, phone, status;
     Bundle bundle;
-    String username, membership_valeu;
+    String username, membership_valeu, flag;
     DBHandler dbHandler;
     SystemUser curr_user;
+    Button update_prof;
     @SuppressLint("SetTextI18n")
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,7 +33,8 @@ public class UserProfileActivity extends  AppCompatActivity{
 
         dbHandler = new SQLiteDBHandler(this);
         bundle = getIntent().getExtras();
-
+        flag = bundle.getString("flag");
+        update_prof = findViewById(R.id.update_prof_btn);
         name = findViewById(R.id.fullName_text);
         uta_id = findViewById(R.id.id_text);
         usrname = findViewById(R.id.username_text);
@@ -61,5 +66,27 @@ public class UserProfileActivity extends  AppCompatActivity{
         } else {
             status.setText("Deactive");
         }
+        update_prof.setOnClickListener(v -> {
+            Toast.makeText(UserProfileActivity.this, "User Profile Update", Toast.LENGTH_SHORT).show();
+            updateProfile(curr_user);
+        });
+    }
+
+    public void updateProfile(SystemUser curr){
+        Intent intent = new Intent(this, UserUpdateProfileActivity.class);
+        bundle = new Bundle();
+        bundle.putString("flag", flag);
+        bundle.putString("username", username);
+        bundle.putString("first_name", curr.getFirstName());
+        bundle.putString("last_name", curr.getLastName());
+        bundle.putString("uta_id", curr.getUtaId());
+        bundle.putString("email", curr.getEmail());
+        bundle.putString("phone", curr.getPhone());
+        bundle.putString("street", curr.getStreet());
+        bundle.putString("state", curr.getState());
+        bundle.putString("city", curr.getCity());
+        bundle.putString("pin", curr.getPin());
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }
