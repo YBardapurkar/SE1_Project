@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llreservationdetails"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:background="#51BCBCBC"
+    android:clickable="true"
+    android:isScrollContainer="false"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/myownbar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:id="@+id/greeting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="0sp"
+            android:fontFamily="sans-serif-medium"
+            android:text="   Reservation details"
+            android:textAllCaps="true"
+            android:textColor="#ffffff"
+            android:textSize="24sp" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="16sp"
+            android:layout_marginRight="16sp"
+            android:gravity="right">
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <TableLayout
+        android:id="@+id/newmaintable"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="0dp"
+        android:background="@drawable/rounded_edge"
+        android:isScrollContainer="false"
+        android:paddingTop="15dp"
+        android:paddingBottom="20dp"
+        android:verticalScrollbarPosition="right"
+        android:visibility="visible"
+        tools:layout_editor_absoluteX="-1dp"
+        tools:layout_editor_absoluteY="3dp">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:baselineAligned="false"
+            android:gravity="center_horizontal"
+            android:paddingTop="1dp"
+            android:paddingBottom="1dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/CarNumberLabel"
+                    android:layout_width="162dp"
+                    android:layout_height="45dp"
+                    android:ems="10"
+                    android:hint="Car Number"
+                    android:inputType="text"
+                    android:text="Car Number"
+                    android:textColor="#000000"
+                    android:textColorHint="#70000000" />
+
+                <TextView
+                    android:id="@+id/carNumber"
+                    android:layout_width="162dp"
+                    android:layout_height="45dp"
+                    android:ems="10"
+                    android:hint="ABC123"
+                    android:inputType="textPersonName"
+                    android:textColor="#000000"
+                    android:textColorHint="#70000000" />
+
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:baselineAligned="false"
+            android:gravity="center_horizontal"
+            android:paddingTop="1dp"
+            android:paddingBottom="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/CarNameLabel"
+                    android:layout_width="162dp"
+                    android:layout_height="45dp"
+
+                    android:ems="10"
+                    android:hint="UTA ID"
+                    android:inputType="text"
+                    android:text="Car Name"
+                    android:textColor="#000000"
+                    android:textColorHint="#70000000" />
+
+                <TextView
+                    android:id="@+id/carName"
+                    android:layout_width="162dp"
+                    android:layout_height="45dp"
+                    android:drawablePadding="15dp"
+                    android:ems="10"
+                    android:hint="Economic"
+                    android:inputType="text"
+                    android:textColor="#000000"
+                    android:textColorHint="#70000000" />
+
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:baselineAligned="false"
+            android:gravity="center_horizontal"
+            android:paddingTop="1dp"
+            android:paddingBottom="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/CarOccupantCapacityLabel"
+                    android:layout_width="162dp"
+                    android:layout_height="45dp"
+                    android:ems="10"
+                    android:hint="capacity"
+                    android:inputType="text"
+                    android:text="Selected Capacity"
+                    android:textColor="#000000"
+                    android:textColorHint="#70000000" />
+
+                <TextView
+                    android:id="@+id/selectedCapacity"
+                    android:layout_width="162dp"
+                    android:layout_height="45dp"
+                    android:ems="10"
+                    android:hint="2"
+                    android:inputType="text"
+                    android:textColor="#000000"
+                    android:textColorHint="#70000000" />
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:baselineAligned="false"
+            android:gravity="center_horizontal"
+            android:paddingTop="1dp"
+            android:paddingBottom="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/DateFromLabel"
+                    android:layout_width="162dp"
+                    android:layout_height="45dp"
+                    android:ems="10"
+                    android:text="Start Date"
+                    android:textColor="#000000"
+                    android:textColorHint="#70000000" />
+
+                <TextView
+                    android:id="@+id/startDate"
+                    android:layout_width="162dp"
+                    android:layout_height="45dp"
+                    android:ems="10"
+                    android:hint="2020-12-31 14:00"
+                    android:textColor="#000000"
+                    android:textColorHint="#70000000" />
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:baselineAligned="false"
+            android:gravity="center_horizontal"
+            android:paddingTop="1dp"
+            android:paddingBottom="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/DateEndLabel"
+                    android:layout_width="162dp"
+                    android:layout_height="45dp"
+                    android:ems="10"
+                    android:text="End Date"
+                    android:textColor="#000000"
+                    android:textColorHint="#70000000" />
+
+                <TextView
+                    android:id="@+id/endDate"
+                    android:layout_width="162dp"
+                    android:layout_height="30dp"
+                    android:ems="10"
+                    android:hint="2020-12-31 16:00"
+                    android:textColor="#000000"
+                    android:textColorHint="#70000000" />
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:baselineAligned="false"
+            android:gravity="center_horizontal"
+            android:paddingTop="1dp"
+            android:paddingBottom="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/optionalText"
+                    android:layout_width="162dp"
+                    android:layout_height="30dp"
+                    android:ems="10"
+                    android:text="                        Options:"
+                    android:textColor="#000000"
+                    android:textColorHint="#70000000" />
+
+                <CheckBox
+                    android:id="@+id/gps"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:text="GPS" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/gpsPrice"
+                    android:layout_width="140dp"
+                    android:layout_height="30dp"
+                    android:ems="10"
+                    android:text="GPS Price:"
+                    android:textColor="#000000"
+                    android:textColorHint="#70000000" />
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:baselineAligned="false"
+            android:gravity="center_horizontal"
+            android:paddingTop="1dp"
+            android:paddingBottom="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="162dp"
+                    android:layout_height="30dp"
+                    android:ems="10"
+                    android:inputType="text"
+                    android:textColor="#000000"
+                    android:textColorHint="#70000000" />
+
+                <CheckBox
+                    android:id="@+id/onstar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="OnStar" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/onstarPrice"
+                    android:layout_width="162dp"
+                    android:layout_height="30dp"
+                    android:ems="10"
+                    android:text="OnStar Price:"
+                    android:textColor="#000000"
+                    android:textColorHint="#70000000" />
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:baselineAligned="false"
+            android:gravity="center_horizontal"
+            android:paddingTop="1dp"
+            android:paddingBottom="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="162dp"
+                    android:layout_height="30dp"
+                    android:ems="10"
+                    android:textColor="#000000"
+                    android:textColorHint="#70000000" />
+
+                <CheckBox
+                    android:id="@+id/siriusxm"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="SiriusXM" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/siriusxmPrice"
+                    android:layout_width="162dp"
+                    android:layout_height="30dp"
+                    android:ems="10"
+                    android:text="siriusxm Price:"
+                    android:textColor="#000000"
+                    android:textColorHint="#70000000" />
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:baselineAligned="false"
+            android:gravity="center_horizontal"
+            android:paddingTop="10dp"
+            android:paddingBottom="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/totalCostLabel"
+                    android:layout_width="162dp"
+                    android:layout_height="45dp"
+                    android:ems="10"
+                    android:hint="totalCost"
+                    android:inputType="text"
+                    android:text="Total Cost:"
+                    android:textColor="#000000"
+                    android:textColorHint="#70000000" />
+
+                <TextView
+                    android:id="@+id/totalCost"
+                    android:layout_width="162dp"
+                    android:layout_height="45dp"
+                    android:ems="10"
+                    android:text="$999.99"
+                    android:textColor="#DC0000"
+                    android:textColorHint="#70000000" />
+
+            </LinearLayout>
+
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:gravity="center_horizontal"
+            android:paddingTop="5dp"
+            android:paddingBottom="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="28dp"
+            android:baselineAligned="false"
+            android:gravity="center_horizontal"
+            android:paddingTop="1dp"
+            android:paddingBottom="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnReserve"
+                    android:layout_width="156dp"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/buttonrounded_edge"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Reserve"
+                    android:textColor="#020202"
+                    android:textColorHint="#FFFDFD"
+                    android:textSize="17sp"
+                    android:visibility="visible"
+                    tools:layout_editor_absoluteX="448dp"
+                    tools:layout_editor_absoluteY="671dp" />
+
+
+            </LinearLayout>
+
+        </TableRow>
+
+
+    </TableLayout>
+
+</LinearLayout>

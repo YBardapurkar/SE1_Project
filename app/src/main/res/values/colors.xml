@@ -6,4 +6,5 @@
     <color name="redLogout">#ff0000</color>
     <color name="disabled">#78909C</color>
     <color name="userbg">#EDDAF5</color>
+    <color name="buttoncolor">#BCCC9A12</color>
 </resources>
