@@ -148,6 +148,7 @@ public class AdminViewsUserDetailsActivity extends AppCompatActivity {
                             dialog.dismiss();
                             Intent intent = new Intent(AdminViewsUserDetailsActivity.this, SearchUserActivity.class);
                             startActivity(intent);
+                            finish();
                         }
                     }
                 })
@@ -224,6 +225,7 @@ public class AdminViewsUserDetailsActivity extends AppCompatActivity {
                             dialog.dismiss();
                             Intent intent = new Intent(AdminViewsUserDetailsActivity.this, SearchUserActivity.class);
                             startActivity(intent);
+                            finish();
                         }
                     }
                 })
