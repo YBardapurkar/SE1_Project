@@ -15,7 +15,7 @@ import com.se1.team3.campuscarrental.models.SystemUser;
 
 public class UserProfileActivity extends  AppCompatActivity{
 
-    TextView fullName, uta_id, usrname, role, email, member, address, phone, status;
+    TextView name, uta_id, usrname, role, email, member, address, phone, status;
     Bundle bundle;
     String username, membership_valeu;
     DBHandler dbHandler;
@@ -30,7 +30,7 @@ public class UserProfileActivity extends  AppCompatActivity{
         dbHandler = new SQLiteDBHandler(this);
         bundle = getIntent().getExtras();
 
-        fullName = findViewById(R.id.fullName_text);
+        name = findViewById(R.id.fullName_text);
         uta_id = findViewById(R.id.id_text);
         usrname = findViewById(R.id.username_text);
         role = findViewById(R.id.role_text);
@@ -42,7 +42,7 @@ public class UserProfileActivity extends  AppCompatActivity{
         username = bundle.getString("username");
 
         curr_user = dbHandler.getUserByUsername(username);
-        fullName.setText(curr_user.getFirstName() + " " + curr_user.getLastName());
+        name.setText(curr_user.getFirstName() + " " + curr_user.getLastName());
         uta_id.setText(curr_user.getUtaId());
         usrname.setText(username);
         role.setText(curr_user.getRole());
