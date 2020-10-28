@@ -19,7 +19,7 @@ public class UserHomeActivity extends AppCompatActivity {
     Button btn_profile,  btn_searchCar, btn_viewAllReserves, btn_logout;
     SharedPreferences sharedPreferences;
     TextView textWelcome;
-
+    Bundle bundle;
     static final String PREFERENCES = "SharedPreferences";
     static final String USERNAME = "username";
     static final String ROLE = "role";
@@ -32,7 +32,6 @@ public class UserHomeActivity extends AppCompatActivity {
 
         sharedPreferences =  getApplicationContext().getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
         String welcomeMessage = String.format(getResources().getString(R.string.welcome_message), sharedPreferences.getString(USERNAME, ""));
-//        String welcomeMessage = "Shubham Shah";
         textWelcome = findViewById(R.id.text_user_welcome);
         textWelcome.setText(welcomeMessage);
 
@@ -41,7 +40,13 @@ public class UserHomeActivity extends AppCompatActivity {
         btn_viewAllReserves = findViewById(R.id.btn_reserves);
         btn_logout = findViewById(R.id.btn_logout);
 
-        btn_profile.setOnClickListener(v -> Toast.makeText(UserHomeActivity.this, "### View Profile", Toast.LENGTH_SHORT).show());
+        btn_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(UserHomeActivity.this, "User Profile", Toast.LENGTH_SHORT).show();
+                viewProfile();
+            }
+        });
 
         btn_searchCar.setOnClickListener(v -> Toast.makeText(UserHomeActivity.this, "!!! Search Car", Toast.LENGTH_SHORT).show());
 
@@ -52,6 +57,14 @@ public class UserHomeActivity extends AppCompatActivity {
             Toast.makeText(UserHomeActivity.this, "Logout", Toast.LENGTH_SHORT).show();
             logout();
         });
+    }
+
+    public void viewProfile(){
+        Intent intent = new Intent(this, UserProfileActivity.class);
+        bundle = new Bundle();
+        bundle.putString("username", sharedPreferences.getString(USERNAME, ""));
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     public void logout() {

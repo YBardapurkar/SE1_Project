@@ -23,6 +23,7 @@
         <activity android:name=".AdminHomeActivity" />
         <activity android:name=".RentalManagerHomeActivity" />
         <activity android:name=".UserHomeActivity" />
+        <activity android:name=".UserProfileActivity" />
         <activity android:name=".SignUpActivity" />
         <activity
             android:name=".LoginActivity"

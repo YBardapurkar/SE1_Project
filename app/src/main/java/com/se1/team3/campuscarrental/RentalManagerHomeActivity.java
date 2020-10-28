@@ -1,6 +1,7 @@
 package com.se1.team3.campuscarrental;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,7 @@ public class RentalManagerHomeActivity extends HomeActivity {
 
     Button btn_lcar, btn_Logout, btn_profile, btn_reserve;
     TextView textWelcome;
+    Bundle bundle;
     SharedPreferences sharedPreferences;
     static final String PREFERENCES = "SharedPreferences";
     static final String USERNAME = "username";
@@ -36,6 +38,7 @@ public class RentalManagerHomeActivity extends HomeActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(),"Rental Manager", Toast.LENGTH_SHORT).show();
+                viewProfile();
             }
         });
         btn_lcar.setOnClickListener(new View.OnClickListener() {
@@ -57,5 +60,12 @@ public class RentalManagerHomeActivity extends HomeActivity {
             }
         });
 
+    }
+    public void viewProfile(){
+        Intent intent = new Intent(this, UserProfileActivity.class);
+        bundle = new Bundle();
+        bundle.putString("username", sharedPreferences.getString(USERNAME, ""));
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }
