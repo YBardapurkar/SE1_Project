@@ -38,7 +38,10 @@ public class SearchUserActivity extends AppCompatActivity{
         setTitle(getString(R.string.title_search_user));
         dbHandler = new SQLiteDBHandler(this);
         // Construct the data source
-        arrayOfUsers = (ArrayList<SystemUser>) dbHandler.getAllUsers();
+
+        arrayOfUsers = (ArrayList<SystemUser>) dbHandler.searchUsers("","User");
+
+//        arrayOfUsers = (ArrayList<SystemUser>) dbHandler.getAllUsers();
         // Create the adapter to convert the array to views
         adapter = new SystemUserAdapter(this, R.layout.item_user, arrayOfUsers);
         // Attach the adapter to a ListView
