@@ -1,13 +1,16 @@
 package com.se1.team3.campuscarrental;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,12 +21,14 @@ import com.se1.team3.campuscarrental.models.SystemUser;
 
 public class UserProfileActivity extends  AppCompatActivity{
 
-    TextView name, uta_id, usrname, role, email, member, address, phone, status;
+    EditText name, uta_id, email, member, address, phone, state, city, pincode;
+    TextView role, status, usrname, roleLabel;
     Bundle bundle;
     String username, membership_valeu, flag;
     DBHandler dbHandler;
-    SystemUser curr_user;
+    SystemUser selected_user;
     Button update_prof;
+    Intent intent;
     @SuppressLint("SetTextI18n")
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,49 +49,104 @@ public class UserProfileActivity extends  AppCompatActivity{
         address = findViewById(R.id.add_text);
         phone = findViewById(R.id.id_phone);
         status = findViewById(R.id.id_status_text);
+        state = findViewById(R.id.id_state_txt);
+        city = findViewById(R.id.id_city_txt);
+        pincode = findViewById(R.id.id_text_pincode);
         username = bundle.getString("username");
+        roleLabel = findViewById(R.id.id_role);
 
-        curr_user = dbHandler.getUserByUsername(username);
-        name.setText(curr_user.getFirstName() + " " + curr_user.getLastName());
-        uta_id.setText(curr_user.getUtaId());
+        selected_user = dbHandler.getUserByUsername(username);
+        name.setText(selected_user.getFirstName() + " " + selected_user.getLastName());
+        uta_id.setText(selected_user.getUtaId());
         usrname.setText(username);
-        role.setText(curr_user.getRole());
-        email.setText(curr_user.getEmail());
-        phone.setText(curr_user.getPhone());
-        address.setText(curr_user.getStreet()+ "\n" + curr_user.getCity()+"\n"+curr_user.getState()+" - " + curr_user.getPin());
-        if (curr_user.isMembership()) {
+        role.setText(selected_user.getRole());
+        email.setText(selected_user.getEmail());
+        phone.setText(selected_user.getPhone());
+        address.setText(selected_user.getStreet());
+        city.setText(selected_user.getCity());
+        state.setText(selected_user.getState());
+        pincode.setText(selected_user.getPin());
+        if(flag.equals("1")){
+            role.setVisibility(View.INVISIBLE);
+            roleLabel.setVisibility(View.INVISIBLE);
+        }
+        if (selected_user.isMembership()) {
             membership_valeu = "Yes";
         }
         else {
             membership_valeu = "No";
         }
         member.setText(membership_valeu);
-        if (curr_user.isStatus()) {
+        if (selected_user.isStatus()) {
             status.setText("Active");
         } else {
             status.setText("Deactive");
         }
         update_prof.setOnClickListener(v -> {
             Toast.makeText(UserProfileActivity.this, "User Profile Update", Toast.LENGTH_SHORT).show();
-            updateProfile(curr_user);
+            updateProfile(selected_user);
         });
     }
 
     public void updateProfile(SystemUser curr){
-        Intent intent = new Intent(this, UserUpdateProfileActivity.class);
-        bundle = new Bundle();
-        bundle.putString("flag", flag);
-        bundle.putString("username", username);
-        bundle.putString("first_name", curr.getFirstName());
-        bundle.putString("last_name", curr.getLastName());
-        bundle.putString("uta_id", curr.getUtaId());
-        bundle.putString("email", curr.getEmail());
-        bundle.putString("phone", curr.getPhone());
-        bundle.putString("street", curr.getStreet());
-        bundle.putString("state", curr.getState());
-        bundle.putString("city", curr.getCity());
-        bundle.putString("pin", curr.getPin());
-        intent.putExtras(bundle);
-        startActivity(intent);
+        Toast.makeText(this, "Update Profile", Toast.LENGTH_SHORT).show();
+        String names = name.getText().toString();
+        String[] name = names.split("\\s+");
+        String first = name[0];
+        String last = name[1];
+        selected_user.setFirstName(first);
+        selected_user.setLastName(last);
+        selected_user.setUtaId(uta_id.getText().toString());
+        selected_user.setPhone(phone.getText().toString());
+        selected_user.setEmail(email.getText().toString());
+        selected_user.setStreet(address.getText().toString());
+        selected_user.setCity(city.getText().toString());
+        selected_user.setState(state.getText().toString());
+        selected_user.setPin(pincode.getText().toString());
+        /*fire query to update these attributes*/
+        /*Firstly diplaying the query and depending on the response updating or not*/
+        AlertDialog.Builder builder = new AlertDialog.Builder(UserProfileActivity.this);
+        builder.setMessage("Are you want to Save Changes?")
+                .setPositiveButton(R.string.logout_confirmation_yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        /*Please do the edit database  database stuff here*/
+
+                        if (dbHandler.edit_profile(selected_user)) {
+                            /*UPdate is Sucessfull*/
+                            Toast.makeText(UserProfileActivity.this, flag, Toast.LENGTH_LONG).show();
+                            Toast.makeText(UserProfileActivity.this, "Succesfully Updated.", Toast.LENGTH_LONG).show();
+                            if (flag.equals("1")) {
+                                intent = new Intent(UserProfileActivity.this, RentalManagerHomeActivity.class);
+                                startActivity(intent);
+                            }
+                            else{
+                                if(flag.equals("0")){
+                                    intent = new Intent(UserProfileActivity.this, UserHomeActivity.class);
+                                    startActivity(intent);
+                                }
+                            }
+                            Toast.makeText(UserProfileActivity.this, "OUTSIDE", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+
+                            finish();
+                        } else {
+                            /*Registration has failed*/
+                            Toast.makeText(UserProfileActivity.this, "Failed Updation!!!.", Toast.LENGTH_LONG).show();
+                            dialog.dismiss();
+                        }
+
+                    }
+                })
+                .setNegativeButton(R.string.logout_confirmation_no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(UserProfileActivity.this, "Changes NOT SAVED!!", Toast.LENGTH_LONG).show();
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

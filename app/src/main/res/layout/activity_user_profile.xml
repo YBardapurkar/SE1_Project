@@ -7,14 +7,7 @@
     tools:ignore="ExtraText"
     android:id="@+id/linearLayout1">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="116dp"
-        android:src="@drawable/user_photo"
-        android:layout_marginLeft="150dp"
-        android:layout_marginTop="40dp"
-        android:id="@+id/userimage"/>
-<!-- Labels -->
+    <!-- Labels -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -74,6 +67,32 @@
         android:text="@string/txt_usr_address"
         android:id="@+id/id_address"
         android:textSize="15sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/add_text"
+        android:layout_alignStart="@+id/fullName_label"
+        android:text="CITY"
+        android:id="@+id/id_city"
+        android:textSize="15sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/status"
+        android:layout_marginTop="50dp"
+        android:layout_alignStart="@+id/status"
+        android:text="STATE"
+        android:id="@+id/id_state"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/id_city_txt"
+        android:layout_alignStart="@+id/fullName_label"
+        android:text="PINCODE"
+        android:id="@+id/id_pincode"
+        android:textSize="15sp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -105,7 +124,7 @@
         android:id="@+id/status"
         android:textSize="15sp" />
 <!-- Data -->
-    <TextView
+    <EditText
         android:id="@+id/fullName_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -121,7 +140,7 @@
         android:layout_alignStart="@+id/fullName_label"
         android:textSize="22sp"
         android:textStyle="bold"/>
-    <TextView
+    <EditText
         android:id="@+id/email_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -129,7 +148,7 @@
         android:layout_alignStart="@+id/fullName_label"
         android:textSize="18sp"
         android:textStyle="bold"/>
-    <TextView
+    <EditText
         android:id="@+id/add_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -147,7 +166,7 @@
         android:textSize="22sp"
         android:textStyle="bold"/>
 
-    <TextView
+    <EditText
         android:id="@+id/id_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -155,7 +174,20 @@
         android:layout_alignStart="@+id/id_label"
         android:textSize="22sp"
         android:textStyle="bold"/>
-    <TextView
+
+    <ToggleButton
+        android:textOn="YES"
+        android:textOff="NO"
+
+        android:layout_weight="1"
+        android:text="ToggleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/member_label"
+        android:layout_alignStart="@+id/id_label"
+        android:textSize="15sp"
+        android:textStyle="bold"/>
+    <EditText
         android:id="@+id/id_member"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -163,12 +195,38 @@
         android:layout_alignStart="@+id/id_label"
         android:textSize="22sp"
         android:textStyle="bold"/>
-    <TextView
+    <EditText
         android:id="@+id/id_phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/phone_member"
         android:layout_alignStart="@+id/phone_member"
+        android:textSize="22sp"
+        android:textStyle="bold"/>
+
+    <EditText
+    android:id="@+id/id_city_txt"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/id_city"
+    android:layout_alignStart="@+id/phone_member"
+    android:textSize="22sp"
+    android:textStyle="bold"/>
+
+    <EditText
+        android:id="@+id/id_state_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/id_state"
+        android:layout_alignStart="@+id/id_state"
+        android:textSize="22sp"
+        android:textStyle="bold"/>
+    <EditText
+        android:id="@+id/id_text_pincode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/id_pincode"
+        android:layout_alignStart="@+id/id_pincode"
         android:textSize="22sp"
         android:textStyle="bold"/>
     <TextView
