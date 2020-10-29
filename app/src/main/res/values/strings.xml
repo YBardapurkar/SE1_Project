@@ -117,7 +117,7 @@
     <string-array name="array_name">
         <item>@string/role_user</item>
         <item>@string/role_rental_manager</item>
-        <item>@string/role_admin</item>
+
     </string-array>
 
 
