@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -65,9 +66,9 @@ public class AvailableCarsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Car selectedCar = carList.get(position);
-//                Intent intent = new Intent(SearchCarActivity.this, CarDetailsActivity.Class);
-//                intent.putExtra("CAR_ID", selectedCar.getId());
-//                startActivity(intent);
+                Intent intent = new Intent(AvailableCarsActivity.this, ViewCarDetailsActivity.class);
+                intent.putExtra("CAR_ID", selectedCar.getId());
+                startActivity(intent);
             }
         });
 

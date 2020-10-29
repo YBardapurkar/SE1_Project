@@ -17,19 +17,49 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AvailableCarsActivity"></activity>
-        <activity android:name=".SearchCarActivity" />
-        <activity android:name=".AdminViewsUserDetailsActivity" />
-        <activity android:name=".HomeActivity" />
-        <activity android:name=".AdminHomeActivity" />
+        <activity
+            android:name=".AvailableCarsActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SearchCarActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AdminViewsUserDetailsActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".HomeActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AdminHomeActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SearchUserActivity"
             android:label="@string/app_name" />
-        <activity android:name=".RentalManagerHomeActivity" />
-        <activity android:name=".UserHomeActivity" />
-        <activity android:name=".UserProfileActivity" />
-        <activity android:name=".UserUpdateProfileActivity" />
-        <activity android:name=".SignUpActivity" />
+        <activity
+            android:name=".RentalManagerHomeActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".UserHomeActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".UserProfileActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".UserUpdateProfileActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SignUpActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".LoginActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -47,6 +77,10 @@
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ViewCarDetailsActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

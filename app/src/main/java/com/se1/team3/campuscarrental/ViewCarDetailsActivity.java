@@ -1,159 +1,196 @@
 package com.se1.team3.campuscarrental;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.se1.team3.campuscarrental.db.DBHandler;
 import com.se1.team3.campuscarrental.db.SQLiteDBHandler;
+import com.se1.team3.campuscarrental.models.Car;
 import com.se1.team3.campuscarrental.models.SystemUser;
 
-import org.joda.time.DateTime;
-import org.joda.time.Days;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
+//import org.joda.time.DateTime;
+//import org.joda.time.Days;
+//import org.joda.time.format.DateTimeFormat;
+//import org.joda.time.format.DateTimeFormatter;
 
-import java.util.ArrayList;
+import org.w3c.dom.Text;
 
-    public class ViewCarDetailsActivity extends AppCompatActivity {
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
-        public SQLiteDBHandler userDbOperations;
-        TextView carNumber;
+public class ViewCarDetailsActivity extends AppCompatActivity {
+
+        public DBHandler dbHandler;
+        SharedPreferences sharedPreferences;
+
+        static final String PREFERENCES = "SharedPreferences";
+        static final String USERNAME = "username";
+        static final String ROLE = "role";
+
         TextView carName;
-        TextView selectedCapacity;
+        TextView capacity;
+        TextView weekday, weekend, week;
         TextView startDateText;
         TextView endDateText;
         CheckBox gps;
         CheckBox onstar;
         CheckBox siriusxm;
+
         TextView gpsPrice;
         TextView onstarPrice;
         TextView siriusxmPrice;
+
+        TextView price, discount, tax;
         TextView totalCost;
         Button btnReserve;
-
-
-        double calculatedCost = 0.00;
-        String reservationNumber = "";
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_reservation_details);
-            userDbOperations = new SQLiteDBHandler(this);
-            btnReserve = (Button) findViewById(R.id.btnReserve);
-            carNumber = (TextView) findViewById(R.id.carNumber);
-            carName = (TextView) findViewById(R.id.carName);
-            selectedCapacity = (TextView) findViewById(R.id.selectedCapacity);
-            SharedPreferences sharedPreferences;
-            String role = "";
-            //String role = sharedPreferences.getString(ROLE, "")
-            if(role == "user")
-            {
-                startDateText = (TextView) findViewById(R.id.startDate);
-                endDateText = (TextView) findViewById(R.id.endDate);
-                gps = (CheckBox) findViewById(R.id.gps);
-                onstar = (CheckBox) findViewById(R.id.onstar);
-                siriusxm = (CheckBox) findViewById(R.id.siriusxm);
+            setContentView(R.layout.activity_view_car_details);
+
+            setTitle("Car Details");
+
+            dbHandler = new SQLiteDBHandler(this);
+            sharedPreferences =  getApplicationContext().getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
+
+            btnReserve = (Button) findViewById(R.id.btn_reserve);
+
+            String role = sharedPreferences.getString(ROLE, "");
+
+            carName = (TextView) findViewById(R.id.txt_car_name);
+            capacity = (TextView) findViewById(R.id.txt_car_capacity);
+
+            weekday = findViewById(R.id.txt_weekday);
+            weekend = findViewById(R.id.txt_weekend);
+            week = findViewById(R.id.txt_week);
+
+            startDateText = (TextView) findViewById(R.id.txt_start_date);
+            endDateText = (TextView) findViewById(R.id.txt_end_date);
+
+            gpsPrice = (TextView) findViewById(R.id.txt_gps_rate);
+            onstarPrice = (TextView) findViewById(R.id.txt_onstar_rate);
+            siriusxmPrice = (TextView) findViewById(R.id.txt_siriusxm_rate);
+
+            price = findViewById(R.id.txt_price);
+            discount = findViewById(R.id.txt_discount);
+            tax = findViewById(R.id.txt_tax);
+            totalCost = findViewById(R.id.txt_total_price);
+
+            gps = (CheckBox) findViewById(R.id.checkbox_gps);
+            onstar = (CheckBox) findViewById(R.id.checkbox_onstar);
+            siriusxm = (CheckBox) findViewById(R.id.checkbox_siriusxm);
+
+            int carId = 0;
+            long startDate = 0;
+            long endDate = 0;
+
+            Intent intent = getIntent();
+            Bundle b = intent.getExtras();
+
+            if(role.equalsIgnoreCase("User")) {
+                findViewById(R.id.row_user_gps).setVisibility(View.VISIBLE);
+                findViewById(R.id.row_user_onstar).setVisibility(View.VISIBLE);
+                findViewById(R.id.row_user_siriusxm).setVisibility(View.VISIBLE);
+                findViewById(R.id.row_user_price).setVisibility(View.VISIBLE);
+                findViewById(R.id.row_user_discount).setVisibility(View.VISIBLE);
+                findViewById(R.id.row_user_tax).setVisibility(View.VISIBLE);
+                findViewById(R.id.row_user_total_price).setVisibility(View.VISIBLE);
+                findViewById(R.id.layout_user_reserve_btn).setVisibility(View.VISIBLE);
+                findViewById(R.id.row_start_date).setVisibility(View.VISIBLE);
+                findViewById(R.id.row_end_date).setVisibility(View.VISIBLE);
+
+                findViewById(R.id.row_rm_gps).setVisibility(View.GONE);
+                findViewById(R.id.row_rm_onstar).setVisibility(View.GONE);
+                findViewById(R.id.row_rm_siriusxm).setVisibility(View.GONE);
+                findViewById(R.id.row_weekday).setVisibility(View.GONE);
+                findViewById(R.id.row_weekend).setVisibility(View.GONE);
+                findViewById(R.id.row_week).setVisibility(View.GONE);
+
+                startDate = b.getLong("START_DATE_TIME");
+                endDate = b.getLong("END_DATE_TIME");
+                carId = b.getInt("CAR_ID");
+            } else if(role.equalsIgnoreCase("Rental Manager")) {
+                findViewById(R.id.row_rm_gps).setVisibility(View.VISIBLE);
+                findViewById(R.id.row_rm_onstar).setVisibility(View.VISIBLE);
+                findViewById(R.id.row_rm_siriusxm).setVisibility(View.VISIBLE);
+                findViewById(R.id.row_weekday).setVisibility(View.VISIBLE);
+                findViewById(R.id.row_weekend).setVisibility(View.VISIBLE);
+                findViewById(R.id.row_week).setVisibility(View.VISIBLE);
+
+                findViewById(R.id.row_user_gps).setVisibility(View.GONE);
+                findViewById(R.id.row_user_onstar).setVisibility(View.GONE);
+                findViewById(R.id.row_user_siriusxm).setVisibility(View.GONE);
+                findViewById(R.id.row_user_price).setVisibility(View.GONE);
+                findViewById(R.id.row_user_discount).setVisibility(View.GONE);
+                findViewById(R.id.row_user_tax).setVisibility(View.GONE);
+                findViewById(R.id.row_user_total_price).setVisibility(View.GONE);
+                findViewById(R.id.layout_user_reserve_btn).setVisibility(View.GONE);
+                findViewById(R.id.row_start_date).setVisibility(View.GONE);
+                findViewById(R.id.row_end_date).setVisibility(View.GONE);
+
+                carId = b.getInt("CAR_ID");
             }
-            if(role == "rental manager")
-            {
-                gpsPrice = (TextView) findViewById(R.id.gpsPrice);
-                onstarPrice = (TextView) findViewById(R.id.onstar);
-                siriusxmPrice = (TextView) findViewById(R.id.siriusxm);
-            }
 
-            totalCost = (TextView) findViewById(R.id.totalCost);
+            Car car = dbHandler.getCarById(carId);
 
-            final double gpsRate;
-            final double onstarRate;
-            final double siriusxmRate;
+            carName.setText(car.getCarName());
+            capacity.setText("" + car.getCapacity());
+            weekday.setText(String.format("$ %.2f per day", car.getWeekday()));
+            weekend.setText(String.format("$ %.2f per day", car.getWeekend()));
+            week.setText(String.format("$ %.2f per week", car.getWeek()));
 
-            // Get data sent from search vehicle screen
-            ArrayList<String> carDetails, userInputs = null;
-            Bundle args = getIntent().getBundleExtra("args");
-            carDetails = (ArrayList<String>) args.getSerializable("car");
-            userInputs = (ArrayList<String>) args.getSerializable("userInputs");
+            ((ImageView) findViewById(R.id.car_image)).setImageResource(car.getImage());
 
-//        String carName = car.get(0);
-//        String carNumber = car.get(1);
-//        String maxCapacity = car.get(2);
-//        String weekdayRate = car.get(3);
-//        String weekendRate = car.get(4);
-//        String weeklyRate = car.get(5);
-//        String gpsRate = car.get(6);
-//        String onstarRate = car.get(7);
-//        String siriusxmRate = car.get(8);
-            final String startDate = userInputs.get(1);
-            final String endDate = userInputs.get(2);
+            Calendar cStart = Calendar.getInstance();
+            cStart.setTimeInMillis(startDate);
+            startDateText.setText(new SimpleDateFormat("yyyy-mm-dd hh:mm:ss").format(cStart.getTime()));
 
-            carName.setText(carDetails.get(0));
-            carNumber.setText(carDetails.get(1));
-            selectedCapacity.setText(userInputs.get(0));
-            startDateText.setText(startDate);
-            endDateText.setText(endDate);
-            gpsRate = Double.parseDouble(carDetails.get(6));
-            onstarRate = Double.parseDouble(carDetails.get(7));
-            siriusxmRate = Double.parseDouble(carDetails.get(8));
+            Calendar cEnd = Calendar.getInstance();
+            cEnd.setTimeInMillis(endDate);
+            endDateText.setText(new SimpleDateFormat("yyyy-mm-dd hh:mm:ss").format(cEnd.getTime()));
 
-            // Default cost + tax
-            totalCost.setText("$999.9");
-            // get no of days.
-            int numberOfDays = getDaysBetweenDates(startDate, endDate);
-            //double totalBaseCost = calculateBaseCost(numberOfDays, isMember);
+            int days = cEnd.get(Calendar.DAY_OF_YEAR) - cStart.get(Calendar.DAY_OF_YEAR) + 1;
+
             gps.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (isChecked) {
-                        calculatedCost += gpsRate;
-                    } else {
-                        calculatedCost -= gpsRate;
-                    }
-                    totalCost.setText("$" + Double.toString(calculatedCost));
+                    calculatePrice(car, days);
                 }
             });
 
             onstar.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (isChecked) {
-                        calculatedCost += onstarRate;
-                    } else {
-                        calculatedCost -= onstarRate;
-                    }
-                    totalCost.setText("$" + Double.toString(calculatedCost));
+                    calculatePrice(car, days);
                 }
             });
 
             siriusxm.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (isChecked) {
-                        calculatedCost += siriusxmRate;
-                    } else {
-                        calculatedCost -= siriusxmRate;
-                    }
-                    totalCost.setText("$" + Double.toString(calculatedCost));
+                    calculatePrice(car, days);
                 }
             });
 
             btnReserve.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // Generate a 6 digit reservation number
-                    reservationNumber = generateReservationNumber(6);
-                    // Save in car_reservation table
-                    userDbOperations.InsertReservationDetails(reservationNumber, carName.getText().toString(),
-                            startDate, endDate, Integer.parseInt(selectedCapacity.getText().toString()), Double.parseDouble(totalCost.getText().toString().replace("$", "")),
-                            gps.isSelected(), onstar.isSelected(), siriusxm.isSelected(), null);
-
-                    // Redirect/ toast
+                    Toast.makeText(ViewCarDetailsActivity.this, "Reserved: " + generateReservationNumber(6), Toast.LENGTH_SHORT).show();
                 }
             });
+
+            calculatePrice(car, days);
         }
 
         private String generateReservationNumber(int stringSize) {
@@ -181,16 +218,59 @@ import java.util.ArrayList;
             return sb.toString();
         }
 
-        private int getDaysBetweenDates(String startDate, String endDate) {
-            int numberOfDays = 0;
-            DateTimeFormatter formatter = DateTimeFormat.forPattern("MM-dd-yyyy HH:mm:ss");
-            DateTime start = formatter.parseDateTime(startDate);
-            DateTime end = formatter.parseDateTime(endDate);
-            numberOfDays = Days.daysBetween(start.toLocalDate(), end.toLocalDate()).getDays();
-            if (numberOfDays == 0) {
-                return 1;
+//        private int getDaysBetweenDates(String startDate, String endDate) {
+//            int numberOfDays = 0;
+//            DateTimeFormatter formatter = DateTimeFormat.forPattern("MM-dd-yyyy HH:mm:ss");
+//            DateTime start = formatter.parseDateTime(startDate);
+//            DateTime end = formatter.parseDateTime(endDate);
+//            numberOfDays = Days.daysBetween(start.toLocalDate(), end.toLocalDate()).getDays();
+//            if (numberOfDays == 0) {
+//                return 1;
+//            }
+//            return numberOfDays;
+//        }
+
+        private void calculatePrice(Car car, int days) {
+            double total = car.getWeekday() * days;
+
+            double gpsCost = 0;
+            double onStarCost = 0;
+            double siriusCost = 0;
+
+            if (gps.isChecked()) {
+                gpsCost = car.getGps() * days;
             }
-            return numberOfDays;
+            if (onstar.isChecked()) {
+                onStarCost = car.getOnStar() * days;
+            }
+            if (siriusxm.isChecked()) {
+                siriusCost = car.getSiriusXM() * days;
+            }
+
+            gps.setText(String.format("GPS     : $ %.2f", gpsCost));
+            gpsPrice.setText(String.format("$ %.2f per day", car.getGps()));
+            siriusxm.setText(String.format("SiriusXM: $ %.2f", siriusCost));
+            siriusxmPrice.setText(String.format("$ %.2f per day", car.getSiriusXM()));
+            onstar.setText(String.format("OnStar  : $ %.2f", onStarCost));
+            onstarPrice.setText(String.format("$ %.2f per day", car.getOnStar()));
+
+            total += (gpsCost + onStarCost + siriusCost);
+
+            price.setText(String.format("$ %.2f", total));
+
+            SystemUser user = dbHandler.getUserByUsername(sharedPreferences.getString(USERNAME, ""));
+            double d = 0;
+            if (user.isMembership()) {
+                d = total * 0.1;
+            }
+            discount.setText(String.format("- $ %.2f", d));
+            total = total - d;
+
+            double t = total * 0.0875;
+            tax.setText(String.format("$ %.2f", t));
+
+            total = total + t;
+            totalCost.setText(String.format("$ %.2f", total));
         }
     }
 

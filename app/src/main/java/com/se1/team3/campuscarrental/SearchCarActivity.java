@@ -196,11 +196,11 @@ public class SearchCarActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Car selectedCar = carList.get(position);
-//                Intent intent = new Intent(SearchCarActivity.this, CarDetailsActivity.Class);
-//                intent.putExtra("CAR_ID", selectedCar.getId());
-//                intent.putExtra("START_DATE_TIME", startDateTime.getTimeInMillis());
-//                intent.putExtra("END_DATE_TIME", endDateTime.getTimeInMillis());
-//                startActivity(intent);
+                Intent intent = new Intent(SearchCarActivity.this, ViewCarDetailsActivity.class);
+                intent.putExtra("CAR_ID", selectedCar.getId());
+                intent.putExtra("START_DATE_TIME", startDateTime.getTimeInMillis());
+                intent.putExtra("END_DATE_TIME", endDateTime.getTimeInMillis());
+                startActivity(intent);
             }
         });
     }
