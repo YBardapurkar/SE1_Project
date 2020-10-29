@@ -179,6 +179,12 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
     }
 
     @Override
+    public List<Car> getAvailableCars(long millis) {
+//        TODO implement this
+        return getAllCars();
+    }
+
+    @Override
     public SystemUser getUserByUsername(String username) {
         SystemUser user = null;
         SQLiteDatabase db = this.getReadableDatabase();

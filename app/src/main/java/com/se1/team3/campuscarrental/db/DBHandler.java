@@ -16,6 +16,7 @@ public interface DBHandler {
    Car getCarById(int carId);
 
    List<Car> getAllCars();
+   List<Car> getAvailableCars(long millis);
 
    SystemUser getUserByUsername(String username);
 
