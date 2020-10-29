@@ -30,6 +30,7 @@ import java.util.List;
 public class SearchCarActivity extends AppCompatActivity {
 
     List<Car> carList;
+    CarAdapter adapter;
     DBHandler dbHandler;
 
     EditText editTextStartDate, editTextStartTime, editTextEndDate, editTextEndTime;
@@ -73,14 +74,10 @@ public class SearchCarActivity extends AppCompatActivity {
                 int capacity = capacities[capacitySpinner.getSelectedItemPosition()];
                 long startTime = startDateTime.getTimeInMillis();
                 long endTime = endDateTime.getTimeInMillis();
-                carList.addAll(dbHandler.getAllCars());
+                carList.addAll(dbHandler.searchCars(capacity, startTime, endTime));
+                adapter.notifyDataSetChanged();
             }
         });
-
-        carList = dbHandler.getAllCars();
-        CarAdapter adapter = new CarAdapter(this, R.layout.item_car, carList);
-        listViewCars.setAdapter(adapter);
-
 
         startDateTime = Calendar.getInstance();
         startDateTime.add(Calendar.HOUR_OF_DAY, 1);
@@ -95,6 +92,10 @@ public class SearchCarActivity extends AppCompatActivity {
         endDateTime.add(Calendar.HOUR_OF_DAY, 2);
         editTextEndDate.setText(String.format("%2d-%2d-%4d", endDateTime.get(Calendar.DAY_OF_MONTH), (endDateTime.get(Calendar.MONTH) + 1), endDateTime.get(Calendar.YEAR)));
         editTextEndTime.setText(String.format("%02d:%02d", endDateTime.get(Calendar.HOUR_OF_DAY), 0));
+
+        carList = dbHandler.searchCars(capacities[capacitySpinner.getSelectedItemPosition()], startDateTime.getTimeInMillis(), endDateTime.getTimeInMillis());
+        adapter = new CarAdapter(this, R.layout.item_car, carList);
+        listViewCars.setAdapter(adapter);
 
         editTextStartDate.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override

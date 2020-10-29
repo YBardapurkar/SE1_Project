@@ -179,6 +179,31 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
     }
 
     @Override
+    public List<Car> searchCars(int cap, double start, double end) {
+        List<Car> cars = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "SELECT * FROM " + TABLE_CARS + " where " + COL_CAPACITY + " >= '" + cap + "';";
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(cursor.getColumnIndexOrThrow(COL_CAR_ID));
+            String carName = cursor.getString(cursor.getColumnIndexOrThrow(COL_CAR_NAME));
+            int capacity = cursor.getInt(cursor.getColumnIndexOrThrow(COL_CAPACITY));
+            int imageId = cursor.getInt(cursor.getColumnIndexOrThrow(COL_CAR_IMAGE));
+            double weekday = cursor.getDouble(cursor.getColumnIndexOrThrow(COL_WEEKDAY));
+            double weekend = cursor.getDouble(cursor.getColumnIndexOrThrow(COL_WEEKEND));
+            double week = cursor.getDouble(cursor.getColumnIndexOrThrow(COL_WEEK));
+            double gps = cursor.getDouble(cursor.getColumnIndexOrThrow(COL_GPS));
+            double onStar = cursor.getDouble(cursor.getColumnIndexOrThrow(COL_ONSTAR));
+            double siriusXm = cursor.getDouble(cursor.getColumnIndexOrThrow(COL_SIRIUSXM));
+
+            cars.add(new Car(id, carName, capacity, imageId, weekday, weekend, week, gps, onStar, siriusXm));
+        }
+        cursor.close();
+        db.close();
+        return cars;
+    }
+
+    @Override
     public List<Car> getAvailableCars(long millis) {
 //        TODO implement this
         return getAllCars();
