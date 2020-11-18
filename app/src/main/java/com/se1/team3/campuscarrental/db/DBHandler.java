@@ -3,6 +3,7 @@ package com.se1.team3.campuscarrental.db;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.se1.team3.campuscarrental.models.Car;
+import com.se1.team3.campuscarrental.models.Reservation;
 import com.se1.team3.campuscarrental.models.SystemUser;
 
 import java.util.List;
@@ -29,5 +30,7 @@ public interface DBHandler {
    boolean revoke_renter(SystemUser target_user);
 
    boolean change_role(SystemUser target_user);
+
+   boolean saveReservation(Reservation reservation);
 //TO BE MODIFIED
 }

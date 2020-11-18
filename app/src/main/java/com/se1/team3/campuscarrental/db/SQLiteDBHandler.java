@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 
 import com.se1.team3.campuscarrental.R;
 import com.se1.team3.campuscarrental.models.Car;
+import com.se1.team3.campuscarrental.models.Reservation;
 import com.se1.team3.campuscarrental.models.SystemUser;
 
 import java.util.ArrayList;
@@ -47,8 +48,25 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
     public static final String COL_ONSTAR = "ONSTAR";
     public static final String COL_SIRIUSXM = "SISRIUSXM";
 
+    public static final String TABLE_RESERVATIONS = "reservationsTable";
+    public static final String COL_R_ID = "RESERVATION_ID";
+    public static final String COL_R_CAR_ID = "CAR_ID";
+    public static final String COL_R_USERNAME = "USERNAME";
+    public static final String COL_R_FIRSTNAME = "FIRSTNAME";
+    public static final String COL_R_LASTNAME = "LASTNAME";
+    public static final String COL_R_START_DATE = "START_DATE";
+    public static final String COL_R_END_DATE = "END_DATE";
+    public static final String COL_R_PRICE = "PRICE";
+    public static final String COL_R_GPS = "GPS";
+    public static final String COL_R_ONSTAR = "ONSTAR";
+    public static final String COL_R_SIRIUSXM = "SISRIUSXM";
+    public static final String COL_R_DISCOUNT = "DISCOUNT";
+    public static final String COL_R_TAX = "TAX";
+    public static final String COL_R_TOTAL_PRICE = "TOTAL_PRICE";
+    public static final String COL_R_STATUS = "STATUS";
+
     public SQLiteDBHandler(@Nullable Context context) {
-        super(context, DATABASE_NAME, null, 2);
+        super(context, DATABASE_NAME, null, 3);
         SQLiteDatabase db = this.getWritableDatabase();
         System.out.println("campusCarRental.db path" +db.getPath());
     }
@@ -57,6 +75,7 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table " + TABLE_NAME + " (USERNAME TEXT PRIMARY KEY, PASSWORD TEXT, UTA_ID INTEGER, FIRSTNAME TEXT, LASTNAME TEXT, ROLE TEXT, MEMBERSHIP INTEGER, PHONE INTEGER, EMAIL TEXT,STREET_ADDRESS TEXT,CITY TEXT, STATE TEXT, ZIPCODE INTEGER, STATUS INTEGER)");
         upgrade1(db);
+        upgrade2(db);
     }
 
     @Override
@@ -64,11 +83,45 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
         if (oldVersion < 2) {
             upgrade1(db);
         }
+        if (oldVersion < 3) {
+            upgrade2(db);
+        }
     }
 
     private void upgrade1(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_CARS + " (" + COL_CAR_ID +" integer primary key autoincrement, " + COL_CAR_NAME + " TEXT, " + COL_CAPACITY + " INTEGER, " + COL_CAR_IMAGE + " INTEGER, " + COL_WEEKDAY + " DECIMAL(6,2), " + COL_WEEKEND + " DECIMAL(10,2), " + COL_WEEK + " DECIMAL(10,2), " + COL_GPS + " DECIMAL(10,2), " + COL_ONSTAR + " DECIMAL(10,2), " + COL_SIRIUSXM + " DECIMAL(10,2)" + ");");
+        db.execSQL("create table " + TABLE_CARS + " (" +
+                COL_CAR_ID +" integer primary key autoincrement, " +
+                COL_CAR_NAME + " TEXT, " +
+                COL_CAPACITY + " INTEGER, " +
+                COL_CAR_IMAGE + " INTEGER, " +
+                COL_WEEKDAY + " DECIMAL(6,2), " +
+                COL_WEEKEND + " DECIMAL(10,2), " +
+                COL_WEEK + " DECIMAL(10,2), " +
+                COL_GPS + " DECIMAL(10,2), " +
+                COL_ONSTAR + " DECIMAL(10,2), " +
+                COL_SIRIUSXM + " DECIMAL(10,2)" +
+                ");");
         saveCars(db);
+    }
+
+    private void upgrade2(SQLiteDatabase db) {
+        db.execSQL("create table " + TABLE_RESERVATIONS + " (" +
+                COL_R_ID +" integer primary key autoincrement, " +
+                COL_R_CAR_ID + " INTEGER, " +
+                COL_R_USERNAME + " TEXT, " +
+                COL_R_FIRSTNAME + " TEXT, " +
+                COL_R_LASTNAME + " TEXT, " +
+                COL_R_START_DATE + " DATETIME, " +
+                COL_R_END_DATE + " DATETIME, " +
+                COL_R_PRICE + " DECIMAL(10,2), " +
+                COL_R_GPS + " DECIMAL(10,2), " +
+                COL_R_ONSTAR + " DECIMAL(10,2), " +
+                COL_R_SIRIUSXM + " DECIMAL(10,2), " +
+                COL_R_DISCOUNT + " DECIMAL(10,2), " +
+                COL_R_TAX + " DECIMAL(10,2), " +
+                COL_R_TOTAL_PRICE + " DECIMAL(10,2), " +
+                COL_R_STATUS + " INTEGER" +
+                ");");
     }
 
     //To save user data after sign up
@@ -401,5 +454,29 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
         db.close();
 
         return true;
+    }
+
+    public boolean saveReservation(Reservation reservation) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COL_R_CAR_ID, reservation.getCarId());
+        values.put(COL_R_USERNAME, reservation.getUsername());
+        values.put(COL_R_FIRSTNAME, reservation.getFirstName());
+        values.put(COL_R_LASTNAME, reservation.getLastName());
+        values.put(COL_R_START_DATE, reservation.getStartDate());
+        values.put(COL_R_END_DATE, reservation.getEndDate());
+        values.put(COL_R_GPS, reservation.getGps());
+        values.put(COL_R_ONSTAR, reservation.getOnStar());
+        values.put(COL_R_SIRIUSXM, reservation.getSiriusXm());
+        values.put(COL_R_DISCOUNT, reservation.getDiscount());
+        values.put(COL_R_TAX, reservation.getTax());
+        values.put(COL_R_TOTAL_PRICE, reservation.getTotalPrice());
+        values.put(COL_R_STATUS, reservation.isStatus());
+
+        // Insert a new row for user in the database, returning the ID of that new row.
+        long rowId = db.insert(TABLE_RESERVATIONS, null, values);
+        db.close();
+
+        return rowId >= 0;
     }
 }
