@@ -59,7 +59,7 @@ public class MakeReservationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_reservation);
 
-        setTitle("Car Details");
+        setTitle("Make Reservation");
 
         dbHandler = new SQLiteDBHandler(this);
         sharedPreferences =  getApplicationContext().getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
