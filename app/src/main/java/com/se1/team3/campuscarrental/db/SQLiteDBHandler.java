@@ -411,39 +411,7 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
 
         return true;
     }
-    public void InsertReservationDetails(String reservation_number, String car_name, String start_date, String end_date, int occupant_capacity, double total_cost, boolean gps_selected, boolean onstar_selected, boolean siriusxm_selected, Boolean is_cancelled) {
-        String query = "INSERT INTO car_reservation (\n" +
-                "                                reservation_number,\n" +
-                "                                car_name,\n" +
-                "                                start_date,\n" +
-                "                                end_date,\n" +
-                "                                occupant_capacity,\n" +
-                "                                total_cost,\n" +
-                "                                gps_selected,\n" +
-                "                                siriusxm_selected,\n" +
-                "                                onstar_selected,\n" +
-                "                                is_cancelled\n" +
-                "                            )\n" +
-                "                            VALUES (\n" +
-                "                                '"+reservation_number+"',\n" +
-                "                                '"+car_name+"',\n" +
-                "                                '"+start_date+"',\n" +
-                "                                '"+end_date+"',\n" +
-                "                                '"+occupant_capacity+"',\n" +
-                "                                '"+total_cost+"',\n" +
-                "                                '"+gps_selected+"',\n" +
-                "                                '"+siriusxm_selected+"',\n" +
-                "                                '"+onstar_selected+"',\n" +
-                "                                "+is_cancelled+"\n" +
-                "                            );";
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = null;
-        cursor = db.rawQuery(query, null);
-        int temp = cursor.getCount();
-        cursor.close();
-    }
-    /*function to change the role renter
-     * This function is called from ViewUSerdetailsActivity.java by the admin*/
+
     @Override
     public boolean change_role(SystemUser target_user) {
         ContentValues cv = new ContentValues();
@@ -478,5 +446,72 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
         db.close();
 
         return rowId >= 0;
+    }
+
+    @Override
+    public List<Reservation> getReservationsForUser(String username) {
+        List<Reservation> reservations = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "SELECT * FROM " + TABLE_RESERVATIONS + " WHERE " + COL_R_USERNAME + " = '" + username + "';";
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        while (cursor.moveToNext()) {
+            reservations.add(getReservationFromCursor(cursor));
+        }
+        cursor.close();
+
+        db.close();
+        return reservations;
+    }
+
+    @Override
+    public List<Reservation> getReservationsByDay(String day) {
+        List<Reservation> reservations = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "SELECT * FROM " + TABLE_RESERVATIONS + " WHERE date(" + COL_R_START_DATE + ") <= '" + day + "' and  '" + day + "' <= date(" + COL_R_START_DATE + ");";
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        while (cursor.moveToNext()) {
+            reservations.add(getReservationFromCursor(cursor));
+        }
+        cursor.close();
+
+        db.close();
+        return reservations;
+    }
+
+    private Reservation getReservationFromCursor(Cursor cursor) {
+        int id = cursor.getInt(cursor.getColumnIndexOrThrow(COL_R_ID));
+        int carId = cursor.getInt(cursor.getColumnIndexOrThrow(COL_R_CAR_ID));
+        String username = cursor.getString(cursor.getColumnIndexOrThrow(COL_R_USERNAME));
+        String firstName = cursor.getString(cursor.getColumnIndexOrThrow(COL_R_FIRSTNAME));
+        String lastName = cursor.getString(cursor.getColumnIndexOrThrow(COL_R_LASTNAME));
+        String startDate = cursor.getString(cursor.getColumnIndexOrThrow(COL_R_START_DATE));
+        String endDate = cursor.getString(cursor.getColumnIndexOrThrow(COL_R_END_DATE));
+        double price = cursor.getDouble(cursor.getColumnIndexOrThrow(COL_R_PRICE));
+        double gps = cursor.getDouble(cursor.getColumnIndexOrThrow(COL_R_GPS));
+        double onStar = cursor.getDouble(cursor.getColumnIndexOrThrow(COL_R_ONSTAR));
+        double siriusXm = cursor.getDouble(cursor.getColumnIndexOrThrow(COL_R_SIRIUSXM));
+        double discount = cursor.getDouble(cursor.getColumnIndexOrThrow(COL_R_DISCOUNT));
+        double tax = cursor.getDouble(cursor.getColumnIndexOrThrow(COL_R_TAX));
+        double totalPrice = cursor.getDouble(cursor.getColumnIndexOrThrow(COL_R_TOTAL_PRICE));
+        boolean status = cursor.getInt(cursor.getColumnIndexOrThrow(COL_R_STATUS)) == 1;
+
+        Reservation reservation = new Reservation();
+        reservation.setId(id);
+        reservation.setCarId(carId);
+        reservation.setUsername(username);
+        reservation.setFirstName(firstName);
+        reservation.setLastName(lastName);
+        reservation.setStartDate(startDate);
+        reservation.setEndDate(endDate);
+        reservation.setPrice(price);
+        reservation.setGps(gps);
+        reservation.setOnStar(onStar);
+        reservation.setSiriusXm(siriusXm);
+        reservation.setDiscount(discount);
+        reservation.setTax(tax);
+        reservation.setTotalPrice(totalPrice);
+        reservation.setStatus(status);
+
+        return reservation;
     }
 }

@@ -1,7 +1,5 @@
 package com.se1.team3.campuscarrental;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -16,15 +14,14 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TimePicker;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.se1.team3.campuscarrental.db.DBHandler;
 import com.se1.team3.campuscarrental.db.SQLiteDBHandler;
 import com.se1.team3.campuscarrental.models.Car;
 
 import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 public class SearchCarActivity extends AppCompatActivity {
@@ -197,7 +194,7 @@ public class SearchCarActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Car selectedCar = carList.get(position);
-                Intent intent = new Intent(SearchCarActivity.this, ViewCarDetailsActivity.class);
+                Intent intent = new Intent(SearchCarActivity.this, MakeReservationActivity.class);
                 intent.putExtra("CAR_ID", selectedCar.getId());
                 intent.putExtra("START_DATE_TIME", startDateTime.getTimeInMillis());
                 intent.putExtra("END_DATE_TIME", endDateTime.getTimeInMillis());

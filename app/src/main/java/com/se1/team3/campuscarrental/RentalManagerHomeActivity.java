@@ -4,10 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class RentalManagerHomeActivity extends HomeActivity {
 
@@ -43,11 +41,9 @@ public class RentalManagerHomeActivity extends HomeActivity {
                 startActivity(intent);
         }
                 );
-        btn_reserve.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"List of Reservations", Toast.LENGTH_SHORT).show();
-            }
+        btn_reserve.setOnClickListener(v -> {
+            Intent intent = new Intent(RentalManagerHomeActivity.this, ListReservationsActivity.class);
+            startActivity(intent);
         });
         btn_Logout.setOnClickListener(v -> logout());
 

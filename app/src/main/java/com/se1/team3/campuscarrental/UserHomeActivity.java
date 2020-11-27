@@ -1,11 +1,9 @@
 package com.se1.team3.campuscarrental;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,21 +43,19 @@ public class UserHomeActivity extends AppCompatActivity {
             viewProfile();
         });
 
-        btn_searchCar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(UserHomeActivity.this, SearchCarActivity.class);
-                startActivity(intent);
-            }
+        btn_searchCar.setOnClickListener(v -> {
+            Intent intent = new Intent(UserHomeActivity.this, SearchCarActivity.class);
+            startActivity(intent);
         });
 
 
-        btn_viewAllReserves.setOnClickListener(v -> Toast.makeText(UserHomeActivity.this, " $$$ View All Reservations", Toast.LENGTH_SHORT).show());
+        btn_viewAllReserves.setOnClickListener(v -> {
+                    Intent intent = new Intent(UserHomeActivity.this, MyReservationsActivity.class);
+                    startActivity(intent);
+                }
+        );
 
-        btn_logout.setOnClickListener(v -> {
-            Toast.makeText(UserHomeActivity.this, "Logout", Toast.LENGTH_SHORT).show();
-            logout();
-        });
+        btn_logout.setOnClickListener(v -> logout());
     }
 
     public void viewProfile(){

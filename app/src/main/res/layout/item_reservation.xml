@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="12dp">
+
+    <TextView
+        android:id="@+id/text_r_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <ImageView
+        android:id="@+id/imageView_r_car"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginEnd="12dp"
+        android:layout_below="@id/text_r_name"
+        android:contentDescription="Car Image" />
+
+    <TextView
+        android:id="@+id/text_r_item_car_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_alignTop="@id/imageView_r_car"
+        android:layout_toEndOf="@+id/imageView_r_car" />
+
+    <TextView
+        android:id="@+id/text_r_item_total_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/imageView_r_car"
+        android:layout_below="@+id/text_r_item_car_name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+    <TextView
+        android:id="@+id/text_r_item_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/imageView_r_car"
+        android:layout_below="@+id/text_r_item_total_price"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+    <TextView
+        android:id="@+id/text_r_item_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/imageView_r_car"
+        android:layout_below="@+id/text_r_item_start"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+</RelativeLayout>
