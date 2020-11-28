@@ -6,21 +6,17 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
-public class UserHomeActivity extends AppCompatActivity {
+public class UserHomeActivity extends HomeActivity {
 
 //    -------- USER HOME PAGE --------------- [Shubham Shah]
     Button btn_profile,  btn_searchCar, btn_viewAllReserves, btn_logout;
     SharedPreferences sharedPreferences;
     TextView textWelcome;
-    Bundle bundle;
+
     static final String PREFERENCES = "SharedPreferences";
     static final String USERNAME = "username";
-    static final String ROLE = "role";
+//    static final String ROLE = "role";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,16 +34,12 @@ public class UserHomeActivity extends AppCompatActivity {
         btn_viewAllReserves = findViewById(R.id.btn_reserves);
         btn_logout = findViewById(R.id.btn_logout);
 
-        btn_profile.setOnClickListener(v -> {
-            Toast.makeText(UserHomeActivity.this, "User Profile", Toast.LENGTH_SHORT).show();
-            viewProfile();
-        });
+        btn_profile.setOnClickListener(v -> viewProfile());
 
         btn_searchCar.setOnClickListener(v -> {
             Intent intent = new Intent(UserHomeActivity.this, SearchCarActivity.class);
             startActivity(intent);
         });
-
 
         btn_viewAllReserves.setOnClickListener(v -> {
                     Intent intent = new Intent(UserHomeActivity.this, MyReservationsActivity.class);
@@ -59,42 +51,7 @@ public class UserHomeActivity extends AppCompatActivity {
     }
 
     public void viewProfile(){
-        Intent intent = new Intent(this, UserProfileActivity.class);
-        bundle = new Bundle();
-        bundle.putString("username", sharedPreferences.getString(USERNAME, ""));
-        bundle.putString("flag", "0");
-        intent.putExtras(bundle);
+        Intent intent = new Intent(UserHomeActivity.this, UserProfileActivity.class);
         startActivity(intent);
-    }
-
-    public void logout() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(R.string.logout_confirmation_message)
-                .setPositiveButton(R.string.logout_confirmation_yes, (dialog, which) -> {
-                    sharedPreferences.edit()
-                            .remove(USERNAME)
-                            .remove(ROLE)
-                            .apply();
-
-                    Intent intent = new Intent(UserHomeActivity.this, LoginActivity.class);
-                    startActivity(intent);
-                    finish();
-                })
-                .setNegativeButton(R.string.logout_confirmation_no, (dialog, which) -> dialog.dismiss());
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
-
-    @Override
-    public void onBackPressed() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(R.string.exit_confirmation_message)
-                .setPositiveButton(R.string.exit_confirmation_yes, (dialog, which) -> UserHomeActivity.super.onBackPressed())
-                .setNegativeButton(R.string.exit_confirmation_no, (dialog, which) -> dialog.dismiss());
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
-
     }
 }

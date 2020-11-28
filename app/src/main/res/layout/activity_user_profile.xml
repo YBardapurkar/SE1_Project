@@ -1,249 +1,286 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:ignore="ExtraText"
-    android:id="@+id/linearLayout1">
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- Labels -->
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/user_details_parent_linear"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/userimage"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="30dp"
-        android:text="@string/txt_name"
-        android:id="@+id/fullName_label"
-        android:textSize="15sp" />
+        android:gravity="clip_horizontal|center_horizontal"
+        android:orientation="vertical"
+        android:layout_margin="5dp"
+        android:paddingTop="20dp"
+        android:padding="20dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/userimage"
-        android:layout_toRightOf="@+id/fullName_label"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="180dp"
-        android:text="@string/txt_usr_name"
-        android:id="@+id/username_label"
-        android:textSize="15sp" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/username_label"
-        android:layout_alignStart="@+id/username_label"
-        android:layout_marginTop="50dp"
-        android:text="@string/txt_id"
-        android:id="@+id/id_label"
-        android:textSize="15sp"/>
+        <TableLayout
+            android:id="@+id/tableProfile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/fullName_label"
-        android:layout_marginTop="50dp"
-        android:layout_alignLeft="@+id/fullName_label"
-        android:text="@string/txt_usr_role"
-        android:id="@+id/id_role"
-        android:textSize="15sp" />
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/id_role"
-        android:layout_marginTop="50dp"
-        android:layout_alignStart="@+id/fullName_label"
-        android:text="@string/txt_usr_email"
-        android:id="@+id/id_email"
-        android:textSize="15sp" />
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_column="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp"
+                    android:text="@string/user_name" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/phone_member"
-        android:layout_marginTop="50dp"
-        android:layout_alignStart="@+id/fullName_label"
-        android:text="@string/txt_usr_address"
-        android:id="@+id/id_address"
-        android:textSize="15sp" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/add_text"
-        android:layout_alignStart="@+id/fullName_label"
-        android:text="CITY"
-        android:id="@+id/id_city"
-        android:textSize="15sp" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/status"
-        android:layout_marginTop="50dp"
-        android:layout_alignStart="@+id/status"
-        android:text="STATE"
-        android:id="@+id/id_state"
-        android:textSize="15sp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/id_city_txt"
-        android:layout_alignStart="@+id/fullName_label"
-        android:text="PINCODE"
-        android:id="@+id/id_pincode"
-        android:textSize="15sp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/id_email"
-        android:layout_marginTop="50dp"
-        android:layout_alignStart="@+id/id_label"
-        android:text="@string/txt_usr_member"
-        android:id="@+id/member_label"
-        android:textSize="15sp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/id_email"
-        android:layout_marginTop="50dp"
-        android:layout_alignStart="@+id/id_email"
-        android:text="@string/txt_usr_phone"
-        android:id="@+id/phone_member"
-        android:textSize="15sp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/member_label"
-        android:layout_marginTop="50dp"
-        android:layout_alignStart="@+id/id_label"
-        android:text="@string/txt_usr_status"
-        android:id="@+id/status"
-        android:textSize="15sp" />
-<!-- Data -->
-    <EditText
-        android:id="@+id/fullName_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/fullName_label"
-        android:layout_alignStart="@+id/fullName_label"
-        android:textSize="22sp"
-        android:textStyle="bold"/>
-    <TextView
-        android:id="@+id/role_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/id_role"
-        android:layout_alignStart="@+id/fullName_label"
-        android:textSize="22sp"
-        android:textStyle="bold"/>
-    <EditText
-        android:id="@+id/email_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/id_email"
-        android:layout_alignStart="@+id/fullName_label"
-        android:textSize="18sp"
-        android:textStyle="bold"/>
-    <EditText
-        android:id="@+id/add_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/id_address"
-        android:layout_alignStart="@+id/fullName_label"
-        android:textSize="22sp"
-        android:textStyle="bold"/>
-
-    <TextView
-        android:id="@+id/username_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/username_label"
-        android:layout_below="@+id/username_label"
-        android:textSize="22sp"
-        android:textStyle="bold"/>
-
-    <EditText
-        android:id="@+id/id_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/id_label"
-        android:layout_alignStart="@+id/id_label"
-        android:textSize="22sp"
-        android:textStyle="bold"/>
-
-    <ToggleButton
-        android:textOn="YES"
-        android:textOff="NO"
-
-        android:layout_weight="1"
-        android:text="ToggleButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/member_label"
-        android:layout_alignStart="@+id/id_label"
-        android:textSize="15sp"
-        android:textStyle="bold"/>
-    <EditText
-        android:id="@+id/id_member"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/member_label"
-        android:layout_alignStart="@+id/id_label"
-        android:textSize="22sp"
-        android:textStyle="bold"/>
-    <EditText
-        android:id="@+id/id_phone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/phone_member"
-        android:layout_alignStart="@+id/phone_member"
-        android:textSize="22sp"
-        android:textStyle="bold"/>
-
-    <EditText
-    android:id="@+id/id_city_txt"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/id_city"
-    android:layout_alignStart="@+id/phone_member"
-    android:textSize="22sp"
-    android:textStyle="bold"/>
-
-    <EditText
-        android:id="@+id/id_state_txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/id_state"
-        android:layout_alignStart="@+id/id_state"
-        android:textSize="22sp"
-        android:textStyle="bold"/>
-    <EditText
-        android:id="@+id/id_text_pincode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/id_pincode"
-        android:layout_alignStart="@+id/id_pincode"
-        android:textSize="22sp"
-        android:textStyle="bold"/>
-    <TextView
-        android:id="@+id/id_status_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/status"
-        android:layout_alignStart="@+id/status"
-        android:textSize="22sp"
-        android:textStyle="bold"/>
-    <Button
-        android:id="@+id/update_prof_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="75dp"
-        android:text="Update Profile"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"/>
+                <TextView
+                    android:id="@+id/profile_username"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp" />
+            </TableRow>
 
 
-</RelativeLayout>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                !-- text view for First Name -->
+
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_column="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp"
+                    android:text="@string/first_name" />
+
+                <EditText
+                    android:id="@+id/profile_firstName"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_column="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp"
+                    android:text="@string/last_name" />
+
+                <EditText
+                    android:id="@+id/profile_lastName"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_column="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp"
+                    android:text="@string/uta_id" />
+
+                <EditText
+                    android:id="@+id/profile_utaId"
+                    android:layout_weight="1"
+                    android:inputType="number"
+                    android:gravity="left"
+                    android:layout_margin="4dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_column="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp"
+                    android:text="@string/role" />
+
+                <TextView
+                    android:id="@+id/profile_role"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:layout_marginTop="4dp" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/row_profile_membership"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_column="1"
+                    android:layout_margin="4dp"
+                    android:text="Membership" />
+
+                <ToggleButton
+                    android:id="@+id/profile_membership"
+                    android:textOn="YES"
+                    android:textOff="NO"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:textStyle="bold"/>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_column="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp"
+                    android:text="@string/phone_number" />
+
+                <EditText
+                    android:inputType="phone"
+                    android:id="@+id/profile_phone"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_column="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp"
+                    android:text="@string/email" />
+
+                <EditText
+                    android:inputType="textEmailAddress"
+                    android:id="@+id/profile_email"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                !-- text view for Street Addresss -->
+
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_column="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp"
+                    android:text="Street Address" />
+
+                <EditText
+                    android:inputType="text"
+                    android:id="@+id/profile_address"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp" />
+            </TableRow>
+
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_column="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp"
+                    android:text="@string/city" />
+
+                <EditText
+                    android:id="@+id/profile_city"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                !-- text view for State -->
+
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_column="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp"
+                    android:text="@string/state" />
+
+                <EditText
+                    android:id="@+id/profile_state"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_column="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp"
+                    android:text="@string/txt_zip_code" />
+
+                <EditText
+                    android:inputType="number"
+                    android:id="@+id/profile_zip"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_column="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp"
+                    android:text="Status" />
+
+                <TextView
+                    android:id="@+id/profile_status"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp" />
+            </TableRow>
+
+        </TableLayout>
+
+        <Button
+            android:id="@+id/update_prof_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Update Profile" />
+    </LinearLayout>
+</ScrollView>

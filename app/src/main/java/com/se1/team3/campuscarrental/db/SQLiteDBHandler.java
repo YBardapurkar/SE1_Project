@@ -402,6 +402,7 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
         cv.put(COL_CITY, user_tobe_edited.getCity());
         cv.put(COL_STATE, user_tobe_edited.getState());
         cv.put(COL_PIN, user_tobe_edited.getPin());
+        cv.put(COL_MEMBERSHIP, user_tobe_edited.isMembership());
 
         db.update(TABLE_NAME, cv, COL_USERNAME + "=?", new String[]{user_tobe_edited.getUsername()});
         db.close();
