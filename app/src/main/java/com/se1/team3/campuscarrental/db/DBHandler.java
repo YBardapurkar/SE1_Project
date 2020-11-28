@@ -1,7 +1,5 @@
 package com.se1.team3.campuscarrental.db;
 
-import android.database.sqlite.SQLiteDatabase;
-
 import com.se1.team3.campuscarrental.models.Car;
 import com.se1.team3.campuscarrental.models.Reservation;
 import com.se1.team3.campuscarrental.models.SystemUser;
@@ -17,7 +15,7 @@ public interface DBHandler {
    Car getCarById(int carId);
 
    List<Car> getAllCars();
-   List<Car> searchCars(int capacity, double start, double end);
+   List<Car> searchCars(int capacity, String start, String end);
    List<Car> getAvailableCars(long millis);
 
    SystemUser getUserByUsername(String username);

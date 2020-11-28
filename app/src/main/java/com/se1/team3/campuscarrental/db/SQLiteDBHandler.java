@@ -232,10 +232,20 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
     }
 
     @Override
-    public List<Car> searchCars(int cap, double start, double end) {
+    public List<Car> searchCars(int cap, String start, String end) {
         List<Car> cars = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        String selectQuery = "SELECT * FROM " + TABLE_CARS + " where " + COL_CAPACITY + " >= '" + cap + "';";
+//        String selectQuery = "SELECT * FROM " + TABLE_CARS + " where " + COL_CAPACITY + " >= '" + cap + "';";
+
+        String selectQuery = "select * fROM " + TABLE_CARS + " left join (" +
+                "select * fROM " + TABLE_RESERVATIONS +
+                " where '" + start + "' <= " + TABLE_RESERVATIONS + "." + COL_R_START_DATE + " and " + TABLE_RESERVATIONS + "." + COL_R_START_DATE + " <= '" + end + "' " +
+                " or '" + start + "' <= " + TABLE_RESERVATIONS + "." + COL_R_END_DATE + " and " + TABLE_RESERVATIONS + "." + COL_R_END_DATE + " <= '" + end + "'" +
+                ") rt " +
+                " on " + TABLE_CARS + "." + COL_CAR_ID + " = rt." + COL_R_CAR_ID + " where rt." + COL_CAR_ID + " is Null " +
+                " and " + TABLE_CARS + "." + COL_CAPACITY + " >= '" + cap + "' " +
+                " order by " + TABLE_CARS + "." + COL_WEEKDAY + ";";
+
         Cursor cursor = db.rawQuery(selectQuery, null);
         while (cursor.moveToNext()) {
             int id = cursor.getInt(cursor.getColumnIndexOrThrow(COL_CAR_ID));
