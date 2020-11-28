@@ -24,22 +24,22 @@
         android:orientation="vertical">
 
         <Button
-        android:id="@+id/btn_lcar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_list_of_available_cars"/>
-
-        <Button
-            android:id="@+id/btn_reserve"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/btn_list_of_reservations" />
-
-        <Button
-            android:id="@+id/btn_profile"
+            android:id="@+id/btn_rm_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/btn_rental_manager_profile" />
+
+        <Button
+            android:id="@+id/btn_available_cars"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_list_of_available_cars"/>
+
+        <Button
+            android:id="@+id/btn_list_of_reservations"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_list_of_reservations" />
 
         <Button
             android:id="@+id/btn_Logout"

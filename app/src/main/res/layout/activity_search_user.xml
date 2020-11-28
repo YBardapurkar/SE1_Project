@@ -16,38 +16,29 @@
             android:layout_height="wrap_content"
             android:id="@+id/search" >
             <requestFocus />
+
         </EditText>
 
         <Button
             android:id="@+id/entr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="search"
-            android:layout_alignRight="@+id/search"/>
+            android:text="Search"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@id/role_spinner"
+            android:layout_below="@id/search"/>
 
-
-
-
-
-    </RelativeLayout>
-
-<!--    <ScrollView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent">-->
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <Spinner
-        android:id="@+id/role_spinner"
-        android:layout_margin="10dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:drawSelectorOnTop="true"
-        android:entries="@array/array_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-</RelativeLayout>
+        <Spinner
+            android:id="@+id/role_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:drawSelectorOnTop="true"
+            android:entries="@array/array_name"
+            android:layout_below="@id/search"
+             />
+        </RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

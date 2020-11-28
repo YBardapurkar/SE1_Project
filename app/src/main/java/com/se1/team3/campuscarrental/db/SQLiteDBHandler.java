@@ -335,7 +335,7 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
 
         List<SystemUser> users = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE USERNAME like '" + query + "' AND ROLE like '" + rle + "%';";
+        String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE USERNAME like '" + query + "%' AND ROLE = '" + rle + "';";
         Cursor cursor = db.rawQuery(selectQuery, null);
         while (cursor.moveToNext()) {
             String username = cursor.getString(cursor.getColumnIndexOrThrow(COL_USERNAME));

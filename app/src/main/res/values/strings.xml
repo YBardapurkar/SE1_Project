@@ -88,7 +88,7 @@
     <string name="title_rental_manager_home">Rental Manager Home</string>
     <string name="btn_list_of_available_cars">List of Available Cars</string>
     <string name="btn_list_of_reservations">List of Reservations</string>
-    <string name="btn_rental_manager_profile">Rental Manager Profile</string>
+    <string name="btn_rental_manager_profile">Profile</string>
     <string name="btn_logout">Logout</string>
 
     <!--    Admin Home-->

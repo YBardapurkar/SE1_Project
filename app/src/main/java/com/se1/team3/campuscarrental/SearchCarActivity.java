@@ -37,6 +37,7 @@ public class SearchCarActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_car);
+        setTitle("Search Car");
 
         dbHandler = new SQLiteDBHandler(this);
 
@@ -76,7 +77,7 @@ public class SearchCarActivity extends AppCompatActivity {
         editTextStartDate.setText(DateUtils.toDateString(startDateTime.getTimeInMillis()));
         editTextStartTime.setText(DateUtils.toTimeString(startDateTime.getTimeInMillis()));
 
-        endDateTime = DateUtils.getNextEndTime();
+        endDateTime = DateUtils.getNextEndTime(startDateTime);
         editTextEndDate.setText(DateUtils.toDateString(endDateTime.getTimeInMillis()));
         editTextEndTime.setText(DateUtils.toTimeString(endDateTime.getTimeInMillis()));
 
@@ -112,6 +113,9 @@ public class SearchCarActivity extends AppCompatActivity {
                     startDateTime.set(Calendar.MINUTE, minute);
                     startDateTime.set(Calendar.SECOND, 0);
                     startDateTime = DateUtils.getNextTime(startDateTime.getTimeInMillis());
+                    if (startDateTime.after(Calendar.getInstance())) {
+                        startDateTime = DateUtils.getNextStartTime();
+                    }
 
                     editTextStartTime.setText(DateUtils.toTimeString(startDateTime.getTimeInMillis()));
                     editTextEndDate.requestFocus();
@@ -130,7 +134,7 @@ public class SearchCarActivity extends AppCompatActivity {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(SearchCarActivity.this, (view, year, monthOfYear, dayOfMonth) -> {
                     endDateTime.set(year, monthOfYear, dayOfMonth, 0, 0, 0);
                     if (startDateTime.after(endDateTime)) {
-                        endDateTime = DateUtils.getNextTime(startDateTime.getTimeInMillis());
+                        endDateTime = DateUtils.getNextEndTime(startDateTime);
                     }
 
                     editTextStartDate.setText(DateUtils.toDateString(endDateTime.getTimeInMillis()));

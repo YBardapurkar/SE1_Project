@@ -29,7 +29,7 @@ public class UserHomeActivity extends HomeActivity {
         textWelcome = findViewById(R.id.text_user_welcome);
         textWelcome.setText(welcomeMessage);
 
-        btn_profile = findViewById(R.id.btn_profile);
+        btn_profile = findViewById(R.id.btn_user_profile);
         btn_searchCar = findViewById(R.id.btn_search_car);
         btn_viewAllReserves = findViewById(R.id.btn_reserves);
         btn_logout = findViewById(R.id.btn_logout);

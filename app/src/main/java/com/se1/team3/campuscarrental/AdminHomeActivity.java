@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class AdminHomeActivity extends HomeActivity {
-    Button btn_profile, btn_logout;
+    Button btnSearchUser, btnLogout;
     TextView textWelcome;
     SharedPreferences sharedPreferences;
     static final String PREFERENCES = "SharedPreferences";
@@ -29,16 +29,15 @@ public class AdminHomeActivity extends HomeActivity {
         textWelcome = findViewById(R.id.text_rm_welcome);
         textWelcome.setText(welcomeMessage);
 
-        btn_profile = findViewById(R.id.btn_profile);
-        btn_logout = findViewById(R.id.btn_Logout);
+        btnSearchUser = findViewById(R.id.btn_search_users);
+        btnLogout = findViewById(R.id.btn_Logout);
 
-        btn_profile.setOnClickListener(v -> {
+        btnSearchUser.setOnClickListener(v -> {
             Intent intent = new Intent(AdminHomeActivity.this, SearchUserActivity.class);
             startActivity(intent);
         });
 
-
-        btn_logout.setOnClickListener(v -> logout());
+        btnLogout.setOnClickListener(v -> logout());
 
         sharedPreferences =  getApplicationContext().getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
     }

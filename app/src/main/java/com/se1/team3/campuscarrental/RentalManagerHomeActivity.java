@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 public class RentalManagerHomeActivity extends HomeActivity {
 
-    Button btn_lcar, btn_Logout, btn_profile, btn_reserve;
+    Button btnAvailableCars, btnLogout, btnProfile, btnListOfReservations;
     TextView textWelcome;
     Bundle bundle;
     SharedPreferences sharedPreferences;
@@ -27,24 +27,23 @@ public class RentalManagerHomeActivity extends HomeActivity {
         textWelcome = findViewById(R.id.text_rm_welcome);
         textWelcome.setText(welcomeMessage);
 
-        btn_lcar = findViewById(R.id.btn_lcar);
-        btn_Logout = findViewById(R.id.btn_Logout);
-        btn_reserve = findViewById(R.id.btn_reserve);
-        btn_profile = findViewById(R.id.btn_profile);
+        btnAvailableCars = findViewById(R.id.btn_available_cars);
+        btnLogout = findViewById(R.id.btn_Logout);
+        btnListOfReservations = findViewById(R.id.btn_list_of_reservations);
+        btnProfile = findViewById(R.id.btn_rm_profile);
 
-        btn_profile.setOnClickListener(v -> viewProfile());
+        btnProfile.setOnClickListener(v -> viewProfile());
 
-        btn_lcar.setOnClickListener(v -> {
-                Intent intent = new Intent(RentalManagerHomeActivity.this, AvailableCarsActivity.class);
-                startActivity(intent);
-        }
-                );
-        btn_reserve.setOnClickListener(v -> {
+        btnAvailableCars.setOnClickListener(v -> {
+            Intent intent = new Intent(RentalManagerHomeActivity.this, AvailableCarsActivity.class);
+            startActivity(intent);
+        });
+        btnListOfReservations.setOnClickListener(v -> {
             Intent intent = new Intent(RentalManagerHomeActivity.this, ListReservationsActivity.class);
             startActivity(intent);
         });
 
-        btn_Logout.setOnClickListener(v -> logout());
+        btnLogout.setOnClickListener(v -> logout());
 
     }
     public void viewProfile(){
