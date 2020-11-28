@@ -56,7 +56,7 @@ public class ViewCarDetailsActivity extends AppCompatActivity {
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
+                super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_view_car_details);
 
             setTitle("Car Details");
@@ -120,24 +120,26 @@ public class ViewCarDetailsActivity extends AppCompatActivity {
                 startDate = b.getLong("START_DATE_TIME");
                 endDate = b.getLong("END_DATE_TIME");
                 carId = b.getInt("CAR_ID");
-            } else if(role.equalsIgnoreCase("Rental Manager")) {
-                findViewById(R.id.row_rm_gps).setVisibility(View.VISIBLE);
-                findViewById(R.id.row_rm_onstar).setVisibility(View.VISIBLE);
-                findViewById(R.id.row_rm_siriusxm).setVisibility(View.VISIBLE);
-                findViewById(R.id.row_weekday).setVisibility(View.VISIBLE);
-                findViewById(R.id.row_weekend).setVisibility(View.VISIBLE);
-                findViewById(R.id.row_week).setVisibility(View.VISIBLE);
-
-                findViewById(R.id.row_user_gps).setVisibility(View.GONE);
-                findViewById(R.id.row_user_onstar).setVisibility(View.GONE);
-                findViewById(R.id.row_user_siriusxm).setVisibility(View.GONE);
-                findViewById(R.id.row_user_price).setVisibility(View.GONE);
-                findViewById(R.id.row_user_discount).setVisibility(View.GONE);
-                findViewById(R.id.row_user_tax).setVisibility(View.GONE);
-                findViewById(R.id.row_user_total_price).setVisibility(View.GONE);
-                findViewById(R.id.layout_user_reserve_btn).setVisibility(View.GONE);
-                findViewById(R.id.row_start_date).setVisibility(View.GONE);
-                findViewById(R.id.row_end_date).setVisibility(View.GONE);
+            } else if(role.equalsIgnoreCase("Rental Manager"))
+            {
+                new RentalManagerActivity();
+//                findViewById(R.id.row_rm_gps).setVisibility(View.VISIBLE);
+//                findViewById(R.id.row_rm_onstar).setVisibility(View.VISIBLE);
+//                findViewById(R.id.row_rm_siriusxm).setVisibility(View.VISIBLE);
+//                findViewById(R.id.row_weekday).setVisibility(View.VISIBLE);
+//                findViewById(R.id.row_weekend).setVisibility(View.VISIBLE);
+//                findViewById(R.id.row_week).setVisibility(View.VISIBLE);
+//
+//                findViewById(R.id.row_user_gps).setVisibility(View.GONE);
+//                findViewById(R.id.row_user_onstar).setVisibility(View.GONE);
+//                findViewById(R.id.row_user_siriusxm).setVisibility(View.GONE);
+//                findViewById(R.id.row_user_price).setVisibility(View.GONE);
+//                findViewById(R.id.row_user_discount).setVisibility(View.GONE);
+//                findViewById(R.id.row_user_tax).setVisibility(View.GONE);
+//                findViewById(R.id.row_user_total_price).setVisibility(View.GONE);
+//                findViewById(R.id.layout_user_reserve_btn).setVisibility(View.GONE);
+//                findViewById(R.id.row_start_date).setVisibility(View.GONE);
+//                findViewById(R.id.row_end_date).setVisibility(View.GONE);
 
                 carId = b.getInt("CAR_ID");
             }
