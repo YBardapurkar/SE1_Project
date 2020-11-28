@@ -254,10 +254,9 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:id="@+id/btn_reserve"
+            android:id="@+id/btn_make_reservation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:text="Reserve" />
     </RelativeLayout>
 

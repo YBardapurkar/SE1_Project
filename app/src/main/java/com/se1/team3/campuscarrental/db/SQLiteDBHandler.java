@@ -237,7 +237,7 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
         SQLiteDatabase db = this.getReadableDatabase();
 //        String selectQuery = "SELECT * FROM " + TABLE_CARS + " where " + COL_CAPACITY + " >= '" + cap + "';";
 
-        String selectQuery = "select * fROM " + TABLE_CARS + " left join (" +
+        String selectQuery = "select " + TABLE_CARS + ".* fROM " + TABLE_CARS + " left join (" +
                 "select * fROM " + TABLE_RESERVATIONS +
                 " where '" + start + "' <= " + TABLE_RESERVATIONS + "." + COL_R_START_DATE + " and " + TABLE_RESERVATIONS + "." + COL_R_START_DATE + " <= '" + end + "' " +
                 " or '" + start + "' <= " + TABLE_RESERVATIONS + "." + COL_R_END_DATE + " and " + TABLE_RESERVATIONS + "." + COL_R_END_DATE + " <= '" + end + "'" +

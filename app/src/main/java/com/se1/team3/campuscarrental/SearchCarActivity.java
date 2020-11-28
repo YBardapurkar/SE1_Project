@@ -137,7 +137,7 @@ public class SearchCarActivity extends AppCompatActivity {
                         endDateTime = DateUtils.getNextEndTime(startDateTime);
                     }
 
-                    editTextStartDate.setText(DateUtils.toDateString(endDateTime.getTimeInMillis()));
+                    editTextEndDate.setText(DateUtils.toDateString(endDateTime.getTimeInMillis()));
                     editTextEndTime.requestFocus();
                 }, mYear, mMonth, mDay);
                 datePickerDialog.getDatePicker().setMinDate(startDateTime.getTimeInMillis());

@@ -1,12 +1,11 @@
 package com.se1.team3.campuscarrental;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,17 +15,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.se1.team3.campuscarrental.db.DBHandler;
 import com.se1.team3.campuscarrental.db.SQLiteDBHandler;
 import com.se1.team3.campuscarrental.models.Car;
+import com.se1.team3.campuscarrental.models.Reservation;
 import com.se1.team3.campuscarrental.models.SystemUser;
+
+import java.util.Calendar;
 
 //import org.joda.time.DateTime;
 //import org.joda.time.Days;
 //import org.joda.time.format.DateTimeFormat;
 //import org.joda.time.format.DateTimeFormatter;
-
-import org.w3c.dom.Text;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 public class MakeReservationActivity extends AppCompatActivity {
 
@@ -35,24 +32,20 @@ public class MakeReservationActivity extends AppCompatActivity {
 
     static final String PREFERENCES = "SharedPreferences";
     static final String USERNAME = "username";
-    static final String ROLE = "role";
+//    static final String ROLE = "role";
 
-    TextView carName;
-    TextView capacity;
-    TextView weekday, weekend, week;
-    TextView startDateText;
-    TextView endDateText;
-    CheckBox gps;
-    CheckBox onstar;
-    CheckBox siriusxm;
+    TextView carName, capacity, startDateText, endDateText;
+    CheckBox checkBoxGps, checkBoxOnStar, checkBoxSiriusXm;
 
-    TextView gpsPrice;
-    TextView onstarPrice;
-    TextView siriusxmPrice;
-
-    TextView price, discount, tax;
-    TextView totalCost;
+    TextView txtPrice, txtDiscount, txtTax, txtTotalCost;
     Button btnReserve;
+
+    SystemUser user;
+    double gps, onStar, siriusXm;
+    double price, discount, tax, totalPrice;
+    int carId = 0;
+    long startDate = 0;
+    long endDate = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,207 +57,123 @@ public class MakeReservationActivity extends AppCompatActivity {
         dbHandler = new SQLiteDBHandler(this);
         sharedPreferences =  getApplicationContext().getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
 
-        btnReserve = (Button) findViewById(R.id.btn_reserve);
+        user = dbHandler.getUserByUsername(sharedPreferences.getString(USERNAME, ""));
 
-        String role = sharedPreferences.getString(ROLE, "");
+        btnReserve = findViewById(R.id.btn_make_reservation);
 
-        carName = (TextView) findViewById(R.id.txt_car_name);
-        capacity = (TextView) findViewById(R.id.txt_car_capacity);
+//        String role = sharedPreferences.getString(ROLE, "");
 
-        weekday = findViewById(R.id.txt_weekday);
-        weekend = findViewById(R.id.txt_weekend);
-        week = findViewById(R.id.txt_week);
+        carName = findViewById(R.id.txt_car_name);
+        capacity = findViewById(R.id.txt_car_capacity);
 
-        startDateText = (TextView) findViewById(R.id.txt_start_date);
-        endDateText = (TextView) findViewById(R.id.txt_end_date);
+        startDateText = findViewById(R.id.txt_start_date);
+        endDateText = findViewById(R.id.txt_end_date);
 
-        gpsPrice = (TextView) findViewById(R.id.txt_gps_rate);
-        onstarPrice = (TextView) findViewById(R.id.txt_onstar_rate);
-        siriusxmPrice = (TextView) findViewById(R.id.txt_siriusxm_rate);
+        txtPrice = findViewById(R.id.txt_price);
+        txtDiscount = findViewById(R.id.txt_discount);
+        txtTax = findViewById(R.id.txt_tax);
+        txtTotalCost = findViewById(R.id.txt_total_price);
 
-        price = findViewById(R.id.txt_price);
-        discount = findViewById(R.id.txt_discount);
-        tax = findViewById(R.id.txt_tax);
-        totalCost = findViewById(R.id.txt_total_price);
-
-        gps = (CheckBox) findViewById(R.id.checkbox_gps);
-        onstar = (CheckBox) findViewById(R.id.checkbox_onstar);
-        siriusxm = (CheckBox) findViewById(R.id.checkbox_siriusxm);
-
-        int carId = 0;
-        long startDate = 0;
-        long endDate = 0;
+        checkBoxGps = findViewById(R.id.checkbox_gps);
+        checkBoxOnStar = findViewById(R.id.checkbox_onstar);
+        checkBoxSiriusXm = findViewById(R.id.checkbox_siriusxm);
 
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
-
-        if(role.equalsIgnoreCase("User")) {
-            findViewById(R.id.row_user_gps).setVisibility(View.VISIBLE);
-            findViewById(R.id.row_user_onstar).setVisibility(View.VISIBLE);
-            findViewById(R.id.row_user_siriusxm).setVisibility(View.VISIBLE);
-            findViewById(R.id.row_user_price).setVisibility(View.VISIBLE);
-            findViewById(R.id.row_user_discount).setVisibility(View.VISIBLE);
-            findViewById(R.id.row_user_tax).setVisibility(View.VISIBLE);
-            findViewById(R.id.row_user_total_price).setVisibility(View.VISIBLE);
-            findViewById(R.id.layout_user_reserve_btn).setVisibility(View.VISIBLE);
-            findViewById(R.id.row_start_date).setVisibility(View.VISIBLE);
-            findViewById(R.id.row_end_date).setVisibility(View.VISIBLE);
-
-
-            startDate = b.getLong("START_DATE_TIME");
-            endDate = b.getLong("END_DATE_TIME");
-            carId = b.getInt("CAR_ID");
-        } else if(role.equalsIgnoreCase("Rental Manager")) {
-            findViewById(R.id.row_rm_gps).setVisibility(View.VISIBLE);
-            findViewById(R.id.row_rm_onstar).setVisibility(View.VISIBLE);
-            findViewById(R.id.row_rm_siriusxm).setVisibility(View.VISIBLE);
-            findViewById(R.id.row_weekday).setVisibility(View.VISIBLE);
-            findViewById(R.id.row_weekend).setVisibility(View.VISIBLE);
-            findViewById(R.id.row_week).setVisibility(View.VISIBLE);
-
-            findViewById(R.id.row_user_gps).setVisibility(View.GONE);
-            findViewById(R.id.row_user_onstar).setVisibility(View.GONE);
-            findViewById(R.id.row_user_siriusxm).setVisibility(View.GONE);
-            findViewById(R.id.row_user_price).setVisibility(View.GONE);
-            findViewById(R.id.row_user_discount).setVisibility(View.GONE);
-            findViewById(R.id.row_user_tax).setVisibility(View.GONE);
-            findViewById(R.id.row_user_total_price).setVisibility(View.GONE);
-            findViewById(R.id.layout_user_reserve_btn).setVisibility(View.GONE);
-            findViewById(R.id.row_start_date).setVisibility(View.GONE);
-            findViewById(R.id.row_end_date).setVisibility(View.GONE);
-
-            carId = b.getInt("CAR_ID");
-        }
+        startDate = b.getLong("START_DATE_TIME");
+        endDate = b.getLong("END_DATE_TIME");
+        carId = b.getInt("CAR_ID");
 
         Car car = dbHandler.getCarById(carId);
 
         carName.setText(car.getCarName());
         capacity.setText("" + car.getCapacity());
-        weekday.setText(String.format("$ %.2f per day", car.getWeekday()));
-        weekend.setText(String.format("$ %.2f per day", car.getWeekend()));
-        week.setText(String.format("$ %.2f per week", car.getWeek()));
-
         ((ImageView) findViewById(R.id.car_image)).setImageResource(car.getImage());
 
+
+
+        checkBoxGps.setOnCheckedChangeListener((buttonView, isChecked) -> calculatePrice(car));
+
+        checkBoxOnStar.setOnCheckedChangeListener((buttonView, isChecked) -> calculatePrice(car));
+
+        checkBoxSiriusXm.setOnCheckedChangeListener((buttonView, isChecked) -> calculatePrice(car));
+
+        btnReserve.setOnClickListener(v -> {
+            Reservation reservation = new Reservation();
+            reservation.setCarId(carId);
+            reservation.setUsername(user.getUsername());
+            reservation.setFirstName(user.getFirstName());
+            reservation.setLastName(user.getLastName());
+            reservation.setStartDate(DateUtils.toDateTimeString(startDate));
+            reservation.setEndDate(DateUtils.toDateTimeString(endDate));
+            reservation.setOnStar(onStar);
+            reservation.setGps(gps);
+            reservation.setSiriusXm(siriusXm);
+            reservation.setPrice(price);
+            reservation.setDiscount(discount);
+            reservation.setTax(tax);
+            reservation.setTotalPrice(totalPrice);
+            reservation.setStatus(true);
+
+            if (dbHandler.saveReservation(reservation)) {
+                Toast.makeText(MakeReservationActivity.this, "Reservation Successful", Toast.LENGTH_SHORT).show();
+//                    TODO redirect here and finish activity
+            } else {
+                Toast.makeText(MakeReservationActivity.this, "Error", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        calculatePrice(car);
+    }
+
+    private void calculatePrice(Car car) {
         Calendar cStart = Calendar.getInstance();
         cStart.setTimeInMillis(startDate);
-        startDateText.setText(new SimpleDateFormat("yyyy-mm-dd hh:mm:ss").format(cStart.getTime()));
+        startDateText.setText(DateUtils.toDateTimeString(startDate));
 
         Calendar cEnd = Calendar.getInstance();
         cEnd.setTimeInMillis(endDate);
-        endDateText.setText(new SimpleDateFormat("yyyy-mm-dd hh:mm:ss").format(cEnd.getTime()));
+        endDateText.setText(DateUtils.toDateTimeString(endDate));
 
-        int days = cEnd.get(Calendar.DAY_OF_YEAR) - cStart.get(Calendar.DAY_OF_YEAR) + 1;
-
-        gps.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                calculatePrice(car, days);
+        int weekdays = 0;
+        int weekends = 0;
+        for (; cStart.get(Calendar.DAY_OF_YEAR) <= cEnd.get(Calendar.DAY_OF_YEAR); cStart.add(Calendar.DAY_OF_YEAR, 1)) {
+            System.out.println(DateUtils.toDateString(cStart.getTimeInMillis()) + " " + cStart.get(Calendar.DAY_OF_WEEK));
+            if ((cStart.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || cStart.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) && weekends < 2) {
+                weekends += 1;
+            } else {
+                weekdays += 1;
             }
-        });
-
-        onstar.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                calculatePrice(car, days);
-            }
-        });
-
-        siriusxm.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                calculatePrice(car, days);
-            }
-        });
-
-        btnReserve.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MakeReservationActivity.this, "Reserved: " + generateReservationNumber(6), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        calculatePrice(car, days);
-    }
-
-    private String generateReservationNumber(int stringSize) {
-        // chose a Character random from this String
-        String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                + "0123456789"
-                + "abcdefghijklmnopqrstuvxyz";
-
-        // create StringBuffer size of AlphaNumericString
-        StringBuilder sb = new StringBuilder(stringSize);
-
-        for (int i = 0; i < stringSize; i++) {
-
-            // generate a random number between
-            // 0 to AlphaNumericString variable length
-            int index
-                    = (int) (AlphaNumericString.length()
-                    * Math.random());
-
-            // add Character one by one in end of sb
-            sb.append(AlphaNumericString
-                    .charAt(index));
         }
-
-        return sb.toString();
-    }
-
-//        private int getDaysBetweenDates(String startDate, String endDate) {
-//            int numberOfDays = 0;
-//            DateTimeFormatter formatter = DateTimeFormat.forPattern("MM-dd-yyyy HH:mm:ss");
-//            DateTime start = formatter.parseDateTime(startDate);
-//            DateTime end = formatter.parseDateTime(endDate);
-//            numberOfDays = Days.daysBetween(start.toLocalDate(), end.toLocalDate()).getDays();
-//            if (numberOfDays == 0) {
-//                return 1;
-//            }
-//            return numberOfDays;
-//        }
-
-    private void calculatePrice(Car car, int days) {
-        double total = car.getWeekday() * days;
 
         double gpsCost = 0;
         double onStarCost = 0;
         double siriusCost = 0;
 
-        if (gps.isChecked()) {
-            gpsCost = car.getGps() * days;
+        if (checkBoxGps.isChecked()) {
+            gpsCost = car.getGps() * (weekdays + weekends);
         }
-        if (onstar.isChecked()) {
-            onStarCost = car.getOnStar() * days;
+        if (checkBoxOnStar.isChecked()) {
+            onStarCost = car.getOnStar() * (weekdays + weekends);
         }
-        if (siriusxm.isChecked()) {
-            siriusCost = car.getSiriusXM() * days;
+        if (checkBoxSiriusXm.isChecked()) {
+            siriusCost = car.getSiriusXM() * (weekdays + weekends);
         }
 
-        gps.setText(String.format("GPS     : $ %.2f", gpsCost));
-        gpsPrice.setText(String.format("$ %.2f per day", car.getGps()));
-        siriusxm.setText(String.format("SiriusXM: $ %.2f", siriusCost));
-        siriusxmPrice.setText(String.format("$ %.2f per day", car.getSiriusXM()));
-        onstar.setText(String.format("OnStar  : $ %.2f", onStarCost));
-        onstarPrice.setText(String.format("$ %.2f per day", car.getOnStar()));
+        checkBoxGps.setText(String.format("GPS     : $ %.2f", gpsCost));
+        checkBoxSiriusXm.setText(String.format("SiriusXM: $ %.2f", siriusCost));
+        checkBoxOnStar.setText(String.format("OnStar  : $ %.2f", onStarCost));
 
-        total += (gpsCost + onStarCost + siriusCost);
+        price = (car.getWeekday() * weekdays + car.getWeekend() * weekends) + (gpsCost + onStarCost + siriusCost);
 
-        price.setText(String.format("$ %.2f", total));
+        discount = user.isMembership() ? price * 0.1 : 0;
+        tax = price * 0.0875;
+        totalPrice = price - discount + tax;
 
-        SystemUser user = dbHandler.getUserByUsername(sharedPreferences.getString(USERNAME, ""));
-        double d = 0;
-        if (user.isMembership()) {
-            d = total * 0.1;
-        }
-        discount.setText(String.format("- $ %.2f", d));
-        total = total - d;
-
-        double t = total * 0.0875;
-        tax.setText(String.format("$ %.2f", t));
-
-        total = total + t;
-        totalCost.setText(String.format("$ %.2f", total));
+        txtPrice.setText(String.format("$ %.2f", price));
+        txtDiscount.setText(String.format("- $ %.2f", discount));
+        txtTax.setText(String.format("$ %.2f", tax));
+        txtTotalCost.setText(String.format("$ %.2f", totalPrice));
     }
 }
 
