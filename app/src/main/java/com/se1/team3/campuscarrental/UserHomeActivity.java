@@ -42,10 +42,9 @@ public class UserHomeActivity extends HomeActivity {
         });
 
         btn_viewAllReserves.setOnClickListener(v -> {
-                    Intent intent = new Intent(UserHomeActivity.this, MyReservationsActivity.class);
-                    startActivity(intent);
-                }
-        );
+            Intent intent = new Intent(UserHomeActivity.this, MyReservationsActivity.class);
+            startActivity(intent);
+        });
 
         btn_logout.setOnClickListener(v -> logout());
     }

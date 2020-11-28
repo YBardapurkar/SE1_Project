@@ -32,10 +32,8 @@ public class RentalManagerHomeActivity extends HomeActivity {
         btn_reserve = findViewById(R.id.btn_reserve);
         btn_profile = findViewById(R.id.btn_profile);
 
-        btn_profile.setOnClickListener(v -> {
-//                Toast.makeText(getApplicationContext(),"Rental Manager", Toast.LENGTH_SHORT).show();
-            viewProfile();
-        });
+        btn_profile.setOnClickListener(v -> viewProfile());
+
         btn_lcar.setOnClickListener(v -> {
                 Intent intent = new Intent(RentalManagerHomeActivity.this, AvailableCarsActivity.class);
                 startActivity(intent);
@@ -45,15 +43,12 @@ public class RentalManagerHomeActivity extends HomeActivity {
             Intent intent = new Intent(RentalManagerHomeActivity.this, ListReservationsActivity.class);
             startActivity(intent);
         });
+
         btn_Logout.setOnClickListener(v -> logout());
 
     }
     public void viewProfile(){
         Intent intent = new Intent(this, UserProfileActivity.class);
-        bundle = new Bundle();
-        bundle.putString("username", sharedPreferences.getString(USERNAME, ""));
-        bundle.putString("flag", "1");
-        intent.putExtras(bundle);
         startActivity(intent);
     }
 }

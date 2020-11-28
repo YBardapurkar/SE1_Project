@@ -1,9 +1,6 @@
 package com.se1.team3.campuscarrental;
 
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -27,11 +24,11 @@ import butterknife.OnClick;
 
 public class AdminViewsUserDetailsActivity extends AppCompatActivity {
 
-    SharedPreferences sharedPreferences;
+//    SharedPreferences sharedPreferences;
 
-    static final String PREFERENCES = "SharedPreferences";
-    static final String USERNAME = "username";
-    static final String ROLE = "role";
+//    static final String PREFERENCES = "SharedPreferences";
+//    static final String USERNAME = "username";
+//    static final String ROLE = "role";
 
     SystemUser selected_user;
     DBHandler dbHandler = null;
@@ -80,7 +77,7 @@ public class AdminViewsUserDetailsActivity extends AppCompatActivity {
         setTitle("User Details");
 
         dbHandler = new SQLiteDBHandler(this);
-        sharedPreferences = getApplicationContext().getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
+//        sharedPreferences = getApplicationContext().getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
 
         //object to save the data from the database
         Intent intent = getIntent();
@@ -94,13 +91,11 @@ public class AdminViewsUserDetailsActivity extends AppCompatActivity {
         selected_user = dbHandler.getUserByUsername(username);
         //populating the drop down for role
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.txt_option_role, android.R.layout.simple_spinner_item);
+                R.array.edit_profile_role, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         displayRoleSpinner.setAdapter(adapter);
         if ("User".equalsIgnoreCase(selected_user.getRole())) {
             displayRoleSpinner.setSelection(0);
-        } else if ("Admin".equalsIgnoreCase(selected_user.getRole())) {
-            displayRoleSpinner.setSelection(2);
         } else {
             displayRoleSpinner.setSelection(1);
         }
@@ -110,14 +105,9 @@ public class AdminViewsUserDetailsActivity extends AppCompatActivity {
 
         displayFirstNameTxt.setText(selected_user.getFirstName());
         displayLastNameTxt.setText(selected_user.getLastName());
-        String selecteduserrole = selected_user.getRole();
-        String membership_valeu = "NO";
-        if (selecteduserrole.equalsIgnoreCase("user")) {
+        if ("User".equalsIgnoreCase(selected_user.getRole())) {
             membershipRow.setVisibility(View.VISIBLE);
-            if (selected_user.isMembership()) {
-                membership_valeu = "YES";
-            }
-            displayMembershipTxt.setText(membership_valeu);
+            displayMembershipTxt.setText(selected_user.isMembership() ? "YES" : "NO");
         } else {
             membershipRow.setVisibility(View.GONE);
         }
@@ -129,8 +119,6 @@ public class AdminViewsUserDetailsActivity extends AppCompatActivity {
         displayCityTxt.setText(selected_user.getCity());
         displayStateTxt.setText(selected_user.getState());
         displayZipCodeTxt.setText(selected_user.getPin());
-
-
     }
 
     @OnClick(R.id.change_role_btn)
@@ -138,27 +126,15 @@ public class AdminViewsUserDetailsActivity extends AppCompatActivity {
         String newrole = displayRoleSpinner.getSelectedItem().toString();
         selected_user.setRole(newrole);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Are you want to Change the role to " + newrole + "?")
-                .setPositiveButton(R.string.logout_confirmation_yes, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        /*Please do the revoke status database stuff here*/
-                        if (dbHandler.change_role(selected_user)) {
-                            Toast.makeText(AdminViewsUserDetailsActivity.this, "User Role Changed Successfully!", Toast.LENGTH_LONG).show();
-                            dialog.dismiss();
-                            Intent intent = new Intent(AdminViewsUserDetailsActivity.this, SearchUserActivity.class);
-                            startActivity(intent);
-                            finish();
-                        }
-                    }
-                })
-                .setNegativeButton(R.string.logout_confirmation_no, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(AdminViewsUserDetailsActivity.this, "User Change role Cancelled!", Toast.LENGTH_LONG).show();
+        builder.setMessage("Change the role to " + newrole + "?")
+                .setPositiveButton(R.string.logout_confirmation_yes, (dialog, which) -> {
+                    /*Please do the revoke status database stuff here*/
+                    if (dbHandler.change_role(selected_user)) {
+                        Toast.makeText(AdminViewsUserDetailsActivity.this, "Role Changed", Toast.LENGTH_LONG).show();
                         dialog.dismiss();
                     }
-                });
+                })
+                .setNegativeButton(R.string.logout_confirmation_no, (dialog, which) -> dialog.dismiss());
 
         AlertDialog dialog = builder.create();
         dialog.show();
@@ -179,32 +155,20 @@ public class AdminViewsUserDetailsActivity extends AppCompatActivity {
         /*fire query to update these attributes*/
         /*Firstly diplaying the query and depending on the response updating or not*/
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Are you want to Save Changes?")
-                .setPositiveButton(R.string.logout_confirmation_yes, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        /*Please do the edit database  database stuff here*/
+        builder.setMessage("Save Changes?")
+                .setPositiveButton(R.string.logout_confirmation_yes, (dialog, which) -> {
+                    /*Please do the edit database  database stuff here*/
 
-                        if (dbHandler.edit_profile(selected_user)) {
-                            /*UPdate is Sucessfull*/
-                            Toast.makeText(AdminViewsUserDetailsActivity.this, "Succesfully Updated.", Toast.LENGTH_LONG).show();
-                            dialog.dismiss();
-
-                        } else {
-                            /*Registration has failed*/
-                            Toast.makeText(AdminViewsUserDetailsActivity.this, "Failed Updation!!!.", Toast.LENGTH_LONG).show();
-                            dialog.dismiss();
-                        }
-
+                    if (dbHandler.edit_profile(selected_user)) {
+                        /*UPdate is Sucessfull*/
+                        Toast.makeText(AdminViewsUserDetailsActivity.this, "Edit Successful", Toast.LENGTH_LONG).show();
+                    } else {
+                        /*Registration has failed*/
+                        Toast.makeText(AdminViewsUserDetailsActivity.this, "Edit Failed", Toast.LENGTH_LONG).show();
                     }
+                    dialog.dismiss();
                 })
-                .setNegativeButton(R.string.logout_confirmation_no, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(AdminViewsUserDetailsActivity.this, "Changes NOT SAVED!!", Toast.LENGTH_LONG).show();
-                        dialog.dismiss();
-                    }
-                });
+                .setNegativeButton(R.string.logout_confirmation_no, (dialog, which) -> dialog.dismiss());
 
         AlertDialog dialog = builder.create();
         dialog.show();
@@ -214,28 +178,16 @@ public class AdminViewsUserDetailsActivity extends AppCompatActivity {
     @OnClick(R.id.Revoke_renter_btn)
     public void onRevokeRenterBtnClicked() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Are you want to Revoke this user?")
-                .setPositiveButton(R.string.logout_confirmation_yes, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        /*Please do the revoke status database stuff here*/
-                        selected_user.setStatus(false);
-                        if (dbHandler.revoke_renter(selected_user)) {
-                            Toast.makeText(AdminViewsUserDetailsActivity.this, "User Status Revoked Successfully!", Toast.LENGTH_LONG).show();
-                            dialog.dismiss();
-                            Intent intent = new Intent(AdminViewsUserDetailsActivity.this, SearchUserActivity.class);
-                            startActivity(intent);
-                            finish();
-                        }
-                    }
-                })
-                .setNegativeButton(R.string.logout_confirmation_no, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(AdminViewsUserDetailsActivity.this, "User Revoke Cancelled!", Toast.LENGTH_LONG).show();
+        builder.setMessage("Revoke this user?")
+                .setPositiveButton(R.string.logout_confirmation_yes, (dialog, which) -> {
+                    /*Please do the revoke status database stuff here*/
+                    selected_user.setStatus(false);
+                    if (dbHandler.revoke_renter(selected_user)) {
+                        Toast.makeText(AdminViewsUserDetailsActivity.this, "User Status Revoked", Toast.LENGTH_LONG).show();
                         dialog.dismiss();
                     }
-                });
+                })
+                .setNegativeButton(R.string.logout_confirmation_no, (dialog, which) -> dialog.dismiss());
 
         AlertDialog dialog = builder.create();
         dialog.show();

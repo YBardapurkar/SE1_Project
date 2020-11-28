@@ -5,22 +5,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class AdminHomeActivity extends HomeActivity {
-
-
-
-
     Button btn_profile, btn_logout;
     TextView textWelcome;
     SharedPreferences sharedPreferences;
     static final String PREFERENCES = "SharedPreferences";
     static final String USERNAME = "username";
-    static final String ROLE = "role";
+//    static final String ROLE = "role";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,29 +29,17 @@ public class AdminHomeActivity extends HomeActivity {
         textWelcome = findViewById(R.id.text_rm_welcome);
         textWelcome.setText(welcomeMessage);
 
+        btn_profile = findViewById(R.id.btn_profile);
+        btn_logout = findViewById(R.id.btn_Logout);
 
-        btn_profile = (Button) findViewById(R.id.btn_profile);
-        btn_logout = (Button) findViewById(R.id.btn_Logout);
-
-
-
-        btn_profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Search Users", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(AdminHomeActivity.this, SearchUserActivity.class);
-                startActivity(intent);
-            }
+        btn_profile.setOnClickListener(v -> {
+            Intent intent = new Intent(AdminHomeActivity.this, SearchUserActivity.class);
+            startActivity(intent);
         });
 
 
-        btn_logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        btn_logout.setOnClickListener(v -> logout());
 
-                logout();
-            }
-        });
         sharedPreferences =  getApplicationContext().getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
     }
 
