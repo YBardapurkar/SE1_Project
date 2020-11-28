@@ -67,9 +67,9 @@ public class ReservationAdapter extends ArrayAdapter<Reservation> {
             textViewFullName.setVisibility(View.GONE);
         }
         textViewCarName.setText(car.getCarName());
-        textViewTotalPrice.setText(reservation.getTotalPrice() + "");
-        textViewStartDate.setText(reservation.getStartDate());
-        textViewEndDate.setText(reservation.getEndDate());
+        textViewTotalPrice.setText(String.format("$ %.2f", reservation.getTotalPrice()));
+        textViewStartDate.setText("From : " + reservation.getStartDate());
+        textViewEndDate.setText("To   : " + reservation.getEndDate());
 
         return convertView;
     }

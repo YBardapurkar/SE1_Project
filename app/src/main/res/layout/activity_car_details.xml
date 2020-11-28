@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/car_image"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/smart" />
+    </RelativeLayout>
+
+    <TableLayout
+        android:id="@+id/table_car_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp">
+
+        <TableRow
+            android:layout_margin="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            !-- text view for username -->
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_column="1"
+                android:gravity="left"
+                android:layout_margin="4dp"
+                android:textStyle="bold"
+                android:text="Car Name" />
+
+            <TextView
+                android:id="@+id/txt_car_name"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:layout_margin="4dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            !-- text view for First Name -->
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_column="1"
+                android:gravity="left"
+                android:textStyle="bold"
+                android:layout_margin="4dp"
+                android:text="Capacity" />
+
+            <TextView
+                android:id="@+id/txt_car_capacity"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:layout_margin="4dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_column="1"
+                android:gravity="left"
+                android:textStyle="bold"
+                android:layout_margin="4dp"
+                android:text="Weekday rate" />
+
+            <TextView
+                android:id="@+id/txt_weekday"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:layout_margin="4dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_column="1"
+                android:gravity="left"
+                android:textStyle="bold"
+                android:layout_margin="4dp"
+                android:text="Weekend rate" />
+
+            <TextView
+                android:id="@+id/txt_weekend"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:layout_margin="4dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            !-- text view for First Name -->
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_column="1"
+                android:gravity="left"
+                android:textStyle="bold"
+                android:layout_margin="4dp"
+                android:text="Weekly rate" />
+
+            <TextView
+                android:id="@+id/txt_week"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:layout_margin="4dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_column="1"
+                android:gravity="left"
+                android:textStyle="bold"
+                android:layout_margin="4dp"
+                android:text="Options:" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_column="1"
+                android:gravity="left"
+                android:layout_margin="4dp"
+                android:text="GPS" />
+
+            <TextView
+                android:id="@+id/txt_gps_rate"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:layout_margin="4dp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_column="1"
+                android:gravity="left"
+                android:layout_margin="4dp"
+                android:text="OnStar" />
+
+            <TextView
+                android:id="@+id/txt_onstar_rate"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:layout_margin="4dp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_column="1"
+                android:gravity="left"
+                android:layout_margin="4dp"
+                android:text="SiriusXM" />
+
+            <TextView
+                android:id="@+id/txt_siriusxm_rate"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:layout_margin="4dp" />
+
+        </TableRow>
+    </TableLayout>
+</LinearLayout>

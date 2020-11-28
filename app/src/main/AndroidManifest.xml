@@ -17,8 +17,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ListReservationsActivity"></activity>
-        <activity android:name=".MyReservationsActivity" />
+        <activity
+            android:name=".ListReservationsActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MyReservationsActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".AvailableCarsActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -41,9 +47,15 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".SearchUserActivity"
-            android:label="@string/app_name" />
+            android:label="@string/app_name"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".RentalManagerHomeActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CarDetailsActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait" />
         <activity
@@ -75,10 +87,6 @@
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ViewCarDetailsActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="portrait" />
         <activity
             android:name=".MakeReservationActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"

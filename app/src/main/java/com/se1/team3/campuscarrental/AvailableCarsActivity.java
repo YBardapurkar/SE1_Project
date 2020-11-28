@@ -56,7 +56,7 @@ public class AvailableCarsActivity extends AppCompatActivity {
 
         listViewCars.setOnItemClickListener((parent, view, position, id) -> {
             Car selectedCar = carList.get(position);
-            Intent intent = new Intent(AvailableCarsActivity.this, ViewCarDetailsActivity.class);
+            Intent intent = new Intent(AvailableCarsActivity.this, CarDetailsActivity.class);
             intent.putExtra("CAR_ID", selectedCar.getId());
             startActivity(intent);
         });

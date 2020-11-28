@@ -28,6 +28,8 @@ public class MyReservationsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_reservations);
 
+        setTitle("My Reservations");
+
         dbHandler = new SQLiteDBHandler(this);
         sharedPreferences =  getApplicationContext().getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
 
