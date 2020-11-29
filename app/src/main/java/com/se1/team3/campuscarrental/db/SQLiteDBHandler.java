@@ -335,7 +335,7 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
 
         List<SystemUser> users = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE USERNAME like '" + query + "%' AND ROLE = '" + rle + "';";
+        String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE USERNAME like '" + query + "%' AND ROLE = '" + rle + "' order by " + COL_USERNAME + " desc;";
         Cursor cursor = db.rawQuery(selectQuery, null);
         while (cursor.moveToNext()) {
             String username = cursor.getString(cursor.getColumnIndexOrThrow(COL_USERNAME));
@@ -463,7 +463,7 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
     public List<Reservation> getReservationsForUser(String username) {
         List<Reservation> reservations = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        String selectQuery = "SELECT * FROM " + TABLE_RESERVATIONS + " WHERE " + COL_R_USERNAME + " = '" + username + "';";
+        String selectQuery = "SELECT * FROM " + TABLE_RESERVATIONS + " WHERE " + COL_R_USERNAME + " = '" + username + "' order by date(" + COL_R_START_DATE + ") desc;";
         Cursor cursor = db.rawQuery(selectQuery, null);
         while (cursor.moveToNext()) {
             reservations.add(getReservationFromCursor(cursor));
@@ -479,7 +479,7 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
         List<Reservation> reservations = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         /*String selectQuery = "SELECT * FROM " + TABLE_RESERVATIONS + " WHERE date(" + COL_R_START_DATE + ") <= '" + day + "' and  '" + day + "' <= date(" + COL_R_START_DATE + ");";*/
-        String selectQuery = "SELECT * FROM " + TABLE_RESERVATIONS + " WHERE date(" + COL_R_START_DATE + ") >= '" + day + "';";
+        String selectQuery = "SELECT * FROM " + TABLE_RESERVATIONS + " WHERE date(" + COL_R_START_DATE + ") >= '" + day + "' order by date(" + COL_R_START_DATE + ") desc;";
         Cursor cursor = db.rawQuery(selectQuery, null);
         while (cursor.moveToNext()) {
             reservations.add(getReservationFromCursor(cursor));
@@ -589,10 +589,11 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
 
     @Override
     public boolean delete_reservation(int reservation_id){
-
+        ContentValues cv = new ContentValues();
         SQLiteDatabase db = this.getWritableDatabase();
+        cv.put(COL_R_STATUS, Boolean.FALSE);
 
-        int update = db.delete(TABLE_RESERVATIONS,  COL_R_ID + "=?", new String[]{String.valueOf(reservation_id)});
+        int update = db.update(TABLE_RESERVATIONS, cv, COL_R_ID + "=?", new String[]{String.valueOf(reservation_id)});
         db.close();
         return true;
     }
