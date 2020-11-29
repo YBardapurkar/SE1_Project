@@ -29,7 +29,7 @@ public interface DBHandler {
 
    boolean change_role(SystemUser target_user);
 
-   boolean saveReservation(Reservation reservation);
+   long saveReservation(Reservation reservation);
    List<Reservation> getReservationsForUser(String username);
    List<Reservation> getReservationsByDay(String day);
 

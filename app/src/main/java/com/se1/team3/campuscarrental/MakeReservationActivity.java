@@ -20,11 +20,6 @@ import com.se1.team3.campuscarrental.models.SystemUser;
 
 import java.util.Calendar;
 
-//import org.joda.time.DateTime;
-//import org.joda.time.Days;
-//import org.joda.time.format.DateTimeFormat;
-//import org.joda.time.format.DateTimeFormatter;
-
 public class MakeReservationActivity extends AppCompatActivity {
 
     public DBHandler dbHandler;
@@ -115,9 +110,13 @@ public class MakeReservationActivity extends AppCompatActivity {
             reservation.setTotalPrice(totalPrice);
             reservation.setStatus(true);
 
-            if (dbHandler.saveReservation(reservation)) {
+            long res_id = dbHandler.saveReservation(reservation);
+            if (res_id > 0) {
                 Toast.makeText(MakeReservationActivity.this, "Reservation Successful", Toast.LENGTH_SHORT).show();
-//                    TODO redirect here and finish activity
+                Intent i = new Intent(MakeReservationActivity.this, SelectedReservation.class);
+                i.putExtra("RESERVATION_ID", res_id);
+                startActivity(i);
+                finish();
             } else {
                 Toast.makeText(MakeReservationActivity.this, "Error", Toast.LENGTH_SHORT).show();
             }
@@ -146,25 +145,25 @@ public class MakeReservationActivity extends AppCompatActivity {
             }
         }
 
-        double gpsCost = 0;
-        double onStarCost = 0;
-        double siriusCost = 0;
+        gps = 0;
+        onStar = 0;
+        siriusXm = 0;
 
         if (checkBoxGps.isChecked()) {
-            gpsCost = car.getGps() * (weekdays + weekends);
+            gps = car.getGps() * (weekdays + weekends);
         }
         if (checkBoxOnStar.isChecked()) {
-            onStarCost = car.getOnStar() * (weekdays + weekends);
+            onStar = car.getOnStar() * (weekdays + weekends);
         }
         if (checkBoxSiriusXm.isChecked()) {
-            siriusCost = car.getSiriusXM() * (weekdays + weekends);
+            siriusXm = car.getSiriusXM() * (weekdays + weekends);
         }
 
-        checkBoxGps.setText(String.format("GPS     : $ %.2f", gpsCost));
-        checkBoxSiriusXm.setText(String.format("SiriusXM: $ %.2f", siriusCost));
-        checkBoxOnStar.setText(String.format("OnStar  : $ %.2f", onStarCost));
+        checkBoxGps.setText(String.format("GPS     : $ %.2f", gps));
+        checkBoxSiriusXm.setText(String.format("SiriusXM: $ %.2f", siriusXm));
+        checkBoxOnStar.setText(String.format("OnStar  : $ %.2f", onStar));
 
-        price = (car.getWeekday() * weekdays + car.getWeekend() * weekends) + (gpsCost + onStarCost + siriusCost);
+        price = (car.getWeekday() * weekdays + car.getWeekend() * weekends) + (gps + onStar + siriusXm);
 
         discount = user.isMembership() ? price * 0.1 : 0;
         tax = price * 0.0875;

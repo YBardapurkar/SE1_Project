@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,7 +38,8 @@ public class SelectedReservation extends AppCompatActivity {
     Reservation currentReservation;
     Car booked_car;
 
-
+    @BindView(R.id.car_image)
+    ImageView carImageReservation;
     @BindView(R.id.display_reservation_id_txt)
     TextView displayReservationIdTxt;
     @BindView(R.id.display_first_name_reservation)
@@ -60,8 +62,16 @@ public class SelectedReservation extends AppCompatActivity {
     TextView displaySiriusReservation;
     @BindView(R.id.display_OnStar_reservation)
     TextView displayOnStarReservation;
+
+    @BindView(R.id.display_price_reservation)
+    TextView displayPriceReservation;
+    @BindView(R.id.display_discount_reservation)
+    TextView displayDiscountReservation;
+    @BindView(R.id.display_tax_reservation)
+    TextView displayTaxReservation;
     @BindView(R.id.display_totalPrice_reservation)
     TextView displayTotalPriceReservation;
+
     @BindView(R.id.display_status_reservation)
     TextView displayStatusReservation;
     @BindView(R.id.reservation_button)
@@ -73,7 +83,7 @@ public class SelectedReservation extends AppCompatActivity {
         setContentView(R.layout.activity_selected_reservation);
         ButterKnife.bind(this);
 
-        setTitle("User Details");
+        setTitle("Reservation Details");
 
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
@@ -91,10 +101,16 @@ public class SelectedReservation extends AppCompatActivity {
         displayLastNameReservation.setText(currentReservation.getLastName());
         displayStartDateReservation.setText(currentReservation.getStartDate());
         displayEndDateReservation.setText(currentReservation.getEndDate());
-        displayGPSReservation.setText(String.valueOf(currentReservation.getGps()));
-        displaySiriusReservation.setText(String.valueOf(currentReservation.getSiriusXm()));
-        displayOnStarReservation.setText(String.valueOf(currentReservation.getOnStar()));
-        displayTotalPriceReservation.setText(String.valueOf("$ "+currentReservation.getTotalPrice()));
+
+        displayGPSReservation.setText(String.format("$ %.2f", currentReservation.getGps()));
+        displaySiriusReservation.setText(String.format("$ %.2f", currentReservation.getSiriusXm()));
+        displayOnStarReservation.setText(String.format("$ %.2f", currentReservation.getOnStar()));
+
+        displayPriceReservation.setText(String.format("$ %.2f", currentReservation.getPrice()));
+        displayDiscountReservation.setText(String.format("- $ %.2f", currentReservation.getDiscount()));
+        displayTaxReservation.setText(String.format("$ %.2f", currentReservation.getTax()));
+        displayTotalPriceReservation.setText(String.format("$ %.2f", currentReservation.getTotalPrice()));
+
         if (currentReservation.isStatus()) {
             displayStatusReservation.setText("Active");
             //displayStatusReservation.setTextColor(Integer.parseInt("#008000"));
@@ -106,6 +122,7 @@ public class SelectedReservation extends AppCompatActivity {
 
         /*getting the reserved car details to show*/
         booked_car = dbHandler.getCarById(currentReservation.getCarId());
+        carImageReservation.setImageResource(booked_car.getImage());
         displayCarNameReservation.setText(booked_car.getCarName());
         displayOccupancyCarReservation.setText(String.valueOf(booked_car.getCapacity()));
 
@@ -121,6 +138,9 @@ public class SelectedReservation extends AppCompatActivity {
             /*usertype: Rental Manager show the delete user button*/
             reservationButton.setText("Delete Reservation");
 
+        }
+        if (!currentReservation.isStatus()) {
+            reservationButton.setEnabled(false);
         }
         reservationButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,7 +176,8 @@ public class SelectedReservation extends AppCompatActivity {
                                 if (dbHandler.delete_reservation(current_res_id)) {
                                     Toast.makeText(SelectedReservation.this, "Reservation Deleted Succesfully!!", Toast.LENGTH_LONG).show();
                                     dialog.dismiss();
-                                    Intent intent = new Intent(SelectedReservation.this, ListReservationsActivity.class);
+                                    Intent intent = new Intent(SelectedReservation.this, SelectedReservation.class);
+                                    intent.putExtra("RESERVATION_ID", current_res_id);
                                     startActivity(intent);
                                     finish();
                                 }

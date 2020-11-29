@@ -79,7 +79,6 @@ public class ListReservationsActivity extends AppCompatActivity {
             Intent intent = new Intent(ListReservationsActivity.this, SelectedReservation.class);
             intent.putExtra("RESERVATION_ID", nowselectedReservatopn.getId());
             startActivity(intent);
-            finish();
         }));
     }
 

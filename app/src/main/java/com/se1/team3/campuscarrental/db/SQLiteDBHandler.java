@@ -435,7 +435,7 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
         return true;
     }
 
-    public boolean saveReservation(Reservation reservation) {
+    public long saveReservation(Reservation reservation) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COL_R_CAR_ID, reservation.getCarId());
@@ -456,7 +456,7 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
         long rowId = db.insert(TABLE_RESERVATIONS, null, values);
         db.close();
 
-        return rowId >= 0;
+        return rowId;
     }
 
     @Override

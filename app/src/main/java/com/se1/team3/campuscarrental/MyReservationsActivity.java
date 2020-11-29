@@ -1,13 +1,12 @@
 package com.se1.team3.campuscarrental;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ListView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.se1.team3.campuscarrental.db.DBHandler;
 import com.se1.team3.campuscarrental.db.SQLiteDBHandler;
@@ -52,7 +51,6 @@ public class MyReservationsActivity extends AppCompatActivity {
             /*intent.putExtra("START_DATE_TIME", startDateTime.getTimeInMillis());
             intent.putExtra("END_DATE_TIME", endDateTime.getTimeInMillis());*/
             startActivity(intent);
-            finish();
         });
     }
 }

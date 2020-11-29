@@ -98,6 +98,11 @@ public class AdminViewsUserDetailsActivity extends AppCompatActivity {
             displayRoleSpinner.setSelection(0);
         } else {
             displayRoleSpinner.setSelection(1);
+            findViewById(R.id.Revoke_renter_btn).setVisibility(View.GONE);
+        }
+
+        if (!selected_user.isStatus()) {
+            findViewById(R.id.Revoke_renter_btn).setEnabled(false);
         }
 
         //setting the values
