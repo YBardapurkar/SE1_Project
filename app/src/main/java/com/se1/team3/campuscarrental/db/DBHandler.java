@@ -32,5 +32,11 @@ public interface DBHandler {
    boolean saveReservation(Reservation reservation);
    List<Reservation> getReservationsForUser(String username);
    List<Reservation> getReservationsByDay(String day);
+
+    Reservation getReservationById(int reservation_id);
+
+    boolean cancel_reservation(int reservation_id);
+
+    boolean delete_reservation(int reservation_id);
 //TO BE MODIFIED
 }

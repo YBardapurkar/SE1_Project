@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:id="@+id/user_details_parent_linear"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="clip_horizontal|center_horizontal"
+        android:orientation="vertical"
+        android:layout_margin="5dp"
+        android:paddingTop="20dp"
+        android:padding="20dp">
+
+        <TextView
+            android:gravity="center"
+            android:textSize="18dp"
+            android:layout_gravity="center"
+            android:layout_margin="15dp"
+            android:textAllCaps="true"
+            android:textColor="#000000"
+            android:text="Reservation Details"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent" />
+
+
+        <TableLayout
+            android:id="@+id/tabllayoutuserdetails"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow
+                android:layout_margin="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/txtreservationid"
+                    android:layout_weight="1"
+                    android:layout_column="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp"
+                    android:text="@string/reservation_number" />
+
+                <TextView
+                    android:id="@+id/display_reservation_id_txt"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_margin="4dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_margin="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                !-- text view for First Name -->
+
+                <TextView
+                    android:id="@+id/txt_reservation_firstname"
+                    android:layout_weight="1"
+                    android:layout_column="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp"
+                    android:text="@string/first_name" />
+
+                <TextView
+                    android:id="@+id/display_first_name_reservation"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:textColor="#000000"
+                    android:layout_margin="4dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_margin="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                !-- text view for last Name -->
+
+                <TextView
+                    android:id="@+id/txt_reservation_lastname"
+                    android:layout_weight="1"
+                    android:layout_column="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp"
+                    android:text="@string/last_name" />
+
+                <TextView
+                    android:id="@+id/display_last_name_reservation"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:textColor="#000000"
+                    android:layout_margin="4dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_margin="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                !-- text view for last Name -->
+
+                <TextView
+                    android:id="@+id/txt_reservation_CarName"
+                    android:layout_weight="1"
+                    android:layout_column="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp"
+                    android:text="Reserved Car Name" />
+
+                <TextView
+                    android:id="@+id/display_car_name_reservation"
+                    android:layout_weight="1"
+                    android:textColor="#000000"
+                    android:gravity="left"
+                    android:layout_margin="4dp" />
+            </TableRow>
+            <TableRow
+                android:layout_margin="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                !-- text view for last Name -->
+
+                <TextView
+                    android:id="@+id/txt_reservation_occupancy"
+                    android:layout_weight="1"
+                    android:layout_column="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp"
+                    android:text="Car Occupancy" />
+
+                <TextView
+                    android:id="@+id/display_occupancy_car_reservation"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:textColor="#000000"
+                    android:layout_margin="4dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_margin="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                !-- text view for last Name -->
+
+                <TextView
+                    android:id="@+id/txt_reservation_startdate"
+                    android:layout_weight="1"
+                    android:layout_column="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp"
+                    android:text="Start date" />
+                <TextView
+                    android:id="@+id/display_start_date_reservation"
+                    android:layout_weight="1"
+                    android:layout_column="1"
+                    android:textColor="#000000"
+                    android:gravity="left"
+                    android:layout_margin="4dp"
+                    />
+
+            </TableRow>
+
+            <!--End date and time textviews-->
+            <TableRow
+                android:layout_margin="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                !-- text view for last Name -->
+
+                <TextView
+                    android:id="@+id/txt_reservation_enddate"
+                    android:layout_weight="1"
+                    android:layout_column="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp"
+                    android:text="End date" />
+                <TextView
+                    android:id="@+id/display_end_date_reservation"
+                    android:layout_weight="1"
+                    android:layout_column="1"
+                    android:textColor="#000000"
+                    android:gravity="left"
+                    android:layout_margin="4dp"
+                    />
+
+            </TableRow>
+
+
+
+
+            <TableRow
+                android:layout_margin="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                !-- text view for last Name -->
+
+                <TextView
+                    android:id="@+id/txt_reservation_GPS"
+                    android:layout_weight="1"
+                    android:layout_column="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp"
+                    android:text="GPS Selection" />
+
+                <TextView
+                    android:id="@+id/display_GPS_reservation"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:textColor="#000000"
+                    android:layout_margin="4dp" />
+            </TableRow>
+            <TableRow
+                android:layout_margin="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                !-- text view for last Name -->
+
+                <TextView
+                    android:id="@+id/txt_sirius_membership"
+                    android:layout_weight="1"
+                    android:layout_column="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp"
+                    android:text="Sirius Selection" />
+
+                <TextView
+                    android:id="@+id/display_sirius_reservation"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:textColor="#000000"
+                    android:layout_margin="4dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_margin="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                !-- text view for last Name -->
+
+                <TextView
+                    android:id="@+id/txt_OnStar_membership"
+                    android:layout_weight="1"
+                    android:layout_column="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp"
+                    android:text="On star selection" />
+
+                <TextView
+                    android:id="@+id/display_OnStar_reservation"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:textColor="#000000"
+                    android:layout_margin="4dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_margin="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                !-- text view for last Name -->
+
+                <TextView
+                    android:id="@+id/txt_totalPrioe_membership"
+                    android:layout_weight="1"
+                    android:layout_column="1"
+                    android:gravity="left"
+                    android:layout_margin="4dp"
+                    android:text="Total price" />
+
+                <TextView
+                    android:id="@+id/display_totalPrice_reservation"
+                    android:layout_weight="1"
+                    android:textColor="#000000"
+                    android:gravity="left"
+                    android:layout_margin="4dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="3dp">
+                !-- text view for last Name -->
+
+                <TextView
+                    android:id="@+id/txt_status_membership"
+                    android:layout_column="1"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="Reservation status" />
+
+                <TextView
+                    android:id="@+id/display_status_reservation"
+                    android:layout_margin="4dp"
+                    android:textColor="#008000"
+                    android:layout_weight="1"
+                    android:gravity="left" />
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp">
+
+
+
+            </TableRow>
+        </TableLayout>
+        <Button
+            android:id="@+id/reservation_button"
+            android:layout_column="1"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_margin="7dp"
+            android:layout_weight="1"
+
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent" />
+
+    </LinearLayout>
+</ScrollView>

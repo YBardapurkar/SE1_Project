@@ -3,9 +3,11 @@ package com.se1.team3.campuscarrental;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.se1.team3.campuscarrental.db.DBHandler;
 import com.se1.team3.campuscarrental.db.SQLiteDBHandler;
@@ -41,5 +43,16 @@ public class MyReservationsActivity extends AppCompatActivity {
         ReservationAdapter adapter = new ReservationAdapter(this, R.layout.item_reservation, reservations);
         listviewMyReservations.setAdapter(adapter);
 
+        listviewMyReservations.setOnItemClickListener((parent, view, position, id) -> {
+            Reservation nowselectedReservatopn = reservations.get(position);
+
+            //Toast.makeText(this, String.valueOf(nowselectedReservatopn.getId()), Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(MyReservationsActivity.this, SelectedReservation.class);
+            intent.putExtra("RESERVATION_ID", nowselectedReservatopn.getId());
+            /*intent.putExtra("START_DATE_TIME", startDateTime.getTimeInMillis());
+            intent.putExtra("END_DATE_TIME", endDateTime.getTimeInMillis());*/
+            startActivity(intent);
+            finish();
+        });
     }
 }

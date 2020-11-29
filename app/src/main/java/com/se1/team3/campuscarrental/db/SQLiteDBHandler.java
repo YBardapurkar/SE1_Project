@@ -478,7 +478,8 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
     public List<Reservation> getReservationsByDay(String day) {
         List<Reservation> reservations = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        String selectQuery = "SELECT * FROM " + TABLE_RESERVATIONS + " WHERE date(" + COL_R_START_DATE + ") <= '" + day + "' and  '" + day + "' <= date(" + COL_R_START_DATE + ");";
+        /*String selectQuery = "SELECT * FROM " + TABLE_RESERVATIONS + " WHERE date(" + COL_R_START_DATE + ") <= '" + day + "' and  '" + day + "' <= date(" + COL_R_START_DATE + ");";*/
+        String selectQuery = "SELECT * FROM " + TABLE_RESERVATIONS + " WHERE date(" + COL_R_START_DATE + ") >= '" + day + "';";
         Cursor cursor = db.rawQuery(selectQuery, null);
         while (cursor.moveToNext()) {
             reservations.add(getReservationFromCursor(cursor));
@@ -525,4 +526,75 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
 
         return reservation;
     }
+
+    @Override
+    public Reservation getReservationById(int reservation_id) {
+        Reservation reservation = null;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "SELECT * FROM " + TABLE_RESERVATIONS + " WHERE " + COL_R_ID + " = '" + reservation_id + "';";
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToNext()) {
+            int id = cursor.getInt(cursor.getColumnIndexOrThrow(COL_R_ID));
+            int carId = cursor.getInt(cursor.getColumnIndexOrThrow(COL_R_CAR_ID));
+            String username = cursor.getString(cursor.getColumnIndexOrThrow(COL_R_USERNAME));
+            String firstName = cursor.getString(cursor.getColumnIndexOrThrow(COL_R_FIRSTNAME));
+            String lastName = cursor.getString(cursor.getColumnIndexOrThrow(COL_R_LASTNAME));
+            String startDate = cursor.getString(cursor.getColumnIndexOrThrow(COL_R_START_DATE));
+            String endDate = cursor.getString(cursor.getColumnIndexOrThrow(COL_R_END_DATE));
+            double price = cursor.getDouble(cursor.getColumnIndexOrThrow(COL_R_PRICE));
+            double gps = cursor.getDouble(cursor.getColumnIndexOrThrow(COL_R_GPS));
+            double onStar = cursor.getDouble(cursor.getColumnIndexOrThrow(COL_R_ONSTAR));
+            double siriusXm = cursor.getDouble(cursor.getColumnIndexOrThrow(COL_R_SIRIUSXM));
+            double discount = cursor.getDouble(cursor.getColumnIndexOrThrow(COL_R_DISCOUNT));
+            double tax = cursor.getDouble(cursor.getColumnIndexOrThrow(COL_R_TAX));
+            double totalPrice = cursor.getDouble(cursor.getColumnIndexOrThrow(COL_R_TOTAL_PRICE));
+            boolean status = cursor.getInt(cursor.getColumnIndexOrThrow(COL_R_STATUS)) == 1;
+
+
+            reservation = new Reservation();
+            reservation.setId(id);
+            reservation.setCarId(carId);
+            reservation.setUsername(username);
+            reservation.setFirstName(firstName);
+            reservation.setLastName(lastName);
+            reservation.setStartDate(startDate);
+            reservation.setEndDate(endDate);
+            reservation.setPrice(price);
+            reservation.setGps(gps);
+            reservation.setOnStar(onStar);
+            reservation.setSiriusXm(siriusXm);
+            reservation.setDiscount(discount);
+            reservation.setTax(tax);
+            reservation.setTotalPrice(totalPrice);
+            reservation.setStatus(status);
+            //current_reservation = new Reservation(reservation_ID, car_ID,username, firstName, lastName, startDate, endDate, price, gps, onStar, sirius, discount, tax, totalprice, status);
+        }
+        cursor.close();
+
+        db.close();
+        return reservation;
+    }
+       @Override
+    public boolean cancel_reservation(int reservation_id){
+        ContentValues cv = new ContentValues();
+        SQLiteDatabase db = this.getWritableDatabase();
+        cv.put(COL_R_STATUS, Boolean.FALSE);
+
+        int update = db.update(TABLE_RESERVATIONS, cv, COL_R_ID + "=?", new String[]{String.valueOf(reservation_id)});
+        db.close();
+
+
+        return true;
+    }
+
+    @Override
+    public boolean delete_reservation(int reservation_id){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        int update = db.delete(TABLE_RESERVATIONS,  COL_R_ID + "=?", new String[]{String.valueOf(reservation_id)});
+        db.close();
+        return true;
+    }
+
 }

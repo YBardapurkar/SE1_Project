@@ -1,6 +1,7 @@
 package com.se1.team3.campuscarrental;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -26,7 +27,7 @@ public class ListReservationsActivity extends AppCompatActivity {
     TextView textViewSelectedDate;
     EditText editTextDate;
     Button btnFindReservations;
-
+    Calendar dateTime;
     List<Reservation> reservations;
 
     @Override
@@ -53,8 +54,11 @@ public class ListReservationsActivity extends AppCompatActivity {
             int mMonth = c.get(Calendar.MONTH);
             int mDay = c.get(Calendar.DAY_OF_MONTH);
 
+            dateTime = Calendar.getInstance();
+            dateTime.set(Calendar.SECOND, 0);
+            dateTime.set(mYear, mMonth, mDay, 0, 0, 0);
             DatePickerDialog datePickerDialog = new DatePickerDialog(ListReservationsActivity.this, (view, year, monthOfYear, dayOfMonth) -> {
-                String date = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+                String date = DateUtils.toDateString(dateTime.getTimeInMillis());
                 editTextDate.setText(date);
             }, mYear, mMonth, mDay);
             datePickerDialog.show();
@@ -66,15 +70,24 @@ public class ListReservationsActivity extends AppCompatActivity {
             imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
 
             String date = editTextDate.getText().toString();
+            //System.out.println(date);
             getReservations(date);
         });
+
+        listviewReservations.setOnItemClickListener(((parent, view, position, id) -> {
+            Reservation nowselectedReservatopn = reservations.get(position);
+            Intent intent = new Intent(ListReservationsActivity.this, SelectedReservation.class);
+            intent.putExtra("RESERVATION_ID", nowselectedReservatopn.getId());
+            startActivity(intent);
+            finish();
+        }));
     }
 
     private void getReservations(String date) {
         editTextDate.setText(date);
         reservations.clear();
         reservations.addAll(dbHandler.getReservationsByDay(date));
-
+        System.out.println(reservations.toString());
         textViewSelectedDate.setText("Reservations on " + date);
     }
 }
