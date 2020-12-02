@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,7 +24,7 @@ public class MyReservationsActivity extends AppCompatActivity {
     static final String USERNAME = "username";
 
     ListView listviewMyReservations;
-
+    TextView norseerva;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,10 +36,12 @@ public class MyReservationsActivity extends AppCompatActivity {
         sharedPreferences =  getApplicationContext().getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
 
         String username = sharedPreferences.getString(USERNAME, null);
-
+        norseerva = findViewById(R.id.noreservationtextbox);
         listviewMyReservations = findViewById(R.id.list_my_reservations);
         ArrayList<Reservation> reservations = (ArrayList<Reservation>) dbHandler.getReservationsForUser(username);
-
+        if(reservations.isEmpty()){
+            norseerva.setText(" There are Currently no Reservation!!");
+        }
         ReservationAdapter adapter = new ReservationAdapter(this, R.layout.item_reservation, reservations);
         listviewMyReservations.setAdapter(adapter);
 

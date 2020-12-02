@@ -174,6 +174,7 @@ public class SearchCarActivity extends AppCompatActivity {
             intent.putExtra("START_DATE_TIME", startDateTime.getTimeInMillis());
             intent.putExtra("END_DATE_TIME", endDateTime.getTimeInMillis());
             startActivity(intent);
+            finish();
         });
     }
 }
