@@ -58,16 +58,23 @@ public class ListReservationsActivity extends AppCompatActivity {
             dateTime.set(Calendar.SECOND, 0);
             dateTime.set(mYear, mMonth, mDay, 0, 0, 0);
             DatePickerDialog datePickerDialog = new DatePickerDialog(ListReservationsActivity.this, (view, year, monthOfYear, dayOfMonth) -> {
+                dateTime.set(Calendar.YEAR, year);
+                dateTime.set(Calendar.MONTH, monthOfYear);
+                dateTime.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 String date = DateUtils.toDateString(dateTime.getTimeInMillis());
                 editTextDate.setText(date);
             }, mYear, mMonth, mDay);
             datePickerDialog.show();
         });
-        editTextDate.requestFocus();
+        editTextDate.callOnClick();
 
         btnFindReservations.setOnClickListener(v -> {
-            InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+            try {
+                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+            } catch (NullPointerException e) {
+
+            }
 
             String date = editTextDate.getText().toString();
             //System.out.println(date);
@@ -76,7 +83,7 @@ public class ListReservationsActivity extends AppCompatActivity {
 
         listviewReservations.setOnItemClickListener(((parent, view, position, id) -> {
             Reservation nowselectedReservatopn = reservations.get(position);
-            Intent intent = new Intent(ListReservationsActivity.this, SelectedReservation.class);
+            Intent intent = new Intent(ListReservationsActivity.this, SelectedReservationActivity.class);
             intent.putExtra("RESERVATION_ID", nowselectedReservatopn.getId());
             startActivity(intent);
         }));

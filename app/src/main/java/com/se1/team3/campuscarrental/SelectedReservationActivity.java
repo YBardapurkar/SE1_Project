@@ -22,11 +22,8 @@ import com.se1.team3.campuscarrental.models.SystemUser;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
-import static android.widget.Toast.LENGTH_LONG;
-
-public class SelectedReservation extends AppCompatActivity {
+public class SelectedReservationActivity extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
 
@@ -145,7 +142,7 @@ public class SelectedReservation extends AppCompatActivity {
         reservationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(SelectedReservation.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(SelectedReservationActivity.this);
                 if ("User".equalsIgnoreCase(roleof_user)) {
                     /*usertype: USer show the cancel reservation button*/
 
@@ -154,9 +151,9 @@ public class SelectedReservation extends AppCompatActivity {
                                 /*Please do the revoke status database stuff here*/
 
                                 if (dbHandler.cancel_reservation(current_res_id)) {
-                                    Toast.makeText(SelectedReservation.this, "Reservation Cancelled Succesfully!!", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(SelectedReservationActivity.this, "Reservation Cancelled Succesfully!!", Toast.LENGTH_LONG).show();
                                     dialog.dismiss();
-                                    Intent intent = new Intent(SelectedReservation.this, SelectedReservation.class);
+                                    Intent intent = new Intent(SelectedReservationActivity.this, SelectedReservationActivity.class);
                                     intent.putExtra("RESERVATION_ID", current_res_id);
                                     startActivity(intent);
                                     finish();
@@ -174,9 +171,9 @@ public class SelectedReservation extends AppCompatActivity {
                                 /*Please do the revoke status database stuff here*/
 
                                 if (dbHandler.delete_reservation(current_res_id)) {
-                                    Toast.makeText(SelectedReservation.this, "Reservation Deleted Succesfully!!", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(SelectedReservationActivity.this, "Reservation Deleted Succesfully!!", Toast.LENGTH_LONG).show();
                                     dialog.dismiss();
-                                    Intent intent = new Intent(SelectedReservation.this, SelectedReservation.class);
+                                    Intent intent = new Intent(SelectedReservationActivity.this, SelectedReservationActivity.class);
                                     intent.putExtra("RESERVATION_ID", current_res_id);
                                     startActivity(intent);
                                     finish();

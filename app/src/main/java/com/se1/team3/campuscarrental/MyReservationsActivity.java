@@ -46,7 +46,7 @@ public class MyReservationsActivity extends AppCompatActivity {
             Reservation nowselectedReservatopn = reservations.get(position);
 
             //Toast.makeText(this, String.valueOf(nowselectedReservatopn.getId()), Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(MyReservationsActivity.this, SelectedReservation.class);
+            Intent intent = new Intent(MyReservationsActivity.this, SelectedReservationActivity.class);
             intent.putExtra("RESERVATION_ID", nowselectedReservatopn.getId());
             /*intent.putExtra("START_DATE_TIME", startDateTime.getTimeInMillis());
             intent.putExtra("END_DATE_TIME", endDateTime.getTimeInMillis());*/

@@ -23,7 +23,7 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".SelectedReservation"
+            android:name=".SelectedReservationActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait" />
         <activity

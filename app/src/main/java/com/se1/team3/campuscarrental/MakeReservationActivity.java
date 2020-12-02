@@ -113,7 +113,7 @@ public class MakeReservationActivity extends AppCompatActivity {
             long res_id = dbHandler.saveReservation(reservation);
             if (res_id > 0) {
                 Toast.makeText(MakeReservationActivity.this, "Reservation Successful", Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(MakeReservationActivity.this, SelectedReservation.class);
+                Intent i = new Intent(MakeReservationActivity.this, SelectedReservationActivity.class);
                 i.putExtra("RESERVATION_ID", res_id);
                 startActivity(i);
                 finish();
