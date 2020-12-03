@@ -55,6 +55,9 @@ public class MakeReservationActivity extends AppCompatActivity {
         user = dbHandler.getUserByUsername(sharedPreferences.getString(USERNAME, ""));
 
         btnReserve = findViewById(R.id.btn_make_reservation);
+        if (!user.isStatus()) {
+            btnReserve.setEnabled(false);
+        }
 
 //        String role = sharedPreferences.getString(ROLE, "");
 
@@ -110,7 +113,7 @@ public class MakeReservationActivity extends AppCompatActivity {
             reservation.setTotalPrice(totalPrice);
             reservation.setStatus(true);
 
-            long res_id = dbHandler.saveReservation(reservation);
+            int res_id = (int) dbHandler.saveReservation(reservation);
             if (res_id > 0) {
                 Toast.makeText(MakeReservationActivity.this, "Reservation Successful", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(MakeReservationActivity.this, SelectedReservationActivity.class);

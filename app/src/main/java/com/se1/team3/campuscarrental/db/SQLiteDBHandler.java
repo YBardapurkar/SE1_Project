@@ -447,6 +447,7 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
         values.put(COL_R_GPS, reservation.getGps());
         values.put(COL_R_ONSTAR, reservation.getOnStar());
         values.put(COL_R_SIRIUSXM, reservation.getSiriusXm());
+        values.put(COL_R_PRICE, reservation.getPrice());
         values.put(COL_R_DISCOUNT, reservation.getDiscount());
         values.put(COL_R_TAX, reservation.getTax());
         values.put(COL_R_TOTAL_PRICE, reservation.getTotalPrice());
@@ -478,8 +479,8 @@ public class SQLiteDBHandler extends SQLiteOpenHelper implements DBHandler{
     public List<Reservation> getReservationsByDay(String day) {
         List<Reservation> reservations = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        /*String selectQuery = "SELECT * FROM " + TABLE_RESERVATIONS + " WHERE date(" + COL_R_START_DATE + ") <= '" + day + "' and  '" + day + "' <= date(" + COL_R_START_DATE + ");";*/
-        String selectQuery = "SELECT * FROM " + TABLE_RESERVATIONS + " WHERE date(" + COL_R_START_DATE + ") >= '" + day + "' order by date(" + COL_R_START_DATE + ") desc;";
+        String selectQuery = "SELECT * FROM " + TABLE_RESERVATIONS + " WHERE date(" + COL_R_START_DATE + ") <= '" + day + "' and  '" + day + "' <= date(" + COL_R_END_DATE + ") order by date(" + COL_R_START_DATE + ") desc;";
+        //String selectQuery = "SELECT * FROM " + TABLE_RESERVATIONS + " WHERE date(" + COL_R_START_DATE + ") <= '" + day + "' order by date(" + COL_R_START_DATE + ") desc;";
         Cursor cursor = db.rawQuery(selectQuery, null);
         while (cursor.moveToNext()) {
             reservations.add(getReservationFromCursor(cursor));

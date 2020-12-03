@@ -113,9 +113,9 @@ public class SearchCarActivity extends AppCompatActivity {
                     startDateTime.set(Calendar.MINUTE, minute);
                     startDateTime.set(Calendar.SECOND, 0);
                     startDateTime = DateUtils.getNextTime(startDateTime.getTimeInMillis());
-                    if (startDateTime.after(Calendar.getInstance())) {
-                        startDateTime = DateUtils.getNextStartTime();
-                    }
+//                    if (startDateTime.after(Calendar.getInstance())) {
+//                        startDateTime = DateUtils.getNextStartTime();
+//                    }
 
                     editTextStartTime.setText(DateUtils.toTimeString(startDateTime.getTimeInMillis()));
                     editTextEndDate.requestFocus();

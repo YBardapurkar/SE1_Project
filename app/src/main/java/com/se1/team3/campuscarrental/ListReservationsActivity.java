@@ -25,6 +25,7 @@ public class ListReservationsActivity extends AppCompatActivity {
 
     ListView listviewReservations;
     TextView textViewSelectedDate;
+    ReservationAdapter adapter;
     EditText editTextDate;
     Button btnFindReservations;
     Calendar dateTime;
@@ -45,7 +46,7 @@ public class ListReservationsActivity extends AppCompatActivity {
         listviewReservations = findViewById(R.id.listview_reservations);
         reservations = new ArrayList<>();
 
-        ReservationAdapter adapter = new ReservationAdapter(this, R.layout.item_reservation, reservations);
+        adapter = new ReservationAdapter(this, R.layout.item_reservation, reservations);
         listviewReservations.setAdapter(adapter);
 
         editTextDate.setOnClickListener((v) -> {
@@ -93,6 +94,7 @@ public class ListReservationsActivity extends AppCompatActivity {
         editTextDate.setText(date);
         reservations.clear();
         reservations.addAll(dbHandler.getReservationsByDay(date));
+        adapter.notifyDataSetChanged();
         System.out.println(reservations.toString());
         textViewSelectedDate.setText("Reservations on " + date);
     }
